@@ -3,6 +3,7 @@ import { withBase } from '../lib/urls';
 const siteTitle = 'Robogrinder at Virginia Tech';
 const siteDescription = 'RoboGrinder brings students together to turn classroom knowledge into hands-on engineering experience through competitive robotics.';
 const { title = siteTitle, description = siteDescription } = Astro.props;
+const previewImage = new URL(withBase('/images/rg-preview.jpg')!, Astro.site || Astro.url.origin).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -15,7 +16,14 @@ const { title = siteTitle, description = siteDescription } = Astro.props;
     <meta property="og:site_name" content={siteTitle} />
     <meta property="og:title" content={siteTitle} />
     <meta property="og:description" content={siteDescription} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={previewImage} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="RoboGrinder at Virginia Tech logo on an orange background" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={previewImage} />
+    <meta name="twitter:image:alt" content="RoboGrinder at Virginia Tech logo on an orange background" />
     <meta name="twitter:title" content={siteTitle} />
     <meta name="twitter:description" content={siteDescription} />
     <link rel="icon" type="image/png" href={withBase('/images/rg-orange.png')} />
