@@ -12,6 +12,7 @@ const previewImage = new URL(withBase('/images/rg-preview.jpg')!, Astro.site || 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f0f0f0" />
     <meta name="description" content={description} />
+    <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteTitle} />
     <meta property="og:title" content={siteTitle} />
