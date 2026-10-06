@@ -175,6 +175,16 @@
       "portfolio": ""
     },
     {
+      "name": "Sean Guo",
+      "subteam": "Mechanical",
+      "role": "",
+      "major": "Mechanical Engineering",
+      "photo": "",
+      "linkedin": "",
+      "github": "",
+      "portfolio": ""
+    },
+    {
       "name": "Steven Morro",
       "subteam": "Mechanical",
       "role": "",
@@ -771,6 +781,16 @@
       "github": "",
       "portfolio": "",
       "email": "annien07@vt.edu"
+    },
+    {
+      "name": "Devin Pawlowicz",
+      "subteam": "Mechanical",
+      "role": "",
+      "major": "Mechanical Engineering",
+      "photo": "",
+      "linkedin": "",
+      "github": "",
+      "portfolio": ""
     }
   ]
 }
