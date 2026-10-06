@@ -161,6 +161,8 @@ Use the shared text sizes in `BaseLayout.astro`: body text is at least 16px, con
 
 The repository is [RoboGrinder-at-Virginia-Tech/RG-website](https://github.com/RoboGrinder-at-Virginia-Tech/RG-website). In **Settings → Pages**, set **Build and deployment → Source** to **GitHub Actions**. Pushes to `main` run the deployment. Administrators can also use **Actions → Deploy Astro to GitHub Pages → Run workflow**.
 
+This website uses Astro. The `.nojekyll` files tell GitHub Pages to skip Jekyll processing; the copy in `public/` is included in the built website. These markers do not build Astro for you. Keep the publishing source set to **GitHub Actions**, rather than **Deploy from a branch**, so GitHub runs `npm run build` and publishes `dist/`. If an Actions log shows `actions/jekyll-build-pages`, check this setting and run **Deploy Astro to GitHub Pages** instead.
+
 The deployment reads the website address and folder path from GitHub Pages settings. This supports the repository address ending in `/RG-website/` and a custom domain configured in **Settings → Pages**. Use the address shown in those settings to visit the published website. Use `withBase()` from `src/lib/urls.ts` for new root-relative links and image URLs.
 
 Online editor login is **not configured yet**: `public/admin/config.yml` still names the old repository and contains `https://YOUR_OAUTH_HOST`. To enable it, update `backend.repo` to `RoboGrinder-at-Virginia-Tech/RG-website`, keep `backend.branch` aligned with `main`, and configure a GitHub OAuth provider or Decap Turbo. Set its authentication host as `backend.base_url`. OAuth lets an editor sign in through GitHub. Editors need repository write access. Never store authentication secrets in this repository.
