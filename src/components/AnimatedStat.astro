@@ -8,7 +8,8 @@ const prefix = match?.[1] || '';
 const start = prefix ? Math.max(20, end ?? 20) : 0;
 const reserve = prefix && start > (end ?? 0) ? `${prefix}${start}` : text;
 ---
-<span class="stat-value" aria-label={text} data-stat-end={end} data-stat-start={start} data-stat-prefix={prefix}>
+<span class="stat-value" data-stat-value={text} data-stat-end={end} data-stat-start={start} data-stat-prefix={prefix}>
+  <span class="stat-accessible">{text}</span>
   <span class="stat-reserve" aria-hidden="true">{reserve}</span>
   <span class="stat-digits" aria-hidden="true">{text}</span>
 </span>
@@ -20,7 +21,7 @@ const reserve = prefix && start > (end ?? 0) ? `${prefix}${start}` : text;
     if (frame !== undefined) cancelAnimationFrame(frame);
     active.delete(element);
     const digits = element.querySelector<HTMLElement>('.stat-digits');
-    if (digits) digits.textContent = element.getAttribute('aria-label');
+    if (digits) digits.textContent = element.dataset.statValue || '';
   };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -55,4 +56,5 @@ const reserve = prefix && start > (end ?? 0) ? `${prefix}${start}` : text;
   .stat-value { display: inline-grid; font-variant-numeric: tabular-nums; }
   .stat-value > span { grid-area: 1 / 1; }
   .stat-reserve { visibility: hidden; }
+  .stat-accessible { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 </style>

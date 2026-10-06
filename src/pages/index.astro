@@ -53,7 +53,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
           title="RoboGrinder background footage" allow="autoplay; encrypted-media"></iframe>)}
       </div>
       {banner.enabled && <div class="anniversary-banner" aria-label={`${banner.teamName} at ${banner.university}: celebrating ${anniversaryYears} years, ${banner.founded} to ${banner.anniversaryYear}`}>
-        <img src={withBase('/images/rg-white.png')} alt="" width="48" height="48" loading="lazy" />
+        <img src={withBase('/images/rg-white-small.png')} alt="" width="48" height="48" loading="lazy" />
         <span class="banner-label">CELEBRATING</span>
         <strong>{anniversaryYears}</strong><span class="banner-band">YEARS</span>
         <span class="banner-dates">{banner.founded}<br />{banner.anniversaryYear}</span>
@@ -89,7 +89,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
 
     <section class="join" id="join" aria-labelledby="join-title">
       <div class="join-photo">{site.join.image === '/images/robot-competition-2018.jpg'
-        ? <Image src={joinPhoto} widths={[640, 960, 1280]} sizes="(max-width: 750px) 100vw, 50vw" format="webp" alt={site.join.imageAlt} loading="lazy" />
+        ? <Image src={joinPhoto} widths={[320, 480, 640, 960, 1280]} sizes="(max-width: 680px) 100vw, 50vw" format="webp" alt={site.join.imageAlt} loading="lazy" />
         : <img src={withBase(site.join.image)} alt={site.join.imageAlt} loading="lazy" />}</div>
       <div class="join-copy">
         <h2 id="join-title">{site.join.title}</h2>

@@ -34,7 +34,7 @@ const numbers = teamNumbers.facts.map((fact) => ({
       </div>
       <figure class="story-photo">
         {site.mission.image === '/images/arc-2026-team.jpg'
-          ? <Image src={missionPhoto} widths={[640, 960, 1280]} sizes="(max-width: 750px) 100vw, 50vw" format="webp" alt={site.mission.imageAlt} loading="lazy" />
+          ? <Image src={missionPhoto} widths={[320, 480, 640, 960, 1280]} sizes="(max-width: 680px) 100vw, 50vw" format="webp" alt={site.mission.imageAlt} loading="lazy" />
           : <img src={withBase(site.mission.image)} alt={site.mission.imageAlt} loading="lazy" />}
       </figure>
     </section>
