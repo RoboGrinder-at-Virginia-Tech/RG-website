@@ -1,0 +1,29 @@
+{
+  "teams": [
+    {
+      "name": "Mechanical",
+      "summary": "Turn concepts into mechanisms, frames, and drive systems built to perform under pressure.",
+      "icon": "settings"
+    },
+    {
+      "name": "Electronics",
+      "summary": "Design the power, sensing, and circuit systems that make every robot move with purpose.",
+      "icon": "bolt"
+    },
+    {
+      "name": "Embedded Controls",
+      "summary": "Connect hardware and software through reliable firmware, controls, and real-time systems.",
+      "icon": "memory"
+    },
+    {
+      "name": "Software & Computer Vision",
+      "summary": "Build autonomous behavior, perception, and tools that help the fleet compete as one.",
+      "icon": "code"
+    },
+    {
+      "name": "Operations",
+      "summary": "Keep the team moving through strategy, logistics, outreach, and the details behind the build.",
+      "icon": "groups"
+    }
+  ]
+}

@@ -1,0 +1,358 @@
+local_backend: true
+
+backend:
+  name: github
+  repo: ruiqian-zhang/RG-website
+  branch: main
+  base_url: https://YOUR_OAUTH_HOST
+
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: simple
+
+collections:
+  - name: site
+    label: Landing page
+    files:
+      - name: home
+        label: Homepage content
+        file: src/content/site.json
+        format: json
+        fields:
+          - label: Recruiting season
+            name: recruitment
+            widget: object
+            fields:
+              - { label: Recruiting is open, name: open, widget: boolean, default: false, hint: 'On: navbar and hero use the Join action. Off: both use the Support action.' }
+              - { label: Join button text, name: joinLabel, widget: string }
+              - { label: Join link, name: joinUrl, widget: string }
+              - { label: Application button text, name: applicationLabel, widget: string }
+              - { label: Application form URL, name: applicationUrl, widget: string, hint: Destination for the Join page button when recruiting is open. }
+              - { label: Join page message when open, name: openDescription, widget: text }
+              - { label: Join page message when closed, name: closedDescription, widget: text }
+              - { label: Support button text, name: supportLabel, widget: string }
+              - { label: Support link, name: supportUrl, widget: string }
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Headline, name: headline, widget: text, hint: Use a new line to control the headline breaks. }
+              - label: Anniversary banner
+                name: anniversaryBanner
+                widget: object
+                fields:
+                  - { label: Show banner, name: enabled, widget: boolean, default: true }
+                  - { label: Team name, name: teamName, widget: string, hint: Used in the accessible banner description. }
+                  - { label: University, name: university, widget: string, hint: Used in the accessible banner description. }
+                  - { label: Founded, name: founded, widget: string }
+                  - { label: Anniversary year, name: anniversaryYear, widget: string, hint: The displayed year count is calculated from this year minus the founding year. }
+              - { label: Introduction, name: intro, widget: text }
+              - { label: Video source, name: videoSource, widget: select, options: [{ label: YouTube, value: youtube }, { label: Uploaded file, value: file }], default: youtube }
+              - { label: YouTube video ID, name: videoId, widget: string, required: false, hint: Used when Video source is YouTube. }
+              - { label: Video file, name: videoFile, widget: file, required: false, hint: Used when Video source is Uploaded file. Upload an MP4 or WebM video. }
+              - { label: Hero photo, name: poster, widget: image, hint: Appears while the video loads or permanently when video is disabled. }
+              - { label: Enable video, name: videoEnabled, widget: boolean, default: true, hint: 'Off: keep the photo permanently, load no video, and hide the play/pause button.' }
+              - { label: Delay before video fade (milliseconds), name: videoRevealDelayMs, widget: number, value_type: int, min: 0, default: 2000, hint: '2000 waits two seconds after playback starts. 0 fades immediately. Ignored when video is disabled.' }
+          - label: Mission
+            name: mission
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Tagline, name: tagline, widget: text }
+              - { label: Supporting text, name: description, widget: text }
+              - { label: Photo, name: image, widget: image }
+              - { label: Photo description, name: imageAlt, widget: string }
+          - label: Join section
+            name: join
+            widget: object
+            fields:
+              - { label: Heading, name: title, widget: string }
+              - { label: Copy, name: description, widget: text }
+              - { label: Photo, name: image, widget: image }
+              - { label: Photo description, name: imageAlt, widget: string }
+          - label: Contact
+            name: contact
+            widget: object
+            fields:
+              - { label: General contact email, name: email, widget: string }
+              - { label: Sponsorship contact email, name: sponsorEmail, widget: string, required: false }
+          - label: Links
+            name: links
+            widget: object
+            fields:
+              - { label: ARC Robotics, name: arc, widget: string }
+              - { label: Linktree, name: linktree, widget: string }
+              - label: Social links
+                name: social
+                widget: list
+                fields:
+                  - { label: Platform, name: name, widget: select, options: [Instagram, YouTube, X, Facebook, GobblerConnect, GitHub, LinkedIn] }
+                  - { label: URL, name: url, widget: string, required: false, hint: Leave blank to show a disabled placeholder. }
+
+  - name: robots
+    label: Robots
+    files:
+      - name: robot-page
+        label: Robots page
+        file: src/content/robots.json
+        format: json
+        fields:
+          - { label: Browser title, name: pageTitle, widget: string }
+          - { label: Page description, name: pageDescription, widget: text }
+          - { label: Hero heading, name: headline, widget: string }
+          - { label: Hero introduction, name: intro, widget: text }
+          - { label: Hero photo, name: image, widget: image }
+          - { label: Hero photo description, name: imageAlt, widget: string }
+          - { label: Explore button text, name: buttonLabel, widget: string }
+          - { label: Fleet heading, name: fleetTitle, widget: string }
+          - { label: Fleet introduction, name: fleetIntro, widget: text }
+          - label: Featured robots
+            name: robots
+            widget: list
+            summary: '{{fields.name}}'
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Render, name: image, widget: image }
+              - { label: Render description, name: imageAlt, widget: string }
+              - { label: Highlights, name: highlights, widget: list, field: { label: Highlight, name: highlight, widget: string } }
+          - { label: Closing heading, name: ctaTitle, widget: string }
+          - { label: Closing description, name: ctaDescription, widget: text }
+          - { label: Team button text, name: teamButtonLabel, widget: string }
+          - { label: Sponsor button text, name: sponsorButtonLabel, widget: string }
+
+  - name: gallery
+    label: Gallery
+    files:
+      - name: photos
+        label: Season and competition photos
+        file: src/content/gallery.json
+        format: json
+        fields:
+          - label: Seasons
+            name: seasons
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string, default: '2026-2027 season', hint: 'Use YYYY-YYYY season, for example 2026-2027 season.' }
+              - { label: Description, name: description, widget: text }
+              - { label: Use manual photo order, name: manualPhotoOrder, widget: boolean, required: false, default: false, hint: 'Display photos in list order instead of grouping by category.' }
+              - label: Photos
+                name: photos
+                widget: list
+                fields:
+                  - { label: Image, name: image, widget: image }
+                  - { label: Caption and image description, name: caption, widget: string }
+                  - { label: Photo category, name: category, widget: select, options: [{ label: Team photo, value: team }, { label: Competition, value: competition }, { label: Miscellaneous, value: miscellaneous }], default: miscellaneous, hint: 'Photos always display team first, then competition, then miscellaneous. List order is preserved within each category.' }
+
+  - name: team-numbers
+    label: Team numbers (all pages)
+    files:
+      - name: numbers
+        label: Shared team numbers
+        file: src/content/team-numbers.json
+        format: json
+        fields:
+          - { label: Homepage numbers heading, name: title, widget: string }
+          - label: Team numbers
+            name: facts
+            widget: list
+            summary: '{{fields.label}}'
+            hint: Shared by the homepage and Sponsors & Partners. Automatic counts follow the roster and subteams.
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Value source, name: source, widget: select, options: [{ label: Manual, value: manual }, { label: Current member count, value: members }, { label: Subteam count, value: subteams }], default: manual }
+              - { label: Manual value, name: value, widget: string, required: false, hint: Used when Value source is Manual. Supports numbers or text such as Top 4. }
+
+  - name: sponsors
+    label: Sponsors
+    files:
+      - name: sponsor-page
+        label: Sponsors page
+        file: src/content/sponsors.json
+        format: json
+        fields:
+          - { label: Browser title, name: pageTitle, widget: string }
+          - { label: Page description, name: pageDescription, widget: text }
+          - { label: Conversation button text, name: conversationLabel, widget: string }
+          - { label: Conversation button destination, name: conversationUrl, widget: string }
+          - { label: Packet button text, name: packetLabel, widget: string }
+          - { label: Team introduction heading, name: whoTitle, widget: text, hint: Use a new line to split the heading. }
+          - { label: Team introduction, name: whoDescription, widget: text }
+          - { label: Benefits heading, name: benefitsTitle, widget: string }
+          - { label: Benefits introduction, name: benefitsIntro, widget: text }
+          - { label: Text before tier link, name: benefitsPacketBefore, widget: string }
+          - { label: Tier link text, name: benefitsPacketLabel, widget: string }
+          - { label: Text after tier link, name: benefitsPacketAfter, widget: string }
+          - { label: Support heading, name: supportTitle, widget: string }
+          - { label: Support introduction, name: supportIntro, widget: text }
+          - { label: Sponsors heading, name: partnersTitle, widget: string }
+          - { label: Departmental supporters heading, name: departmentalTitle, widget: string }
+          - { label: Contact heading, name: connectTitle, widget: string }
+          - { label: Contact introduction, name: connectIntro, widget: text }
+          - label: Sponsorship form text
+            name: form
+            widget: object
+            fields:
+              - { label: Name label, name: nameLabel, widget: string }
+              - { label: Email label, name: emailLabel, widget: string }
+              - { label: Organization label, name: companyLabel, widget: string }
+              - { label: Topic label, name: topicLabel, widget: string }
+              - { label: Topic placeholder, name: topicPlaceholder, widget: string }
+              - { label: Joining option, name: joiningLabel, widget: string }
+              - { label: Sponsorship option, name: sponsorshipLabel, widget: string }
+              - { label: Collaboration option, name: collaborationLabel, widget: string }
+              - { label: Other option, name: otherLabel, widget: string }
+              - { label: Message label, name: messageLabel, widget: string }
+              - { label: Submit button, name: submitLabel, widget: string }
+              - { label: Form helper text, name: statusText, widget: text }
+          - { label: Sponsorship packet PDF, name: packetUrl, widget: file }
+          - label: Partnership benefits
+            name: benefits
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Icon, name: icon, widget: select, options: [description, forum, groups, star_outline], default: description }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Introduction, name: intro, widget: text }
+          - { label: Hero image, name: image, widget: image }
+          - { label: Image description, name: imageAlt, widget: string }
+          - label: Ways to support the team
+            name: supportOptions
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+          - label: Current partners
+            name: partners
+            widget: list
+            required: false
+            fields:
+              - { label: Organization name, name: name, widget: string }
+              - { label: Group, name: category, widget: select, options: [{ label: Sponsor, value: sponsor }, { label: Departmental supporter, value: departmental }], default: sponsor }
+              - { label: Logo, name: logo, widget: image }
+              - { label: Website, name: url, widget: string, required: false }
+
+  - name: members
+    label: Members
+    files:
+      - name: roster
+        label: Team roster
+        file: src/content/members.json
+        format: json
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - { label: Introduction, name: intro, widget: text }
+          - { label: Featured academic year, name: rosterYear, widget: string }
+          - label: Featured season members
+            name: people
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Subteam, name: subteam, widget: string, required: false }
+              - { label: Role, name: role, widget: string, required: false }
+              - { label: Major, name: major, widget: string, required: false }
+              - { label: Photo, name: photo, widget: image, required: false }
+              - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+              - { label: GitHub URL, name: github, widget: string, required: false }
+              - { label: Portfolio URL, name: portfolio, widget: string, required: false }
+              - { label: Public email address, name: email, widget: string, required: false }
+      - name: alumni
+        label: Alumni roster
+        file: src/content/alumni.json
+        format: json
+        fields:
+          - label: Undated alumni
+            name: alumni
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Subteam, name: subteam, widget: string, required: false }
+              - { label: Role, name: role, widget: string, required: false }
+              - { label: Major, name: major, widget: string, required: false }
+              - { label: Photo, name: photo, widget: image, required: false }
+              - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+              - { label: GitHub URL, name: github, widget: string, required: false }
+              - { label: Portfolio URL, name: portfolio, widget: string, required: false }
+
+  - name: seasons
+    label: Previous seasons
+    folder: src/content/seasons
+    create: true
+    format: json
+    extension: json
+    identifier_field: year
+    slug: '{{year}}'
+    summary: '{{year}}'
+    fields:
+      - { label: Academic year, name: year, widget: string, pattern: ['^[0-9]{4}-[0-9]{4}$', 'Use YYYY-YYYY, for example 2025-2026'] }
+      - label: Members
+        name: people
+        widget: list
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Subteam, name: subteam, widget: string, required: false }
+          - { label: Role, name: role, widget: string, required: false }
+          - { label: Major, name: major, widget: string, required: false }
+          - { label: Photo, name: photo, widget: image, required: false }
+          - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+          - { label: GitHub URL, name: github, widget: string, required: false }
+          - { label: Portfolio URL, name: portfolio, widget: string, required: false }
+
+  - name: subteams
+    label: Subteams
+    files:
+      - name: team-list
+        label: Subteam cards
+        file: src/content/subteams.json
+        format: json
+        fields:
+          - label: Teams
+            name: teams
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Description, name: summary, widget: text }
+              - { label: Icon, name: icon, widget: select, options: [settings, bolt, memory, code, groups], default: settings }
+
+  - name: achievements
+    label: Achievements
+    files:
+      - name: history
+        label: Competition history
+        file: src/content/achievements.json
+        format: json
+        fields:
+          - { label: Heading, name: title, widget: string }
+          - label: Competition records
+            name: records
+            widget: list
+            fields:
+              - { label: Year, name: year, widget: string }
+              - { label: Competition, name: competition, widget: string }
+              - { label: Photo, name: image, widget: image, required: false }
+              - { label: Photo description, name: imageAlt, widget: string, required: false }
+              - { label: Prominent awards, name: results, widget: list, field: { label: Award, name: result, widget: string } }
+              - { label: Supporting bullet points, name: bulletPoints, widget: list, required: false, field: { label: Bullet point, name: point, widget: string } }
+
+  - name: industry-placements
+    label: Industry placements
+    files:
+      - name: placements
+        label: Careers and graduate study
+        file: src/content/industry-placements.json
+        format: json
+        fields:
+          - { label: Careers and graduate study heading, name: title, widget: string }
+          - { label: Careers and graduate study description, name: description, widget: text }
+          - label: Placement marquee logos
+            name: companies
+            widget: list
+            hint: Names are sorted alphabetically and split into three consecutive groups. Use local uploaded logo files.
+            fields:
+              - { label: Organization, name: name, widget: string }
+              - { label: Unique identifier, name: slug, widget: string }
+              - { label: Logo, name: logo, widget: image }
+              - { label: Original asset URL, name: source, widget: string, required: false }
+              - { label: Source page, name: sourcePage, widget: string, required: false }
+

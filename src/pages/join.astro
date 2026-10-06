@@ -1,0 +1,33 @@
+---
+import { withBase } from '../lib/urls';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import OrangeFeature from '../components/OrangeFeature.astro';
+import site from '../content/site.json';
+import { joinPageAction, recruitmentDescription } from '../lib/season';
+---
+<BaseLayout title="Join us | RoboGrinder at Virginia Tech" description={recruitmentDescription}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <SiteHeader active="Join" />
+  <main id="main">
+    <OrangeFeature title="Your next chapter starts here." description={recruitmentDescription} image="/images/join-gobblerfest.webp" imageAlt="RoboGrinder members smiling with their robot at Gobblerfest" imagePosition="50% 30%">
+      {joinPageAction.href ? <a class="button button-swipe button-dark" href={withBase(joinPageAction.href)}>{joinPageAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a> : <button class="button button-dark" type="button" disabled>{joinPageAction.label}</button>}
+    </OrangeFeature>
+    <section class="next-season">
+      <div><h2>Stay on the grind.</h2><p>Follow our latest builds and competition updates, cheer us on during matches, and help support the team throughout the season.</p><div class="support-actions"><a class="button button-swipe button-dark" href={withBase('/sponsors/')}>Support the team<span class="material-icon" aria-hidden="true">chevron_right</span></a><a class="button button-swipe button-dark" href={withBase(site.links.linktree)} target="_blank" rel="noreferrer">Follow us<span class="material-icon" aria-hidden="true">chevron_right</span></a></div></div>
+      <img src={withBase('/images/interest-meeting-software.webp')} alt="RoboGrinder students sharing ideas around a laptop at an interest meeting" loading="lazy" width="1600" height="1067" />
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>
+<style>
+  .support-actions { display: grid; grid-template-columns: repeat(2, max-content); align-items: start; gap: 20px 24px; }
+  .support-actions > .button { margin: 0; }
+  .next-season { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; padding: 80px clamp(24px, 8vw, 124px); }
+  h2 { margin: 0 0 24px; font: 700 clamp(32px, 4vw, 48px)/1.05 var(--display); }
+  p { margin: 0 0 28px; font-size: var(--font-body-min); line-height: 1.6; }
+  img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px); }
+  @media (max-width: 1100px) { .support-actions { grid-template-columns: max-content; } }
+  @media (max-width: 680px) { .next-season { grid-template-columns: 1fr; padding: 56px 23px; gap: 36px; } }
+</style>

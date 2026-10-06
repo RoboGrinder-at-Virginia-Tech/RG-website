@@ -1,0 +1,270 @@
+---
+import { withBase } from '../lib/urls';
+import site from '../content/site.json';
+import { primaryAction } from '../lib/season';
+import ConnectSocialLinks from './ConnectSocialLinks.astro';
+const { active = 'Home' } = Astro.props;
+const links = [
+  { label: 'Achievements', href: '/#achievements', active: 'Achievements' },
+  { label: 'Subteams', href: '/#subteams', active: 'Home' },
+  { label: 'Robots', href: '/robots/', active: 'Robots' },
+  { label: 'Members', href: '/members/', active: 'Members' },
+  { label: 'Gallery', href: '/gallery/', active: 'Gallery' },
+  { label: 'Sponsors & Partners', href: '/sponsors/', active: 'Sponsors' },
+  { label: 'Contact us', href: '/contact/', active: 'Contact' },
+];
+---
+
+<div class="header-shell">
+  <header class="site-header">
+    <a class="brand" href={withBase('/')} aria-label="RoboGrinder home">
+      <img src={withBase('/images/rg-white.png')} alt="" loading="lazy" />
+    </a>
+    <div class="header-controls">
+    <details class="mobile-menu primary-menu" data-disclosure>
+      <summary aria-label="Open About us menu"><span class="primary-label">About us</span><span class="material-icon dropdown-arrow" aria-hidden="true">expand_more</span><span class="material-icon burger-icon" aria-hidden="true">menu</span><span class="material-icon burger-close" aria-hidden="true">close</span></summary>
+      <nav aria-label="Main navigation">
+        {links.map((link) => <a class:list={[['Sponsors & Partners', 'Contact us'].includes(link.label) && 'mobile-only']} href={withBase(link.href)} aria-current={active === link.active && link.label !== 'Subteams' ? 'page' : undefined}>{link.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>)}
+        <a class="mobile-only" href={withBase(site.recruitment.joinUrl)} aria-current={active === 'Join' ? 'page' : undefined}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <ConnectSocialLinks mobileOnly />
+      </nav>
+    </details>
+    <details class="mobile-menu support-menu" data-disclosure>
+      <summary aria-label="Open Connect menu">Connect<span class="material-icon dropdown-arrow" aria-hidden="true">expand_more</span></summary>
+      <nav aria-label="Connect">
+        <a href={withBase(site.recruitment.joinUrl)} aria-current={active === 'Join' ? 'page' : undefined}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <a href={withBase('/sponsors/')} aria-current={active === 'Sponsors' ? 'page' : undefined}>Sponsors &amp; Partners<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <a href={withBase('/contact/')} aria-current={active === 'Contact' ? 'page' : undefined}>Contact us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <ConnectSocialLinks />
+      </nav>
+    </details>
+    <a class="header-cta button-swipe" href={withBase(primaryAction.href)} aria-current={active === primaryAction.page ? 'page' : undefined}>{primaryAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+    </div>
+  </header>
+</div>
+
+<script>
+  const disclosures = new Map<HTMLDetailsElement, (open: boolean) => void>();
+  const narrowScreen = matchMedia('(max-width: 850px)');
+  const updateMenuLabel = () => {
+    const summary = document.querySelector<HTMLElement>('.primary-menu > summary');
+    if (summary) summary.setAttribute('aria-label', `${summary.getAttribute('aria-expanded') === 'true' ? 'Close' : 'Open'} ${narrowScreen.matches ? 'navigation' : 'About us'} menu`);
+  };
+  narrowScreen.addEventListener('change', updateMenuLabel);
+  updateMenuLabel();
+  document.querySelectorAll<HTMLDetailsElement>('[data-disclosure]').forEach((details) => {
+    const summary = details.querySelector<HTMLElement>(':scope > summary')!;
+    const panel = details.querySelector<HTMLElement>(':scope > nav, :scope > .disclosure-panel')!;
+    let animation: Animation | undefined;
+    let contentAnimation: Animation | undefined;
+    let expanded = details.open;
+    summary.setAttribute('aria-expanded', String(expanded));
+    const setExpanded = (open: boolean) => {
+      if (expanded === open) return;
+      const menu = details.classList.contains('mobile-menu');
+      const currentHeight = menu ? panel.getBoundingClientRect().height : details.getBoundingClientRect().height;
+      const renderedOpacity = Number.parseFloat(getComputedStyle(panel).opacity);
+      const currentOpacity = animation || contentAnimation || expanded ? renderedOpacity : 0;
+      const currentTransform = getComputedStyle(panel).transform;
+      expanded = open;
+      animation?.cancel();
+      contentAnimation?.cancel();
+      summary.setAttribute('aria-expanded', String(open));
+      if (details.classList.contains('mobile-menu')) {
+        const label = details.classList.contains('support-menu') ? 'Connect' : narrowScreen.matches ? 'navigation' : 'About us';
+        summary.setAttribute('aria-label', `${open ? 'Close' : 'Open'} ${label} menu`);
+        if (open) disclosures.forEach((set, other) => { if (other !== details && other.classList.contains('mobile-menu')) set(false); });
+      }
+      details.open = true;
+      if (menu) {
+        panel.style.overflow = 'hidden';
+        panel.style.opacity = String(Number.isFinite(currentOpacity) ? currentOpacity : open ? 0 : 1);
+        panel.style.transform = currentTransform === 'none' ? (open ? 'translateY(-6px)' : 'translateY(0)') : currentTransform;
+        const frames = open
+          ? [{ opacity: Number.isFinite(currentOpacity) ? currentOpacity : 0, transform: currentTransform === 'none' ? 'translateY(-6px)' : currentTransform }, { opacity: 1, transform: 'translateY(0)' }]
+          : [{ opacity: Number.isFinite(currentOpacity) ? currentOpacity : 1, transform: currentTransform === 'none' ? 'translateY(0)' : currentTransform }, { opacity: 0, transform: 'translateY(-6px)' }];
+        animation = panel.animate(frames, { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300, easing: 'ease-in-out', fill: 'both' });
+      } else {
+        details.style.overflow = 'hidden';
+        details.style.removeProperty('height');
+        const expandedHeight = details.getBoundingClientRect().height;
+        const borders = Number.parseFloat(getComputedStyle(details).borderTopWidth) + Number.parseFloat(getComputedStyle(details).borderBottomWidth);
+        const collapsedHeight = summary.getBoundingClientRect().height + borders;
+        details.style.height = `${currentHeight}px`;
+        const frames = open
+          ? [{ height: `${currentHeight}px` }, { height: `${expandedHeight}px` }]
+          : [{ height: `${currentHeight}px` }, { height: `${collapsedHeight}px` }];
+        animation = details.animate(frames, { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, easing: 'ease-in-out', fill: 'both' });
+        panel.style.opacity = String(Number.isFinite(currentOpacity) ? currentOpacity : open ? 0 : 1);
+        contentAnimation = panel.animate(
+          [{ opacity: Number.isFinite(currentOpacity) ? currentOpacity : open ? 0 : 1 }, { opacity: open ? 1 : 0 }],
+          { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, easing: 'ease-in-out', fill: 'both' }
+        );
+      }
+      const current = animation;
+      animation.onfinish = () => {
+        if (animation === current) {
+          details.open = open;
+          current.cancel();
+          contentAnimation?.cancel();
+          contentAnimation = undefined;
+          details.style.removeProperty('height');
+          details.style.removeProperty('overflow');
+          panel.style.removeProperty('opacity');
+          panel.style.removeProperty('transform');
+          panel.style.removeProperty('overflow');
+          animation = undefined;
+        }
+      };
+    };
+    disclosures.set(details, setExpanded);
+    summary.addEventListener('click', (event) => { event.preventDefault(); setExpanded(!expanded); });
+  });
+  document.querySelectorAll<HTMLDetailsElement>('.mobile-menu').forEach((menu) => {
+    document.addEventListener('click', (event) => { if (!menu.contains(event.target as Node)) disclosures.get(menu)?.(false); });
+    menu.addEventListener('keydown', (event) => { if (event.key === 'Escape') { disclosures.get(menu)?.(false); menu.querySelector('summary')?.focus(); } });
+  });
+  document.querySelectorAll<HTMLAnchorElement>('.mobile-menu nav a').forEach((link) => {
+    link.addEventListener('click', () => {
+      const menu = link.closest<HTMLDetailsElement>('details');
+      if (menu) disclosures.get(menu)?.(false);
+    });
+  });
+  const headerShell = document.querySelector<HTMLElement>('.header-shell');
+  const videoHero = document.querySelector<HTMLElement>('.landing');
+  if (headerShell) {
+    let previousY = Math.max(0, window.scrollY);
+    const heroBottom = () => videoHero ? videoHero.getBoundingClientRect().bottom + window.scrollY : 0;
+    let hidden = !location.hash && previousY > 0 && (!videoHero || previousY >= heroBottom() - headerShell.offsetHeight);
+    let navigatingToSection = false;
+    let navigationTimeout: ReturnType<typeof setTimeout> | undefined;
+    const updateHeader = () => {
+      headerShell.classList.toggle('header-hidden', hidden);
+      document.documentElement.classList.toggle('header-is-hidden', hidden);
+    };
+    updateHeader();
+    // Keep anchor offsets accurate after breakpoint or layout changes.
+    const measureHeader = () => {
+      document.documentElement.style.setProperty('--measured-header-height', `${headerShell.offsetHeight}px`);
+    };
+    measureHeader();
+    const headerSize = new ResizeObserver(measureHeader);
+    headerSize.observe(headerShell);
+    const resumeUserScroll = () => {
+      navigatingToSection = false;
+      clearTimeout(navigationTimeout);
+      previousY = Math.max(0, window.scrollY);
+    };
+    headerShell.addEventListener('focusin', () => {
+      hidden = false;
+      updateHeader();
+    });
+    const navigateToSection = (hash: string, moveFocus = false) => {
+      let target: HTMLElement | null;
+      try { target = document.getElementById(decodeURIComponent(hash.slice(1))); } catch { return false; }
+      if (!target) return false;
+      // Hold the navbar visible during the jump so its offset cannot change
+      // halfway through smooth scrolling, whether moving up or down the page.
+      navigatingToSection = true;
+      hidden = false;
+      updateHeader();
+      measureHeader();
+      if (moveFocus) {
+        const hadTabindex = target.hasAttribute('tabindex');
+        if (!hadTabindex) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        if (!hadTabindex) target.addEventListener('blur', () => target?.removeAttribute('tabindex'), { once: true });
+      }
+      target.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      clearTimeout(navigationTimeout);
+      navigationTimeout = setTimeout(resumeUserScroll, 2000);
+      return true;
+    };
+    document.querySelectorAll<HTMLAnchorElement>('.mobile-menu nav a').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const destination = new URL(link.href);
+        if (destination.origin !== location.origin || destination.pathname !== location.pathname || !destination.hash) return;
+        if (navigateToSection(destination.hash, true)) {
+          event.preventDefault();
+          history.pushState(null, '', destination.href);
+        }
+      });
+    });
+    window.addEventListener('scrollend', () => { if (navigatingToSection) resumeUserScroll(); });
+    window.addEventListener('hashchange', () => { if (location.hash) navigateToSection(location.hash); });
+    if (location.hash) requestAnimationFrame(() => navigateToSection(location.hash));
+    window.addEventListener('wheel', resumeUserScroll, { passive: true });
+    window.addEventListener('touchmove', resumeUserScroll, { passive: true });
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) resumeUserScroll();
+    });
+    window.addEventListener('scroll', () => {
+      const currentY = Math.max(0, window.scrollY);
+      const delta = currentY - previousY;
+      if (navigatingToSection) { previousY = currentY; return; }
+      if (currentY <= 0 || delta < 0 || headerShell.querySelector(':focus-visible')) {
+        hidden = false;
+      } else if (delta > 0 && (!videoHero || currentY >= heroBottom() - headerShell.offsetHeight)) {
+        hidden = true;
+      }
+      if (hidden) {
+        document.querySelectorAll<HTMLDetailsElement>('.mobile-menu[open]').forEach((menu) => disclosures.get(menu)?.(false));
+      }
+      updateHeader();
+      previousY = currentY;
+    }, { passive: true });
+  }
+</script>
+
+<style>
+  .header-shell { position: sticky; top: 0; z-index: 20; background: #000000; transition: transform 240ms ease; }
+  .header-shell.header-hidden { transform: translateY(-100%); }
+  @media (prefers-reduced-motion: reduce) { .header-shell { transition: none; } }
+  .site-header { position: relative; height: var(--header-height); display: flex; align-items: center; gap: 28px; justify-content: space-between; padding: 0 clamp(24px, 6vw, 92px); background: #000000; color: var(--paper); }
+  .brand { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; gap: 12px; color: var(--paper); text-decoration: none; flex: 0 0 auto; }
+  .brand img { width: 36px; height: 36px; object-fit: contain; }
+  .header-controls { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .header-cta { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; background: var(--orange); color: #fff; --hover-fill: #fff; --hover-ink: var(--ink); font-size: var(--font-ui-min); font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .mobile-menu { position: relative; display: block; }
+  .mobile-menu summary { min-width: 44px; height: 44px; padding: 0 16px; display: flex; gap: 10px; align-items: center; justify-content: center; list-style: none; cursor: pointer; color: var(--paper); font-size: var(--font-ui-min); font-weight: 600; white-space: nowrap; }
+  .burger-icon, .burger-close { display: none; }
+  .dropdown-arrow { transition: rotate 300ms ease; }
+  .mobile-menu summary { transition: color 200ms ease; }
+  @media (hover: hover) and (pointer: fine) { .mobile-menu summary:hover { color: var(--orange); } }
+  [aria-expanded="true"] .dropdown-arrow { rotate: 180deg; }
+  .primary-menu nav .mobile-only { display: none; }
+  .mobile-menu .menu-close { display: none; }
+  .mobile-menu[open] .menu-open { display: none; }
+  .mobile-menu[open] .menu-close { display: inline-block; }
+  .mobile-menu nav a[aria-current="page"] { color: var(--orange); }
+  .mobile-menu summary::-webkit-details-marker { display: none; }
+  .mobile-menu { --menu-dropdown-offset: calc((var(--header-height) - 44px) / 2); }
+  .mobile-menu nav { position: absolute; top: calc(100% + var(--menu-dropdown-offset)); right: 0; width: min(320px, calc(100vw - 32px)); padding: 0 20px; overflow: hidden; background: var(--ink); border: 1px solid rgba(240,240,240,.25); box-shadow: 0 16px 28px rgba(0,0,0,.18); }
+  .mobile-menu nav a { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--menu-link-color, var(--paper)); font-size: var(--font-ui-min); text-decoration: none; border-bottom: 1px solid rgba(240,240,240,.15); }
+  .mobile-menu nav a:last-child { border-bottom: 0; }
+  @media (max-width: 850px) {
+    .site-header { padding: 0 24px; gap: 12px; }
+    .mobile-menu { position: relative; display: block; }
+    .mobile-menu nav { max-height: calc(100dvh - var(--header-height) - 20px); overflow-y: auto; }
+    .mobile-menu summary { min-width: 44px; height: 44px; padding: 0; }
+    .support-menu, .header-cta, .brand-copy, .primary-label, .primary-menu .dropdown-arrow { display: none; }
+    .primary-menu .burger-icon { display: inline-block; }
+    .primary-menu summary[aria-expanded="true"] .burger-icon { display: none; }
+    .primary-menu summary[aria-expanded="true"] .burger-close { display: inline-block; }
+    .primary-menu nav .mobile-only { display: flex; }
+    .mobile-menu summary .material-icon { font-size: 23px; }
+  }
+  @media (min-width: 851px) {
+    .brand img { width: 32px; height: 32px; }
+    .site-header { --font-ui-min: 14px; }
+  }
+  @media (max-width: 360px) {
+    .mobile-menu summary { gap: 4px; }
+  }
+  @media (max-width: 520px) {
+    .site-header { padding: 0 24px; }
+    .brand { gap: 8px; }
+    .brand img { width: 35px; height: 35px; }
+  }
+</style>

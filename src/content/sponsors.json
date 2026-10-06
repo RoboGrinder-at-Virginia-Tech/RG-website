@@ -1,0 +1,117 @@
+{
+  "headline": "Partner with RoboGrinder",
+  "intro": "Companies, local businesses, families, and friends help our students design, build, and compete. Support RoboGrinder with funding, equipment, or expertise to keep our robots and our team moving through the season.",
+  "packetUrl": "/packets/robogrinder-partnership-2026-2027.pdf",
+  "benefits": [
+    {
+      "title": "Resume drops",
+      "icon": "description",
+      "description": "Receive student resumes for internship and full-time recruiting at qualifying tiers."
+    },
+    {
+      "title": "Meet the team",
+      "icon": "forum",
+      "description": "Share career opportunities and engineering experience through sponsor sessions included in your tier."
+    },
+    {
+      "title": "Lab tours & outreach",
+      "icon": "groups",
+      "description": "See our projects in the lab and connect at team events, with opportunities based on your tier."
+    },
+    {
+      "title": "Sponsor recognition",
+      "icon": "star_outline",
+      "description": "Get recognition on our robots, website, or team media as included in your sponsorship tier."
+    }
+  ],
+  "image": "/images/arc-2026-team.jpg",
+  "imageAlt": "RoboGrinder students and robots at a robotics competition",
+  "supportOptions": [
+    {
+      "title": "Fund the build",
+      "description": "Help cover materials, components, travel, and the other costs of a new season."
+    },
+    {
+      "title": "Share your expertise",
+      "description": "Connect students with engineers, technical mentors, and real-world feedback."
+    },
+    {
+      "title": "Equip the team",
+      "description": "Contribute tools, parts, software, or shop resources that support student projects."
+    }
+  ],
+  "partners": [
+    {
+      "name": "Bradley Department of Electrical and Computer Engineering",
+      "category": "departmental",
+      "logo": "/images/partners/ece.svg",
+      "url": "https://ece.vt.edu/"
+    },
+    {
+      "name": "Department of Mechanical Engineering at Virginia Tech",
+      "category": "departmental",
+      "logo": "/images/partners/mechanical-engineering.svg",
+      "url": "https://me.vt.edu/"
+    },
+    {
+      "name": "Student Engineers' Council at Virginia Tech",
+      "category": "departmental",
+      "logo": "/images/partners/sec.png",
+      "url": "https://www.sec.vt.edu/"
+    },
+    {
+      "name": "Undergraduate Student Senate",
+      "category": "departmental",
+      "logo": "/images/partners/undergraduate-student-senate-small.png",
+      "url": "https://uss.vt.edu/index.html"
+    },
+    {
+      "name": "Virginia Tech AUVSI — Association for Unmanned Vehicle Systems International",
+      "category": "departmental",
+      "logo": "/images/partners/auvsi.png",
+      "url": "https://auvsivt.wixsite.com/home"
+    },
+    {
+      "name": "SOLIDWORKS",
+      "logo": "/images/partners/solidworks.svg",
+      "url": "https://www.solidworks.com/"
+    },
+    {
+      "name": "Polymaker",
+      "logo": "/images/partners/polymaker.png",
+      "url": "https://polymaker.com/"
+    }
+  ],
+  "pageTitle": "Partnerships | RoboGrinder at Virginia Tech",
+  "pageDescription": "Partner with Virginia Tech's student-led RoboGrinder team. Connect with emerging engineering talent, share expertise, and help students build practical experience.",
+  "conversationLabel": "Start a conversation",
+  "conversationUrl": "#connect",
+  "packetLabel": "View sponsorship packet",
+  "whoTitle": "Student led.\nIndustry focused.",
+  "whoDescription": "We’re a student-led engineering team at Virginia Tech, bringing students together since 2016. Members take ideas through design, build, and testing, learning to deliver as a team.",
+  "benefitsTitle": "What sponsors get",
+  "benefitsIntro": "These benefits are available at eligible company donation tiers. Resume drops, events, and recognition depend on your sponsorship level.",
+  "benefitsPacketLabel": "sponsorship packet",
+  "benefitsPacketBefore": "See the",
+  "benefitsPacketAfter": "for tier details.",
+  "supportTitle": "Help the team build and compete.",
+  "supportIntro": "From business sponsorships to support from family and friends, every contribution helps. Funding, equipment, and expertise cover the work in our lab and the costs of getting to competitions.",
+  "partnersTitle": "Our sponsors",
+  "departmentalTitle": "Departmental supporters",
+  "connectTitle": "Interested in supporting us?",
+  "connectIntro": "Tell us how you’d like to help. Whether you represent a business or want to contribute personally, we’d like to hear from you.",
+  "form": {
+    "nameLabel": "Your name",
+    "emailLabel": "Email address",
+    "companyLabel": "Business or organization (optional)",
+    "topicLabel": "What can we help with?",
+    "topicPlaceholder": "Select a topic",
+    "joiningLabel": "Joining RoboGrinder",
+    "sponsorshipLabel": "Sponsorship & partnerships",
+    "collaborationLabel": "Collaboration",
+    "otherLabel": "Something else",
+    "messageLabel": "Your message",
+    "submitLabel": "Send message",
+    "statusText": "Your email app will open with the message ready to send."
+  }
+}
