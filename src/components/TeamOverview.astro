@@ -4,6 +4,8 @@
 // EDIT COPY: site.json holds the home introduction; sponsors.json holds sponsor copy.
 // EDIT LAYOUT: the home and sponsors styles are together below.
 import { withBase } from '../lib/urls';
+import { Image } from 'astro:assets';
+import missionPhoto from '../../public/images/arc-2026-team.jpg';
 import AnimatedStat from './AnimatedStat.astro';
 import teamNumbers from '../content/team-numbers.json';
 import members from '../content/members.json';
@@ -31,7 +33,9 @@ const numbers = teamNumbers.facts.map((fact) => ({
         <p class="story-context">{site.mission.description}</p>
       </div>
       <figure class="story-photo">
-        <img src={withBase(site.mission.image)} alt={site.mission.imageAlt} loading="lazy" />
+        {site.mission.image === '/images/arc-2026-team.jpg'
+          ? <Image src={missionPhoto} widths={[640, 960, 1280]} sizes="(max-width: 750px) 100vw, 50vw" format="webp" alt={site.mission.imageAlt} loading="lazy" />
+          : <img src={withBase(site.mission.image)} alt={site.mission.imageAlt} loading="lazy" />}
       </figure>
     </section>
   <section class="team-numbers" id="numbers" aria-labelledby="numbers-title">

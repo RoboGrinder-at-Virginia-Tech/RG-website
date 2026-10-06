@@ -1,5 +1,8 @@
 ---
 import { withBase } from '../lib/urls';
+import { Image } from 'astro:assets';
+import heroPhoto from '../../public/images/robot-competition-2019.jpg';
+import joinPhoto from '../../public/images/robot-competition-2018.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -25,7 +28,6 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
       <link rel="preconnect" href="https://www.youtube-nocookie.com" />
       <link rel="preconnect" href="https://www.youtube.com" />
     </>}
-    <link rel="preload" as="image" href={withBase(site.hero.poster)} />
   </Fragment>
   <a class="skip-link" href="#main">Skip to content</a>
   <SiteHeader active="Home" />
@@ -41,7 +43,9 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
         </div>
       </div>
       <div class="hero-background" aria-hidden="true">
-        <img class="hero-poster" src={withBase(site.hero.poster)} alt="" fetchpriority="high" />
+        {site.hero.poster === '/images/robot-competition-2019.jpg'
+          ? <Image class="hero-poster" src={heroPhoto} widths={[768, 1280, 1920]} sizes="100vw" format="webp" alt="" loading="eager" fetchpriority="high" />
+          : <img class="hero-poster" src={withBase(site.hero.poster)} alt="" fetchpriority="high" />}
         {videoEnabled && (localVideo ?
           <video class="hero-video hero-video-file" data-src={withBase(site.hero.videoFile)} muted loop playsinline preload="none" tabindex="-1" /> :
           <iframe class="hero-video" tabindex="-1"
@@ -84,7 +88,9 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
     <OurSponsors partners={sponsorship.partners} showCta={true} />
 
     <section class="join" id="join" aria-labelledby="join-title">
-      <div class="join-photo"><img src={withBase(site.join.image)} alt={site.join.imageAlt} loading="lazy" /></div>
+      <div class="join-photo">{site.join.image === '/images/robot-competition-2018.jpg'
+        ? <Image src={joinPhoto} widths={[640, 960, 1280]} sizes="(max-width: 750px) 100vw, 50vw" format="webp" alt={site.join.imageAlt} loading="lazy" />
+        : <img src={withBase(site.join.image)} alt={site.join.imageAlt} loading="lazy" />}</div>
       <div class="join-copy">
         <h2 id="join-title">{site.join.title}</h2>
         <p>{site.join.description}</p>
