@@ -11,10 +11,10 @@ const { partnership = false, labels = {} } = Astro.props;
     <label for="contact-email">{labels.emailLabel ?? 'Email address'}</label>
     <input id="contact-email" name="email" type="email" autocomplete="email" required />
   </div>
-  {partnership && <div class="form-row">
-    <label for="contact-company">{labels.companyLabel ?? 'Business or organization (optional)'}</label>
+  <div class="form-row">
+    <label for="contact-company">{labels.companyLabel ?? 'Your company (optional)'}</label>
     <input id="contact-company" name="company" type="text" autocomplete="organization" />
-  </div>}
+  </div>
   <div class="form-row">
     <label for="contact-topic">{labels.topicLabel ?? 'What can we help with?'}</label>
     <select id="contact-topic" name="topic" required>

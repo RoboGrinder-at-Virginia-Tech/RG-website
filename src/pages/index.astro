@@ -22,7 +22,7 @@ const banner = site.hero.anniversaryBanner;
 const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(banner.founded));
 ---
 
-<BaseLayout>
+<BaseLayout page="home">
   <Fragment slot="head">
     {videoEnabled && !localVideo && <>
       <link rel="preconnect" href="https://www.youtube-nocookie.com" />
@@ -264,7 +264,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .team-icon { font-size: 32px; line-height: 1; }
   .team-card h3 { margin: 0 0 10px; font-size: clamp(20px, 1.75vw, 25px); line-height: 1.15; letter-spacing: -.035em; }
   .team-card p { margin: 0; color: var(--ink); font-size: var(--font-body-min); line-height: 1.6; }
-  .subteams-actions { display: flex; align-items: center; justify-content: center; }
+  .subteams-actions { display: flex; align-items: center; justify-content: flex-start; padding-left: 46px; }
   .join { position: relative; min-height: 512px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; background: var(--orange); color: var(--ink); }
   .join-photo { position: relative; min-width: 0; min-height: 512px; overflow: hidden; }
   .join-photo::after { position: absolute; top: 0; right: 0; width: 24px; height: 24px; content: ''; background: var(--orange); clip-path: polygon(0 0, 100% 0, 100% 100%); }

@@ -11,6 +11,84 @@ public_folder: /uploads
 publish_mode: simple
 
 collections:
+  - name: website-settings
+    label: Website settings
+    files:
+      - name: maintenance
+        label: Maintenance
+        file: src/content/maintenance.json
+        format: json
+        fields:
+          - { label: Maintenance message enabled, name: enabled, widget: boolean, default: false, hint: 'Switches the 404 page and its preview to a maintenance message. Existing pages remain available. Publish to apply this setting to the live site.' }
+          - { label: Maintenance heading, name: heading, widget: string }
+          - { label: Maintenance message, name: message, widget: text }
+          - { label: Maintenance preview title, name: title, widget: string }
+          - { label: Maintenance preview description, name: description, widget: text }
+
+  - name: metadata
+    label: Titles and link previews
+    files:
+      - name: metadata
+        label: Website metadata
+        file: src/content/metadata.json
+        format: json
+        fields:
+          - { label: Site name, name: siteName, widget: string, hint: The website name shown above shared link previews. }
+          - { label: Shared preview image, name: previewImage, widget: image, hint: Used by all pages. Recommended size is 1200 by 630 pixels. }
+          - { label: Preview image description, name: previewImageAlt, widget: string }
+          - label: Page titles and descriptions
+            name: pages
+            widget: object
+            fields:
+              - label: Home
+                name: home
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Home | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Join
+                name: join
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Join | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Contact
+                name: contact
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Contact | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Gallery
+                name: gallery
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Gallery | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Members
+                name: members
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Members | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Robots
+                name: robots
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Robots | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Sponsors
+                name: sponsors
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Sponsors | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+              - label: Page not found
+                name: notFound
+                widget: object
+                fields:
+                  - { label: Page title, name: title, widget: string, hint: 'Used in the browser tab and link previews. Example: Page not found | RoboGrinder.' }
+                  - { label: Description, name: description, widget: text, hint: Used in search results and shared link previews. }
+
   - name: site
     label: Landing page
     files:
@@ -97,8 +175,6 @@ collections:
         file: src/content/robots.json
         format: json
         fields:
-          - { label: Browser title, name: pageTitle, widget: string }
-          - { label: Page description, name: pageDescription, widget: text }
           - { label: Hero heading, name: headline, widget: string }
           - { label: Hero introduction, name: intro, widget: text }
           - { label: Hero photo, name: image, widget: image }
@@ -171,8 +247,6 @@ collections:
         file: src/content/sponsors.json
         format: json
         fields:
-          - { label: Browser title, name: pageTitle, widget: string }
-          - { label: Page description, name: pageDescription, widget: text }
           - { label: Conversation button text, name: conversationLabel, widget: string }
           - { label: Conversation button destination, name: conversationUrl, widget: string }
           - { label: Packet button text, name: packetLabel, widget: string }

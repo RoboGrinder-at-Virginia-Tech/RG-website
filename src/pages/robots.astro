@@ -6,7 +6,7 @@ import OrangeFeature from '../components/OrangeFeature.astro';
 import robots from '../content/robots.json';
 import { withBase } from '../lib/urls';
 ---
-<BaseLayout title={robots.pageTitle} description={robots.pageDescription}>
+<BaseLayout page="robots">
   <a class="skip-link" href="#main">Skip to content</a>
   <SiteHeader active="Robots" />
   <main id="main">

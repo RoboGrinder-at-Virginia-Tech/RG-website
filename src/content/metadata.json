@@ -1,0 +1,39 @@
+{
+  "siteName": "RoboGrinder",
+  "previewImage": "/images/rg-preview.jpg",
+  "previewImageAlt": "RoboGrinder at Virginia Tech logo on an orange background",
+  "pages": {
+    "home": {
+      "title": "RoboGrinder at Virginia Tech",
+      "description": "On the grind since 2016. RoboGrinder represents Virginia Tech in the ARC Championship. Meet our team and explore the robots we design, build, and compete with."
+    },
+    "join": {
+      "title": "Join | RoboGrinder",
+      "description": "Join RoboGrinder to design, build, and compete in the ARC Championship. Explore our subteams and learn how recruitment works."
+    },
+    "contact": {
+      "title": "Contact | RoboGrinder",
+      "description": "Connect with RoboGrinder at Virginia Tech. Have a question about joining, sponsorship, or collaboration? Send a message to our team."
+    },
+    "gallery": {
+      "title": "Gallery | RoboGrinder",
+      "description": "See life on the grind. Explore photos from our builds, competitions, and moments together throughout the season."
+    },
+    "members": {
+      "title": "Members | RoboGrinder",
+      "description": "Meet the people behind RoboGrinder. Explore our current team and alumni who design, build, and compete for Virginia Tech."
+    },
+    "robots": {
+      "title": "Robots | RoboGrinder",
+      "description": "Built for the ARC Championship. Explore RoboGrinder’s robots, designed and built by students at Virginia Tech."
+    },
+    "sponsors": {
+      "title": "Sponsors | RoboGrinder",
+      "description": "We are RoboGrinder, Virginia Tech’s undergraduate competitive robotics team in the ARC Championship. Meet our sponsors and learn how your company can support us."
+    },
+    "notFound": {
+      "title": "Page not found | RoboGrinder",
+      "description": "We couldn't find this page. Return to RoboGrinder’s homepage or contact us for help."
+    }
+  }
+}

@@ -16,7 +16,7 @@ const groups = [
       <a class="footer-brand" href={withBase('/')} aria-label="RoboGrinder home"><img src={withBase('/images/rg-white-small.png')} alt="" width="110" height="110" loading="lazy" /></a>
       <div class="footer-location">
         <h2 class="footer-heading footer-address-title">Address</h2>
-        <address class="footer-address">1600 Innovation Dr, Room 139<br />Blacksburg, VA 24060</address>
+        <address class="footer-address">1600 Innovation Dr,<br />Room 139<br />Blacksburg, VA 24060</address>
       </div>
     </div>
     {groups.map((group) => <nav class="footer-nav" aria-label={group.title}>
@@ -49,7 +49,17 @@ const groups = [
   .footer-copyright { grid-column: 1; grid-row: 1; }
   .footer-credit { grid-column: 2; grid-row: 1; text-align: center; }
   .site-footer .footer-social-links { grid-column: 3; grid-row: 1; margin-left: auto; }
+  @media (min-width: 1001px) and (max-width: 1200px) {
+    .site-footer .footer-legal { display: flex; flex-direction: column; text-align: center; gap: 16px; }
+    .site-footer .footer-social-links { justify-content: center; align-self: center; margin-left: 0; }
+  }
   @media (max-width: 1000px) { .footer-top { gap: 28px; grid-template-columns: 1.4fr repeat(3, 1fr); } }
   @media (max-width: 1000px) { .site-footer .footer-legal { display: flex; flex-direction: column; text-align: center; gap: 16px; } .site-footer .footer-social-links { justify-content: center; align-self: center; margin-left: 0; gap: 2px; } .footer-brand-block { display: flex; align-items: center; gap: 24px; padding-right: 0; } .footer-brand { flex-shrink: 0; } .footer-location { min-width: 0; } .site-footer .footer-address-title { margin-top: 0; } .footer-top { grid-template-columns: repeat(3, 1fr); } .footer-brand-block { grid-column: 1 / -1; } }
   @media (max-width: 480px) { .site-footer { padding: 40px 22px 24px; } .footer-top { grid-template-columns: repeat(2, 1fr); gap: 24px; } .footer-legal { margin-top: 36px; } }
+  @media (max-width: 1000px) {
+    .footer-brand-block { display: grid; grid-template-columns: subgrid; column-gap: inherit; }
+    .footer-brand { grid-column: 1; }
+    .footer-location { grid-column: 2 / -1; }
+  }
+  @media (max-width: 360px) { .site-footer .footer-social-links { gap: 0; } }
 </style>

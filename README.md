@@ -58,6 +58,8 @@ The editor is called **Decap CMS**. CMS means “content management system”: a
 
 | What you want to change | Where to look in the editor |
 | --- | --- |
+| Browser titles, search descriptions, and shared link previews | Titles and link previews → Website metadata |
+| Switch the 404 page to a maintenance message | Website settings → Maintenance |
 | Homepage headline, introduction, background photo or video | Landing page → Homepage content → Hero |
 | Open or close recruiting; application links and messages | Landing page → Homepage content → Recruiting season |
 | Mission statement and joining section | Landing page → Homepage content → Mission / Join section |
@@ -72,6 +74,12 @@ The editor is called **Decap CMS**. CMS means “content management system”: a
 | Career, research, and university logos | Industry placements |
 
 ### Tips for content updates
+
+For titles and previews, open **Titles and link previews → Website metadata**. Expand a page under **Page titles and descriptions** to edit its title and description. These fields update the browser tab, search metadata, and Open Graph/Twitter link previews together. The shared preview image and its description apply to every page; use a 1200 × 630 image. Page headings and visible text are edited in their normal content sections.
+
+If you prefer editing a file, all these settings live in `src/content/metadata.json`. After publishing, existing previews may keep older text or images until the sharing service refreshes its cache.
+
+Under **Website settings → Maintenance**, enable **Maintenance message enabled** to replace the 404 page's heading, message, and preview text. The large 404 number stays visible, and existing pages remain available. Disable it to restore the normal page-not-found message. Save and publish your changes to update the live website; the setting is stored in `src/content/maintenance.json`.
 
 - Before opening recruiting, check that the application link points to the actual application form.
 - Add a short photo description (also called alternative text). It helps people who use screen readers understand the image.

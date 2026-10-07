@@ -16,7 +16,7 @@ const recordedPresidents = new Set(alumniRoster.alumni.filter((person) => /^Pres
 const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season) => season.people.filter((person) => /^President$/i.test(person.role) && !recordedPresidents.has(person.name.trim().toLowerCase())).map((person) => ({ ...person, role: `President, ${season.year}` })))], members.people);
 ---
 
-<BaseLayout title="Members | RoboGrinder at Virginia Tech" description="Meet the RoboGrinder team at Virginia Tech.">
+<BaseLayout page="members">
   <a class="skip-link" href="#main">Skip to content</a>
   <SiteHeader active="Members" />
   <main id="main">

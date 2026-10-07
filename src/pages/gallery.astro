@@ -11,7 +11,7 @@ const seasons = gallery.seasons.map((season) => ({
   photos: ('manualPhotoOrder' in season && season.manualPhotoOrder) ? [...season.photos] : [...season.photos].sort((a, b) => (photoOrder[a.category] ?? 2) - (photoOrder[b.category] ?? 2)),
 }));
 ---
-<BaseLayout title="Gallery | RoboGrinder at Virginia Tech" description="Competition and season photos from RoboGrinder at Virginia Tech.">
+<BaseLayout page="gallery">
   <a class="skip-link" href="#main">Skip to content</a>
   <SiteHeader active="Gallery" />
   <main id="main">

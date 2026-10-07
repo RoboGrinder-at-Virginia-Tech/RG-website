@@ -246,7 +246,7 @@ const links = [
   @media (max-width: 850px) {
     .site-header { padding: 0 24px; gap: 12px; }
     .mobile-menu { position: relative; display: block; }
-    .mobile-menu nav { max-height: calc(100dvh - var(--header-height) - 20px); overflow-y: auto; }
+    .mobile-menu nav { width: min(420px, calc(100vw - 2 * var(--mobile-gutter, 24px))); max-height: calc(100dvh - var(--header-height) - 20px); overflow-y: auto; }
     .mobile-menu summary { min-width: 44px; height: 44px; padding: 0; }
     .support-menu, .header-cta, .brand-copy, .primary-label, .primary-menu .dropdown-arrow { display: none; }
     .primary-menu .burger-icon { display: inline-block; }
