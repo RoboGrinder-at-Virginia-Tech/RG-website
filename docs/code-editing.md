@@ -8,7 +8,7 @@ Set `recruitment.open` in `src/content/site.json` to `true` for recruiting seaso
 
 The standalone navbar CTA and homepage hero share `src/lib/season.ts`: `true` uses `recruitment.joinLabel` and `recruitment.joinUrl`; `false` uses `recruitment.supportLabel` and `recruitment.supportUrl`. The Connect dropdown, footer, industry section, and lower homepage Join section always link to the Join page, regardless of recruitment status.
 
-On `/join/`, `true` shows **Application forms** using `recruitment.applicationLabel` and `recruitment.applicationUrl`. Replace the temporary Rickroll link with your actual form URL before opening recruiting. `false` shows **Explore our subteams**. Edit `recruitment.openDescription` and `closedDescription` for the matching Join page messages. The lower homepage Join section always uses `join.title` and `join.description`. Sponsor-specific links still lead to sponsors in both seasons.
+On `/join/`, `true` shows **Application forms** using `recruitment.applicationLabel` and `recruitment.applicationUrl`. Replace the temporary Rickroll link with your actual form URL before opening recruiting. `false` shows **Follow us**, linking to `links.linktree`. Edit `recruitment.openDescription` and `closedDescription` for the matching Join page messages. The lower homepage Join section always uses `join.title` and `join.description`. Sponsor-specific links still lead to sponsors in both seasons.
 
 ## Site settings
 

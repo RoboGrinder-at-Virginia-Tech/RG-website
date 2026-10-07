@@ -12,22 +12,35 @@ import { joinPageAction, recruitmentDescription } from '../lib/season';
   <SiteHeader active="Join" />
   <main id="main">
     <OrangeFeature title="Your next chapter starts here." description={recruitmentDescription} image="/images/join-gobblerfest.webp" imageAlt="RoboGrinder members smiling with their robot at Gobblerfest" imagePosition="50% 30%">
-      {joinPageAction.href ? <a class="button button-swipe button-dark" href={withBase(joinPageAction.href)}>{joinPageAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a> : <button class="button button-dark" type="button" disabled>{joinPageAction.label}</button>}
+      {joinPageAction.href ? <a class="button button-swipe button-dark" href={withBase(joinPageAction.href)} target={!site.recruitment.open ? '_blank' : undefined} rel={!site.recruitment.open ? 'noreferrer' : undefined}>{joinPageAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a> : <button class="button button-dark" type="button" disabled>{joinPageAction.label}</button>}
     </OrangeFeature>
+    <section class="recruitment-process" aria-labelledby="recruitment-process-title">
+      <h2 id="recruitment-process-title">How recruiting works.</h2>
+      <ol class="recruitment-steps">
+        <li><span class="step-number" aria-hidden="true">01</span><h3>Apply</h3><p>Fill out the application form and choose which team you'd like to join.</p></li>
+        <li><span class="step-number" aria-hidden="true">02</span><h3>Interviews</h3><p>Selected applicants move on to interviews so we can learn more about you and your background.</p></li>
+        <li><span class="step-number" aria-hidden="true">03</span><h3>Offers</h3><p>Once the process is complete, we'll email you with the outcome of your application.</p></li>
+      </ol>
+    </section>
     <section class="next-season">
-      <div><h2>Stay on the grind.</h2><p>Follow our latest builds and competition updates, cheer us on during matches, and help support the team throughout the season.</p><div class="support-actions"><a class="button button-swipe button-dark" href={withBase('/sponsors/')}>Support the team<span class="material-icon" aria-hidden="true">chevron_right</span></a><a class="button button-swipe button-dark" href={withBase(site.links.linktree)} target="_blank" rel="noreferrer">Follow us<span class="material-icon" aria-hidden="true">chevron_right</span></a></div></div>
+      <div><h2>Stay on the grind.</h2><p>Follow our latest builds and competition updates, cheer us on during matches, and help support the team throughout the season.</p><div class="support-actions"><a class="button button-swipe button-dark" href={withBase('/sponsors/')}>Support the team<span class="material-icon" aria-hidden="true">chevron_right</span></a></div></div>
       <img src={withBase('/images/interest-meeting-software.webp')} alt="RoboGrinder students sharing ideas around a laptop at an interest meeting" loading="lazy" width="1600" height="1067" />
     </section>
   </main>
   <SiteFooter />
 </BaseLayout>
 <style>
-  .support-actions { display: grid; grid-template-columns: repeat(2, max-content); align-items: start; gap: 20px 24px; }
+  .support-actions { display: flex; flex-wrap: wrap; align-items: start; }
   .support-actions > .button { margin: 0; }
   .next-season { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; padding: 80px clamp(24px, 8vw, 124px); }
   h2 { margin: 0 0 24px; font: 700 clamp(32px, 4vw, 48px)/1.05 var(--display); }
   p { margin: 0 0 28px; font-size: var(--font-body-min); line-height: 1.6; }
+  .recruitment-process { padding: 80px clamp(24px, 8vw, 124px); background: var(--ink); color: var(--paper); }
+  .recruitment-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; list-style: none; padding: 0; margin: 40px 0 0; }
+  .recruitment-steps li { border-top: 1px solid rgba(240,240,240,.2); padding-top: 24px; }
+  .step-number { display: block; margin-bottom: 24px; color: var(--orange); font: 700 48px/1 var(--display); }
+  .recruitment-steps h3 { margin: 0 0 16px; font: 700 26px/1.15 var(--display); }
+  .recruitment-steps p { margin: 0; color: rgba(240,240,240,.8); }
   img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px); }
-  @media (max-width: 1100px) { .support-actions { grid-template-columns: max-content; } }
-  @media (max-width: 680px) { .next-season { grid-template-columns: 1fr; padding: 56px 23px; gap: 36px; } }
+  @media (max-width: 680px) { .next-season { grid-template-columns: 1fr; padding: 56px 23px; gap: 36px; } .recruitment-process { padding: 56px 23px; } .recruitment-steps { grid-template-columns: 1fr; gap: 32px; } .step-number { margin-bottom: 16px; } }
 </style>

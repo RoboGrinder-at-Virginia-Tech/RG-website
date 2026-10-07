@@ -14,16 +14,23 @@ const groups = [
   <div class="footer-top">
     <div class="footer-brand-block">
       <a class="footer-brand" href={withBase('/')} aria-label="RoboGrinder home"><img src={withBase('/images/rg-white-small.png')} alt="" width="110" height="110" loading="lazy" /></a>
-      <div class="social-links" aria-label="Social media">
-        {socialLinks.map((social) => social.url ? <a class="icon-button" href={withBase(social.url)} target="_blank" rel="noreferrer" aria-label={social.name}><ProfileIcon name={social.name} /></a> : <button class="icon-button" type="button" disabled aria-label={`${social.name} (link coming soon)`} title={`${social.name}: coming soon`}><ProfileIcon name={social.name} /></button>)}
+      <div class="footer-location">
+        <h2 class="footer-heading footer-address-title">Address</h2>
+        <address class="footer-address">1600 Innovation Dr, Room 139<br />Blacksburg, VA 24060</address>
       </div>
     </div>
     {groups.map((group) => <nav class="footer-nav" aria-label={group.title}>
-      <h2>{group.title}</h2>
+      <h2 class="footer-heading">{group.title}</h2>
       {group.links.map((link) => <a href={withBase(link.url)} target={link.url.startsWith('https:') ? '_blank' : undefined} rel={link.url.startsWith('https:') ? 'noreferrer' : undefined}>{link.name}</a>)}
     </nav>)}
   </div>
-  <div class="footer-legal"><p>© {new Date().getFullYear()} RoboGrinder at Virginia Tech</p><p>Made with <3 in Blacksburg</p></div>
+  <div class="footer-legal">
+    <div class="footer-social-links" aria-label="Social media">
+      {socialLinks.map((social) => social.url ? <a class="icon-button" href={withBase(social.url)} target="_blank" rel="noreferrer" aria-label={social.name}><ProfileIcon name={social.name} /></a> : <button class="icon-button" type="button" disabled aria-label={`${social.name} (link coming soon)`} title={`${social.name}: coming soon`}><ProfileIcon name={social.name} /></button>)}
+    </div>
+    <p class="footer-credit">Made with love in Blacksburg</p>
+    <p class="footer-copyright">© {new Date().getFullYear()} RoboGrinder at Virginia Tech</p>
+  </div>
 </footer>
 <style>
   .site-footer { padding: 64px clamp(24px, 6vw, 100px) 28px; background: var(--ink); color: var(--paper); }
@@ -31,15 +38,18 @@ const groups = [
   .footer-brand { display: inline-block; }
   .footer-brand img { width: 90px; height: 90px; object-fit: contain; }
   .footer-brand-block { min-width: 0; padding-right: 24px; }
-  .social-links { display: grid; grid-template-columns: repeat(3, 44px); gap: 12px; width: max-content; margin-top: 28px; }
+  .site-footer .footer-social-links { display: flex; flex-wrap: nowrap; justify-content: flex-end; align-items: center; gap: 8px; width: max-content; justify-self: end; }
+  .footer-address { color: rgba(240,240,240,.8); font-size: var(--font-body-min); font-style: normal; line-height: 1.6; }
   .footer-nav { display: grid; gap: 4px; }
-  .footer-nav h2 { margin: 16px 0 18px; font: 700 16px/1.2 var(--body); letter-spacing: .1em; text-transform: uppercase; }
+  .site-footer .footer-heading { margin: 16px 0 18px; font: 700 16px/1.2 var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--paper); }
+  .site-footer .footer-address-title { margin-top: 24px; }
   .footer-nav a { display: flex; align-items: center; min-height: 44px; padding: 8px 4px; color: rgba(240,240,240,.8); font-size: var(--font-body-min); text-decoration: none; }
-  .footer-legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(240,240,240,.2); color: rgba(240,240,240,.72); font-size: var(--font-label-min); }
+  .site-footer .footer-legal { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px 24px; margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(240,240,240,.2); color: rgba(240,240,240,.72); font-size: var(--font-label-min); }
   .footer-legal p { margin: 0; }
-  .footer-legal p:last-child { margin-left: auto; text-align: right; }
+  .footer-copyright { grid-column: 1; grid-row: 1; }
+  .footer-credit { grid-column: 2; grid-row: 1; text-align: center; }
+  .site-footer .footer-social-links { grid-column: 3; grid-row: 1; margin-left: auto; }
   @media (max-width: 1000px) { .footer-top { gap: 28px; grid-template-columns: 1.4fr repeat(3, 1fr); } }
-  @media (max-width: 760px) { .footer-top { grid-template-columns: repeat(3, 1fr); } .footer-brand-block { grid-column: 1 / -1; } }
-  @media (max-width: 760px) { .footer-legal { flex-direction: column; align-items: center; text-align: center; gap: 12px; } .footer-legal p:last-child { margin-left: 0; text-align: center; } }
+  @media (max-width: 1000px) { .site-footer .footer-legal { display: flex; flex-direction: column; text-align: center; gap: 16px; } .site-footer .footer-social-links { justify-content: center; align-self: center; margin-left: 0; gap: 2px; } .footer-brand-block { display: flex; align-items: center; gap: 24px; padding-right: 0; } .footer-brand { flex-shrink: 0; } .footer-location { min-width: 0; } .site-footer .footer-address-title { margin-top: 0; } .footer-top { grid-template-columns: repeat(3, 1fr); } .footer-brand-block { grid-column: 1 / -1; } }
   @media (max-width: 480px) { .site-footer { padding: 40px 22px 24px; } .footer-top { grid-template-columns: repeat(2, 1fr); gap: 24px; } .footer-legal { margin-top: 36px; } }
 </style>
