@@ -18,6 +18,7 @@ The marquee sorts names alphabetically and splits the active list into three con
 | Boeing | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/5/54/Boeing_full_logo_%28variant%29.svg) | [Logo](../public/images/placements/boeing.svg) |
 | Capital One | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/9/98/Capital_One_logo.svg) | [Logo](../public/images/placements/capital-one.svg) |
 | Carnegie Mellon University | Top row | [Source](https://commons.wikimedia.org/wiki/File:Carnegie_Mellon_wordmark.svg) | [Logo](../public/images/placements/carnegie-mellon.svg) |
+| Center for Power Electronics Systems | Top row | [Source](https://cpes.vt.edu/common/img/cpes_logo_335px_circle.png) | [Logo](../public/images/placements/cpes.png) |
 | Cisco | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg) | [Logo](../public/images/placements/cisco.svg) |
 | Columbia University | Not displayed: top 10 eligibility unconfirmed | [Source](https://upload.wikimedia.org/wikipedia/commons/1/10/Columbia_University_1754.svg) | Not downloaded |
 | COMAC | Top row | [Source](https://upload.wikimedia.org/wikipedia/en/c/c1/Commercial_Aircraft_Corporation_of_China_logo.svg) | [Logo](../public/images/placements/comac.svg) |
@@ -90,6 +91,7 @@ Ranking references: [U.S. News graduate engineering](https://www.usnews.com/best
 | Boeing | | | | |
 | Capital One | | | | |
 | Carnegie Mellon University | | | | |
+| Center for Power Electronics Systems | | | | |
 | Cisco | | | | |
 | Columbia University | | | | |
 | COMAC | | | | |

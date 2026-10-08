@@ -73,6 +73,13 @@
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Carnegie_Mellon_wordmark.svg"
     },
     {
+      "name": "Center for Power Electronics Systems",
+      "slug": "cpes",
+      "logo": "/images/placements/cpes.png",
+      "source": "https://cpes.vt.edu/common/img/cpes_logo_335px_circle.png",
+      "sourcePage": "https://cpes.vt.edu/"
+    },
+    {
       "name": "Cisco",
       "slug": "cisco",
       "logo": "/images/placements/cisco.svg",
