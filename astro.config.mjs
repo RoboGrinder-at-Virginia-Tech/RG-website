@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const siteURL = new URL(process.env.SITE_URL || 'https://robogrinder.org');
+const siteURL = new URL(process.env.SITE_URL || 'https://www.robogrinder.org');
 siteURL.protocol = 'https:';
-if (siteURL.hostname === 'www.robogrinder.org') siteURL.hostname = 'robogrinder.org';
+if (siteURL.hostname === 'robogrinder.org') siteURL.hostname = 'www.robogrinder.org';
 
 export default defineConfig({
   site: siteURL.href,
