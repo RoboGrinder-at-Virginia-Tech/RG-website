@@ -7,22 +7,12 @@ import { withBase } from '../lib/urls';
 import { Image } from 'astro:assets';
 import missionPhoto from '../../public/images/arc-2026-team.jpg';
 import AnimatedStat from './AnimatedStat.astro';
-import teamNumbers from '../content/team-numbers.json';
-import members from '../content/members.json';
-import subteams from '../content/subteams.json';
+import { numbers } from '../lib/teamNumbers';
 import site from '../content/site.json';
 import sponsorship from '../content/sponsors.json';
 
 interface Props { variant?: 'home' | 'sponsors' }
 const { variant = 'home' } = Astro.props;
-const counts = {
-  members: new Set(members.people.map((person) => person.name.trim().toLowerCase())).size,
-  subteams: subteams.teams.length,
-};
-const numbers = teamNumbers.facts.map((fact) => ({
-  label: fact.label,
-  value: fact.source === 'members' ? counts.members : fact.source === 'subteams' ? counts.subteams : fact.value,
-}));
 ---
 
 {variant === 'home' ? <div class="mission-chapter">
@@ -38,17 +28,13 @@ const numbers = teamNumbers.facts.map((fact) => ({
           : <img src={withBase(site.mission.image)} alt={site.mission.imageAlt} loading="lazy" />}
       </figure>
     </section>
-  <section class="team-numbers" id="numbers" aria-labelledby="numbers-title">
-  <h2 id="numbers-title">{teamNumbers.title}</h2>
-  <dl>{numbers.map((number) => <div><dt>{number.label}</dt><dd><AnimatedStat value={number.value} /></dd></div>)}</dl>
-</section>
 </div> : <section class="who section-shell" aria-labelledby="who-title">
   <div><h2 id="who-title">{sponsorship.whoTitle}</h2><p>{sponsorship.whoDescription}</p></div>
   <dl class="team-facts">{numbers.map((number) => <div><dt>{number.label}</dt><dd><AnimatedStat value={number.value} /></dd></div>)}</dl>
 </section>}
 
 <style>
-  /* HOME: featured team introduction and orange numbers strip */
+  /* HOME: featured team introduction; numbers now appear in the hero. */
   .mission-chapter { background: var(--paper); }
   .story { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 0; padding: 0; background: var(--paper); }
   .story-heading { align-self: center; padding: 80px clamp(24px, 6vw, 90px) 80px clamp(24px, 8vw, 124px); }
@@ -60,17 +46,8 @@ const numbers = teamNumbers.facts.map((fact) => ({
   .story-photo img { position: absolute; inset: -1px; display: block; max-width: none; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover; object-position: center; }
 
 
-  .team-numbers { padding: 64px clamp(24px, 8vw, 124px); background: var(--orange); color: var(--ink); scroll-margin-top: var(--scroll-header-offset); }
-  .team-numbers h2 { margin: 0 0 36px; font: 700 clamp(28px, 3vw, 40px)/1.1 var(--display); }
-  .team-numbers dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; }
-  .team-numbers dl > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 16px; }
-  .team-numbers dt { font-size: var(--font-body-min); line-height: 1.5; color: var(--ink); }
-  .team-numbers dd { margin: 0; font: 700 clamp(54px, 7vw, 96px)/1 var(--display); color: var(--ink); }
-  @media (max-width: 750px) { .team-numbers dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; } }
-  @media (max-width: 420px) { .team-numbers { padding: 48px 23px; } .team-numbers dd { font-size: 56px; } }
 
   .story-heading p { margin-top: 0; }
-  .team-numbers { display: flex; flex-direction: column; justify-content: center; }
 
   /* SPONSORS: introduction alongside a compact two-column numbers grid */
   .who { padding: 80px clamp(24px, 8vw, 124px); display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; align-content: center; }

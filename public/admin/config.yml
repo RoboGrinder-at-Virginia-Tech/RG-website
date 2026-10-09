@@ -228,7 +228,6 @@ collections:
         file: src/content/team-numbers.json
         format: json
         fields:
-          - { label: Homepage numbers heading, name: title, widget: string }
           - label: Team numbers
             name: facts
             widget: list

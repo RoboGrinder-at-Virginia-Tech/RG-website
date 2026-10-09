@@ -58,7 +58,7 @@ Edit **`src/content/team-numbers.json`** to change numbers on both the homepage 
 
 `title` controls the homepage's numbers heading. The current `#2` placement is a manually rounded figure, not an automatically calculated average.
 
-**`src/components/TeamOverview.astro`** contains the featured team introduction, number resolution, and both page layouts. Its frontmatter points to the content files; its styles mark the home and sponsor sections. `index.astro` uses `<TeamOverview />`; `sponsors.astro` uses `<TeamOverview variant="sponsors" />`.
+**`src/components/TeamOverview.astro`** contains the featured team introductions and the sponsor numbers layout. `src/lib/teamNumbers.ts` resolves the shared numbers. The homepage displays them inside the hero in `src/pages/index.astro`, without a visible heading. `index.astro` uses `<TeamOverview />` for the mission; `sponsors.astro` uses `<TeamOverview variant="sponsors" />` for its introduction and numbers.
 
 ## Where to edit other sections
 

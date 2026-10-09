@@ -20,4 +20,4 @@ The PDF is stored in this repository at `public/packets/RG27_SponsorPacket.pdf`.
 
 The online CMS requires GitHub OAuth setup; use GitHub directly or the local CMS until that is configured.
 
-For layout changes, edit `src/components/TeamOverview.astro`. It contains the featured introduction and numbers for both pages, with clearly marked home and sponsor styles. Sponsor numbers are no longer stored separately in `sponsors.json`. See [Editing in code](code-editing.md) for the full file map.
+For introduction layout changes, edit `src/components/TeamOverview.astro`; it also contains the sponsor numbers layout. The homepage numbers appear in the hero in `src/pages/index.astro`. Both pages use `src/lib/teamNumbers.ts` to resolve shared values from `team-numbers.json`. See [Editing in code](code-editing.md) for the full file map.

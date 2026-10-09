@@ -1,5 +1,4 @@
 {
-  "title": "By the numbers",
   "facts": [
     { "label": "Active members", "source": "members", "value": "" },
     { "label": "Average competition placement*", "source": "manual", "value": "#2" },

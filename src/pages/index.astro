@@ -10,6 +10,8 @@ import OurSponsors from '../components/OurSponsors.astro';
 import IndustryExperience from '../components/IndustryExperience.astro';
 import Achievements from '../components/Achievements.astro';
 import TeamOverview from '../components/TeamOverview.astro';
+import AnimatedStat from '../components/AnimatedStat.astro';
+import { numbers } from '../lib/teamNumbers';
 import site from '../content/site.json';
 import { primaryAction } from '../lib/season';
 import placements from '../content/industry-placements.json';
@@ -42,6 +44,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
           <a class="button button-swipe button-light" href={withBase(primaryAction.href)}>{primaryAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
         </div>
       </div>
+      <dl class="hero-numbers" id="numbers" aria-label="Team numbers">{numbers.map((number) => <div><dt>{number.label}</dt><dd><AnimatedStat value={number.value} /></dd></div>)}</dl>
       <div class="hero-background" aria-hidden="true">
         {site.hero.poster === '/images/robot-competition-2019.jpg'
           ? <Image class="hero-poster" src={heroPhoto} widths={[768, 1280, 1920]} sizes="100vw" format="webp" alt="" loading="eager" fetchpriority="high" />
@@ -230,8 +233,12 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
 
 <style>
 
-  .landing { position: relative; display: flex; align-items: center; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; padding: 100px clamp(24px, 8vw, 124px); background: var(--orange); color: var(--paper); }
-  .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; max-width: 680px; padding: 20px 0 35px; }
+  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--orange); color: var(--paper); }
+  .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; max-width: min(680px, calc(100% - 160px)); padding: 20px 0; }
+  .hero-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 28px 0 0; border-top: 1px solid rgba(240,240,240,.4); scroll-margin-top: var(--scroll-header-offset); }
+  .hero-numbers > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; }
+  .hero-numbers dt { max-width: 230px; font-size: var(--font-body-min); line-height: 1.5; }
+  .hero-numbers dd { margin: 0; font: 700 clamp(44px, 5vw, 68px)/1 var(--display); }
   h1, h2, h3, p { margin-top: 0; }
   h1, h2, h3 { font-family: var(--display); }
   .landing h1 { max-width: 650px; margin: 0 0 24px; font-size: clamp(52px, 6vw, 88px); font-weight: 700; line-height: 1.02; letter-spacing: -.055em; white-space: pre-line; }
@@ -254,7 +261,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .anniversary-banner strong { font: 700 64px/.95 var(--display); margin: 4px 0 8px; }
   .banner-band { background: var(--paper); color: var(--ink); width: calc(100% + 20px); text-align: center; padding: 5px; font: 700 16px/1 var(--display); }
   .banner-dates { margin-top: 10px; font: 700 14px/1.25 var(--display); letter-spacing: .05em; text-align: center; }
-  .video-toggle { position: absolute; right: max(24px, env(safe-area-inset-right)); top: max(0px, min(calc(100% - var(--button-height) - 22px - env(safe-area-inset-bottom)), calc(100svh - var(--header-height) - var(--button-height) - 22px - env(safe-area-inset-bottom)))); width: var(--button-height); min-height: var(--button-height); border: 0; cursor: pointer; }
+  .video-toggle { position: absolute; right: max(24px, env(safe-area-inset-right)); bottom: calc(22px + env(safe-area-inset-bottom)); width: var(--button-height); min-height: var(--button-height); border: 0; cursor: pointer; }
   .section-shell { padding-left: clamp(24px, 8vw, 124px); padding-right: clamp(24px, 8vw, 124px); }
   .subteams { padding-top: 64px; padding-bottom: 64px; background: var(--orange); color: var(--ink); }
   .subteams-head { margin-bottom: 32px; }
@@ -275,8 +282,9 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .button-dark { background: var(--ink); color: var(--paper); }
   .join-cut { position: absolute; top: 0; right: 0; width: 30px; height: 30px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); }
   @media (max-width: 950px) {
-    .landing { min-height: calc(100svh - var(--header-height)); padding: 180px clamp(24px, 4vw, 38px) 80px; }
-    .hero-copy { max-width: 620px; }
+    .landing { min-height: calc(100svh - var(--header-height)); padding: 56px clamp(24px, 4vw, 38px) 88px; }
+    .hero-copy { max-width: calc(100% - 124px); }
+    .hero-numbers { gap: 24px; }
     .anniversary-banner { right: 24px; width: 100px; height: 202px; padding: 14px 8px 25px; }
     .anniversary-banner img { width: 30px; height: 30px; margin-bottom: 10px; }
     .anniversary-banner strong { font-size: 48px; }
@@ -288,8 +296,15 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
     .join-copy { padding-left: 45px; }
   }
   @media (max-width: 680px) {
-    .landing { align-items: flex-start; min-height: calc(100svh - var(--header-height)); padding: clamp(140px, 25svh, 202px) 22px 76px; }
-    .hero-copy { padding: 0; }
+    .landing { align-items: start; min-height: calc(100svh - var(--header-height)); gap: 32px; padding: 180px 22px 76px; }
+    .hero-copy { max-width: 100%; padding: 0; }
+    .hero-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 24px; }
+    .hero-numbers dd { font-size: 44px; }
+    .anniversary-banner { height: 158px; width: 88px; padding: 10px 8px 20px; }
+    .anniversary-banner img { width: 24px; height: 24px; margin-bottom: 6px; }
+    .anniversary-banner strong { font-size: 36px; margin: 4px 0; }
+    .banner-band { font-size: 12px; padding: 3px; }
+    .banner-dates { font-size: 10px; margin-top: 6px; }
     .landing h1 { margin: 0 0 20px; font-size: clamp(38px, 11vw, 64px); }
     .hero-intro { max-width: 380px; margin-bottom: 23px; font-size: var(--font-body-min); }
     .hero-actions { gap: 16px; }
