@@ -24,9 +24,15 @@ import sponsorship from '../content/sponsors.json';
       <header><h2 id="benefits-title">{sponsorship.benefitsTitle}</h2><p>{sponsorship.benefitsIntro} {sponsorship.benefitsPacketBefore} <a href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.benefitsPacketLabel}</a> {sponsorship.benefitsPacketAfter}</p></header>
       <div class="benefit-list">{sponsorship.benefits.map((benefit) => <article><span class="benefit-icon material-icon" aria-hidden="true">{benefit.icon}</span><div><h3>{benefit.title}</h3><p>{benefit.description}</p></div></article>)}</div>
     </section>
-    <section class="support section-shell" aria-labelledby="support-title">
-      <div><h2 id="support-title">{sponsorship.supportTitle}</h2><p>{sponsorship.supportIntro}</p></div>
-      <div class="support-list">{sponsorship.supportOptions.map((option) => <article><h3>{option.title}</h3><p>{option.description}</p></article>)}</div>
+    <section class="tiers section-shell" id="tiers" aria-labelledby="tiers-title">
+      <header><h2 id="tiers-title">{sponsorship.tiersTitle}</h2><p>{sponsorship.tiersIntro}</p></header>
+      <div class="tier-grid">{sponsorship.tiers.map((tier) => <article class:list={['tier-card', `tier-${tier.style}`]}>
+        <h3><span class="tier-marker" aria-hidden="true"></span>{tier.name}</h3>
+        <p class="tier-price">{tier.amount}<span>{sponsorship.tiersPeriod}</span></p>
+        <p class="tier-summary">{tier.summary}</p>
+        <ul>{tier.highlights.map((highlight) => <li><span aria-hidden="true">✓</span>{highlight}</li>)}</ul>
+      </article>)}</div>
+      <div class="tier-notes"><p>{sponsorship.tiersNote} <a href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.benefitsPacketLabel}</a>.</p><p>{sponsorship.tiersSupportNote} <a href="#connect">{sponsorship.conversationLabel}</a>.</p></div>
     </section>
     <OurSponsors partners={sponsorship.partners} id="partners" title={sponsorship.partnersTitle} departmentalTitle={sponsorship.departmentalTitle} />
     <section class="connect section-shell" id="connect" aria-labelledby="connect-title">
@@ -54,26 +60,41 @@ import sponsorship from '../content/sponsors.json';
   .benefit-icon { display: grid; place-items: center; width: 40px; height: 32px; color: var(--orange); font-size: 28px; }
   .benefit-list h3 { margin-bottom: 10px; font-size: clamp(22px, 2vw, 26px); }
   .benefit-list p { max-width: 620px; }
-  .support { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; background: var(--orange); color: var(--ink); }
-  .support > div > p:last-child { max-width: 470px; }
-  .support-list article { padding: 24px 0; }
-  .support-list article + article { border-top: 1px solid rgba(0,0,0,.3); }
-  .support-list article:first-child { border-top: 0; padding-top: 0; }
-  .support-list article:last-child { padding-bottom: 0; }
-  .support-list h3 { margin-bottom: 12px; }
+  .tiers { background: var(--paper); color: var(--ink); scroll-margin-top: var(--scroll-header-offset); }
+  .tiers header { margin-bottom: 40px; }
+  .tiers header p { max-width: 700px; }
+  .tier-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .tier-card { --tier-accent: #626262; padding: 28px 24px 32px; border: 1px solid rgba(0,0,0,.18); border-radius: 16px; background: linear-gradient(145deg, rgba(0,0,0,.035), transparent 45%); }
+  .tier-bronze { --tier-accent: #94552e; background: linear-gradient(145deg, rgba(148,85,46,.1), transparent 45%); }
+  .tier-silver { --tier-accent: #5c6b77; background: linear-gradient(145deg, rgba(92,107,119,.13), transparent 45%); }
+  .tier-gold { --tier-accent: #edb849; background: var(--ink); color: var(--paper); }
+  .tier-card h3 { display: flex; align-items: center; gap: 10px; font: 700 16px/1.4 var(--display); letter-spacing: .08em; text-transform: uppercase; }
+  .tier-marker { width: 9px; height: 9px; transform: rotate(45deg); background: var(--tier-accent); flex-shrink: 0; }
+  .tier-price { margin-top: 20px; font: 500 clamp(30px, 3vw, 42px)/1.1 var(--display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+  .tier-price span { display: block; margin-top: 10px; font: 400 14px/1.5 var(--body, sans-serif); letter-spacing: 0; }
+  .tier-summary { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,.18); font-size: 16px; }
+  .tier-gold .tier-summary { border-color: rgba(255,255,255,.25); }
+  .tier-card ul { display: grid; gap: 14px; padding: 0; margin: 20px 0 0; list-style: none; }
+  .tier-card li { display: grid; grid-template-columns: 14px 1fr; gap: 10px; font-size: 16px; line-height: 1.55; }
+  .tier-card li > span { color: var(--tier-accent); }
+  .tier-notes { display: grid; gap: 12px; max-width: 900px; margin: 32px auto 0; text-align: center; }
+  .tier-notes p { font-size: 16px; }
+  .tier-notes a { text-underline-offset: 4px; }
   .connect { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; background: var(--ink); color: var(--paper); scroll-margin-top: var(--scroll-header-offset); }
   .connect p { max-width: 560px; }
   .connect-packet { margin-top: 28px; }
   .button-light { background: var(--paper); color: var(--ink); --hover-fill: var(--orange); --hover-ink: var(--paper); }
   .connect :focus-visible { outline-color: var(--orange); }
-  @media (max-width: 1000px) { .support, .connect { gap: 40px; } .benefit-list { column-gap: 28px; } }
+  @media (max-width: 1100px) { .tier-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 1000px) { .connect { gap: 40px; } .benefit-list { column-gap: 28px; } }
   @media (max-width: 800px) {
-    .support, .connect { grid-template-columns: 1fr; }
+    .connect { grid-template-columns: 1fr; }
     .benefit-list { grid-template-columns: 1fr; }
   }
   @media (max-width: 540px) {
     .section-shell { padding: 56px 23px; }
     .benefit-list article { gap: 12px; }
+    .tier-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 680px) { .sponsor-page > :global(.orange-feature) { min-height: 0; } }
 </style>

@@ -4,14 +4,14 @@
   "packetUrl": "/packets/RG27_SponsorPacket.pdf",
   "benefits": [
     {
-      "title": "Resume drops",
+      "title": "Resume book",
       "icon": "description",
-      "description": "Receive student resumes for internship and full-time recruiting at qualifying tiers."
+      "description": "Connect with student talent for internships and full-time opportunities through our sponsor resume book."
     },
     {
       "title": "Meet the team",
       "icon": "forum",
-      "description": "Share career opportunities and engineering experience through sponsor sessions included in your tier."
+      "description": "Get to know the students behind our robots through visits and custom outreach opportunities at eligible tiers."
     },
     {
       "title": "Lab tours & outreach",
@@ -26,20 +26,6 @@
   ],
   "image": "/images/arc-2026-team.jpg",
   "imageAlt": "RoboGrinder students and robots at a robotics competition",
-  "supportOptions": [
-    {
-      "title": "Fund the build",
-      "description": "Help cover materials, components, travel, and the other costs of a new season."
-    },
-    {
-      "title": "Share your expertise",
-      "description": "Connect students with engineers, technical mentors, and real-world feedback."
-    },
-    {
-      "title": "Equip the team",
-      "description": "Contribute tools, parts, software, or shop resources that support student projects."
-    }
-  ],
   "partners": [
     {
       "name": "Bradley Department of Electrical and Computer Engineering",
@@ -88,12 +74,10 @@
   "whoTitle": "Student led.\nIndustry focused.",
   "whoDescription": "We’re a student-led engineering team at Virginia Tech, bringing students together since 2016. Members take ideas through design, build, and testing, learning to deliver as a team.",
   "benefitsTitle": "What sponsors get",
-  "benefitsIntro": "These benefits are available at eligible company donation tiers. Resume drops, events, and recognition depend on your sponsorship level.",
+  "benefitsIntro": "Connect with student engineers and put your support on display. Benefits vary by sponsorship tier.",
   "benefitsPacketLabel": "sponsorship packet",
   "benefitsPacketBefore": "See the",
   "benefitsPacketAfter": "for tier details.",
-  "supportTitle": "Help the team build and compete.",
-  "supportIntro": "From business sponsorships to support from family and friends, every contribution helps. Funding, equipment, and expertise cover the work in our lab and the costs of getting to competitions.",
   "partnersTitle": "Our sponsors",
   "departmentalTitle": "Departmental supporters",
   "connectTitle": "Interested in supporting us?",
@@ -111,5 +95,53 @@
     "messageLabel": "Your message",
     "submitLabel": "Send message",
     "statusText": "Your email app will open with the message ready to send."
-  }
+  },
+  "tiersTitle": "Sponsorship tiers",
+  "tiersIntro": "Choose a level of annual support and help our students bring the next generation of robots to competition.",
+  "tiersPeriod": "annual contribution",
+  "tiersNote": "Each higher tier includes the benefits of the tiers before it. See the full details in our",
+  "tiersSupportNote": "Have equipment, parts, software, or expertise to share? In-kind support is assigned a tier by the team.",
+  "tiers": [
+    {
+      "name": "Friend",
+      "style": "friend",
+      "amount": "$250+",
+      "summary": "Help make the next build possible.",
+      "highlights": [
+        "Support student-led engineering"
+      ]
+    },
+    {
+      "name": "Bronze",
+      "style": "bronze",
+      "amount": "$3,000+",
+      "summary": "Connect your company with the team.",
+      "highlights": [
+        "Website logo & social post on request",
+        "Small logo on the robot",
+        "Access to our resume book"
+      ]
+    },
+    {
+      "name": "Silver",
+      "style": "silver",
+      "amount": "$8,000+",
+      "summary": "Build a closer connection.",
+      "highlights": [
+        "Medium robot & team apparel logos",
+        "Shop tour & campus visit"
+      ]
+    },
+    {
+      "name": "Gold",
+      "style": "gold",
+      "amount": "$15,000+",
+      "summary": "Make a lasting impression.",
+      "highlights": [
+        "Large robot & team apparel logos",
+        "Banner in our shop",
+        "Custom outreach event"
+      ]
+    }
+  ]
 }

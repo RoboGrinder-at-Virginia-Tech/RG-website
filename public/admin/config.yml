@@ -257,8 +257,11 @@ collections:
           - { label: Text before tier link, name: benefitsPacketBefore, widget: string }
           - { label: Tier link text, name: benefitsPacketLabel, widget: string }
           - { label: Text after tier link, name: benefitsPacketAfter, widget: string }
-          - { label: Support heading, name: supportTitle, widget: string }
-          - { label: Support introduction, name: supportIntro, widget: text }
+          - { label: Tiers heading, name: tiersTitle, widget: string }
+          - { label: Tiers introduction, name: tiersIntro, widget: text }
+          - { label: Contribution period label, name: tiersPeriod, widget: string }
+          - { label: Tier details note, name: tiersNote, widget: text, hint: Appears before the packet link. }
+          - { label: In-kind support note, name: tiersSupportNote, widget: text, hint: Appears before the contact link. }
           - { label: Sponsors heading, name: partnersTitle, widget: string }
           - { label: Departmental supporters heading, name: departmentalTitle, widget: string }
           - { label: Contact heading, name: connectTitle, widget: string }
@@ -291,12 +294,19 @@ collections:
           - { label: Introduction, name: intro, widget: text }
           - { label: Hero image, name: image, widget: image }
           - { label: Image description, name: imageAlt, widget: string }
-          - label: Ways to support the team
-            name: supportOptions
+          - label: Sponsorship tiers
+            name: tiers
             widget: list
+            hint: Keep tiers ordered from least to most expensive. Highlights describe additions to the preceding tier.
             fields:
-              - { label: Title, name: title, widget: string }
-              - { label: Description, name: description, widget: text }
+              - { label: Tier name, name: name, widget: string }
+              - { label: Card style, name: style, widget: select, options: [friend, bronze, silver, gold] }
+              - { label: Annual contribution, name: amount, widget: string }
+              - { label: Short summary, name: summary, widget: string }
+              - label: Highlights
+                name: highlights
+                widget: list
+                field: { label: Benefit, name: benefit, widget: string }
           - label: Current partners
             name: partners
             widget: list
