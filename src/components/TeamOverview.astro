@@ -35,14 +35,14 @@ const { variant = 'home' } = Astro.props;
 
 <style>
   /* HOME: featured team introduction; numbers now appear in the hero. */
-  .mission-chapter { background: var(--paper); }
-  .story { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 0; padding: 0; background: var(--paper); }
+  .mission-chapter { background: var(--orange); }
+  .story { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 0; padding: 0; background: var(--orange); color: var(--ink); }
   .story-heading { align-self: center; padding: 80px clamp(24px, 6vw, 90px) 80px clamp(24px, 8vw, 124px); }
   .story-heading h2 { max-width: 515px; margin: 0 0 32px; font-size: clamp(40px, 5.1vw, 70px); line-height: .99; letter-spacing: -.055em; }
   .story-copy { margin-bottom: 24px; color: var(--ink); font-size: clamp(20px, 2vw, 26px); line-height: 1.5; }
-  .story-context { margin: 0; color: var(--muted-ink); font-size: var(--font-body-min); line-height: 1.75; }
-  .story-photo { position: relative; min-width: 0; min-height: 512px; margin: 0; overflow: hidden; background: var(--paper); }
-  .story-photo::after { position: absolute; top: 0; left: 0; width: 24px; height: 24px; content: ''; background: var(--paper); clip-path: polygon(0 0, 100% 0, 0 100%); }
+  .story-context { margin: 0; color: var(--ink); font-size: var(--font-body-min); line-height: 1.75; }
+  .story-photo { position: relative; min-width: 0; min-height: 512px; margin: 0; overflow: hidden; background: var(--orange); }
+  .story-photo::after { position: absolute; top: 0; left: 0; width: 24px; height: 24px; content: ''; background: var(--orange); clip-path: polygon(0 0, 100% 0, 0 100%); }
   .story-photo img { position: absolute; inset: -1px; display: block; max-width: none; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover; object-position: center; }
 
 
