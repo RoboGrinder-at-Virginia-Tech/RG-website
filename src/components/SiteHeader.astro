@@ -180,7 +180,7 @@ const links = [
       navigationTimeout = setTimeout(resumeUserScroll, 2000);
       return true;
     };
-    document.querySelectorAll<HTMLAnchorElement>('.mobile-menu nav a').forEach((link) => {
+    document.querySelectorAll<HTMLAnchorElement>('.mobile-menu nav a, a[data-section-link]').forEach((link) => {
       link.addEventListener('click', (event) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         const destination = new URL(link.href);

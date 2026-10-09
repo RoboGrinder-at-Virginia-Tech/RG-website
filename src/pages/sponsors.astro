@@ -15,7 +15,7 @@ import sponsorship from '../content/sponsors.json';
   <main id="main" class="sponsor-page">
     <OrangeFeature title={sponsorship.headline} description={sponsorship.intro} image={sponsorship.image} imageAlt={sponsorship.imageAlt}>
       <div class="hero-actions">
-        <a class="button button-swipe button-dark" href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <a class="button button-swipe button-dark" data-section-link href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
         <a class="button button-swipe button-dark packet-link" href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.packetLabel}<span class="material-icon" aria-hidden="true">open_in_new</span></a>
       </div>
     </OrangeFeature>
@@ -32,7 +32,7 @@ import sponsorship from '../content/sponsors.json';
         <ul>{tier.highlights.map((highlight) => <li><span aria-hidden="true">✓</span>{highlight}</li>)}</ul>
       </article>)}</div>
       <div class="tier-notes"><p>{sponsorship.tiersNote} <a href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.benefitsPacketLabel}</a>.</p><p>{sponsorship.tiersSupportNote}</p></div>
-      <div class="tier-actions"><a class="button button-swipe button-dark" href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a></div>
+      <div class="tier-actions"><a class="button button-swipe button-dark" data-section-link href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a></div>
     </section>
     <OurSponsors partners={sponsorship.partners} id="partners" title={sponsorship.partnersTitle} departmentalTitle={sponsorship.departmentalTitle} />
     <section class="connect section-shell" id="connect" aria-labelledby="connect-title">
