@@ -48,8 +48,8 @@ const records = [...achievements.records].sort((a, b) => Number(b.year) - Number
   .award { display: flex; align-items: flex-start; gap: 12px; margin: 0; }
   .award .material-icon { flex: 0 0 auto; font-size: 24px; margin-top: 2px; }
   .award strong { font: 700 clamp(22px, 2.3vw, 30px)/1.15 var(--display); }
-  .competition { margin: 0 0 0 36px; font-size: var(--font-label-min); line-height: 1.5; color: var(--muted-ink); }
-  .additional-results { margin: 12px 0 0 36px; padding-left: 18px; font-size: var(--font-label-min); line-height: 1.65; }
+  .competition { margin: 0 0 0 36px; font-size: var(--font-body-min); line-height: 1.5; color: var(--muted-ink); }
+  .additional-results { margin: 12px 0 0 36px; padding-left: 18px; font-size: var(--font-body-min); line-height: 1.65; }
   @media (max-width: 520px) {
     .timeline-entry { grid-template-columns: 58px minmax(0, 1fr); gap: 24px; }
     .timeline-entry::before { left: 68px; }
@@ -58,5 +58,11 @@ const records = [...achievements.records].sort((a, b) => Number(b.year) - Number
     .award { gap: 8px; }
     .award .material-icon { font-size: 20px; }
     .competition, .additional-results { margin-left: 28px; }
+  }
+  @media (max-width: 360px) {
+    .timeline-entry { grid-template-columns: minmax(0, 1fr); gap: 12px; padding-left: 20px; }
+    .timeline-entry::before { left: 4px; }
+    .timeline-entry::after { left: 0; }
+    .competition, .additional-results { margin-left: 0; }
   }
 </style>

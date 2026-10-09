@@ -296,15 +296,11 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
     .join-copy { padding-left: 45px; }
   }
   @media (max-width: 680px) {
-    .landing { align-items: start; min-height: calc(100svh - var(--header-height)); gap: 32px; padding: 180px 22px 76px; }
+    .landing { align-items: start; min-height: calc(100svh - var(--header-height)); gap: 32px; padding: 48px 22px 76px; }
     .hero-copy { max-width: 100%; padding: 0; }
     .hero-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 24px; }
     .hero-numbers dd { font-size: 44px; }
-    .anniversary-banner { height: 158px; width: 88px; padding: 10px 8px 20px; }
-    .anniversary-banner img { width: 24px; height: 24px; margin-bottom: 6px; }
-    .anniversary-banner strong { font-size: 36px; margin: 4px 0; }
-    .banner-band { font-size: 12px; padding: 3px; }
-    .banner-dates { font-size: 10px; margin-top: 6px; }
+    .anniversary-banner { display: none; }
     .landing h1 { margin: 0 0 20px; font-size: clamp(38px, 11vw, 64px); }
     .hero-intro { max-width: 380px; margin-bottom: 23px; font-size: var(--font-body-min); }
     .hero-actions { gap: 16px; }
