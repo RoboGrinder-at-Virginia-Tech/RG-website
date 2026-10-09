@@ -24,7 +24,7 @@ The long email button wraps cleanly on small phones and maintains a 52px target.
 
 - Start a conversation scrolls to the contact section beneath the sticky header.
 - The email action targets the configured sponsorship email, currently `tina22@vt.edu`, with a partnership inquiry subject. No email was sent during review.
-- Packet buttons point to `/packets/robogrinder-sponsor-packet-2027.pdf` and open a new tab. This is the user-approved information packet until a dedicated packet is supplied.
+- Packet buttons point to `/packets/RG27_SponsorPacket.pdf` and open a new tab. This is the user-approved information packet until a dedicated packet is supplied.
 - Current member and subteam counts are derived from the same records as the rest of the site.
 - Recognition and recruiting are presented as opportunities to discuss, rather than guarantees of employment or a fixed sponsorship package.
 - The homepage callout now says “Interested in partnering with us?” and “Partner with us.”

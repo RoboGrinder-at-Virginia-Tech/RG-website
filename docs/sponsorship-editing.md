@@ -13,9 +13,9 @@ Use a new line in **Team introduction heading** to control its line break.
 
 ## Replacing the sponsorship packet
 
-The PDF is stored in this repository at `public/packets/robogrinder-sponsor-packet-2027.pdf`. All packet links use the `packetUrl` field in `src/content/sponsors.json`.
+The PDF is stored in this repository at `public/packets/RG27_SponsorPacket.pdf`. All packet links use the `packetUrl` field in `src/content/sponsors.json`.
 
-- **On GitHub:** open [the packets folder](https://github.com/RoboGrinder-at-Virginia-Tech/RG-website/tree/main/public/packets), choose **Add file → Upload files**, and upload the new PDF renamed to `robogrinder-sponsor-packet-2027.pdf`. Commit the replacement to `main`. Keeping this filename means no link edits are needed. GitHub Pages automatically rebuilds after the commit.
+- **On GitHub:** open [the packets folder](https://github.com/RoboGrinder-at-Virginia-Tech/RG-website/tree/main/public/packets), choose **Add file → Upload files**, and upload the new PDF renamed to `RG27_SponsorPacket.pdf`. Commit the replacement to `main`. Keeping this filename means no link edits are needed. GitHub Pages automatically rebuilds after the commit.
 - **In the local CMS:** run `npm run cms`, open `http://127.0.0.1:4322/admin/index.html`, and choose **Sponsors → Sponsors page → Sponsorship packet PDF**. Upload or select the new PDF and save. Commit and push both the uploaded file and `src/content/sponsors.json` to publish. The editor updates all packet links together, even if the new file has a different name.
 
 The online CMS requires GitHub OAuth setup; use GitHub directly or the local CMS until that is configured.
