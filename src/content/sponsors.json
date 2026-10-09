@@ -106,7 +106,6 @@
       "name": "Friend",
       "style": "friend",
       "amount": "$250+",
-      "summary": "Help make the next build possible.",
       "highlights": [
         "Support student-led engineering"
       ]
@@ -115,7 +114,6 @@
       "name": "Bronze",
       "style": "bronze",
       "amount": "$3,000+",
-      "summary": "Connect your company with the team.",
       "highlights": [
         "Website logo & social post on request",
         "Small logo on the robot",
@@ -126,7 +124,6 @@
       "name": "Silver",
       "style": "silver",
       "amount": "$8,000+",
-      "summary": "Build a closer connection.",
       "highlights": [
         "Medium robot & team apparel logos",
         "Shop tour & campus visit"
@@ -136,7 +133,6 @@
       "name": "Gold",
       "style": "gold",
       "amount": "$15,000+",
-      "summary": "Make a lasting impression.",
       "highlights": [
         "Large robot & team apparel logos",
         "Banner in our shop",

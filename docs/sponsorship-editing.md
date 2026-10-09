@@ -4,7 +4,7 @@ Open the CMS at `/admin/`, then **Sponsors → Sponsors page**. The same content
 
 - **Team numbers:** open **Team numbers (all pages)** in the CMS or edit `src/content/team-numbers.json`. Labels, values, and order update on both pages. Automatic member and subteam counts follow the roster and subteam files. Choose Manual to supply a custom value.
 - Edit section headings, introductions, hero photo and alternative text, button labels and destinations, and sponsorship packet PDF in this collection.
-- **Partnership benefits** controls the “What sponsors get” summaries. **Sponsorship tiers** controls the contribution amounts, summaries, and highlights; keep Friend → Bronze → Silver → Gold ordered from least to most expensive. Each card lists additions to the preceding tier. The packet holds the full benefit details.
+- **Partnership benefits** controls the “What sponsors get” summaries. **Sponsorship tiers** controls the contribution amounts and highlights; keep Friend → Bronze → Silver → Gold ordered from least to most expensive. Each card lists additions to the preceding tier. The packet holds the full benefit details.
 - **Current partners** controls names, logos, websites, categories, and display order. These partners are also used on the homepage.
 - **Sponsorship form text** controls the visible labels, topic names, submit button, and helper text. Topic routing remains stable when labels change.
 - The form recipient addresses are configured under the site's general settings (`contact.email` and `contact.sponsorEmail` in `src/content/site.json`).

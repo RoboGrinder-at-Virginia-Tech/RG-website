@@ -302,7 +302,6 @@ collections:
               - { label: Tier name, name: name, widget: string }
               - { label: Card style, name: style, widget: select, options: [friend, bronze, silver, gold] }
               - { label: Annual contribution, name: amount, widget: string }
-              - { label: Short summary, name: summary, widget: string }
               - label: Highlights
                 name: highlights
                 widget: list
