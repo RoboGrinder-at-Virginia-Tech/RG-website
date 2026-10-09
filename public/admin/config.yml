@@ -279,7 +279,7 @@ collections:
               - { label: Message label, name: messageLabel, widget: string }
               - { label: Submit button, name: submitLabel, widget: string }
               - { label: Form helper text, name: statusText, widget: text }
-          - { label: Sponsorship packet PDF, name: packetUrl, widget: file }
+          - { label: Sponsorship packet PDF, name: packetUrl, widget: file, hint: 'Upload or select the current PDF. This updates every sponsorship packet link. Save, commit, and push local editor changes to publish them.' }
           - label: Partnership benefits
             name: benefits
             widget: list
