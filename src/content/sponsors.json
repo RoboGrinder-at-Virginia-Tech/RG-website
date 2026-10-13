@@ -66,6 +66,11 @@
       "name": "Polymaker",
       "logo": "/images/partners/polymaker.png",
       "url": "https://polymaker.com/"
+    },
+    {
+      "name": "Manifold Tech",
+      "logo": "/images/partners/manifold-tech.webp",
+      "url": "https://3dmanifold.com/"
     }
   ],
   "conversationLabel": "Start a conversation",

@@ -34,5 +34,11 @@
     "height": 463,
     "viewBox": "19 101 963 262",
     "ratio": 3.6755725190839694
+  },
+  "/images/partners/manifold-tech.webp": {
+    "width": 1000,
+    "height": 320,
+    "viewBox": "0 0 1000 320",
+    "ratio": 3.125
   }
 }
