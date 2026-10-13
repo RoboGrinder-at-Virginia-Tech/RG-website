@@ -7,6 +7,8 @@ const uniqueCompanies = companies.filter((company, index, list) => list.findInde
 const sortedCompanies = [...uniqueCompanies].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 const rowSize = Math.floor(sortedCompanies.length / 3);
 const remainder = sortedCompanies.length % 3;
+// Two repeats per half cover wide screens without ten copies of every logo.
+const repeatsPerHalf = 2;
 const rows = Array.from({ length: 3 }, (_, index) => {
   const start = index * rowSize + Math.min(index, remainder);
   return sortedCompanies.slice(start, start + rowSize + (index < remainder ? 1 : 0));
@@ -33,10 +35,10 @@ const rows = Array.from({ length: 3 }, (_, index) => {
   <div class="marquees" aria-label="Career, research, and graduate study destinations">
     {rows.map((row, index) => (
       <div class="marquee">
-        <div class:list={['marquee-track', index === 1 && 'marquee-track-reverse']} style={`--marquee-duration: ${row.length * 40}s`}>
+        <div class:list={['marquee-track', index === 1 && 'marquee-track-reverse']} style={`--marquee-duration: ${row.length * 40 * repeatsPerHalf / 5}s`}>
           {[false, true].map((duplicate) => (
             <ul class="marquee-list" aria-hidden={duplicate ? 'true' : undefined}>
-              {Array.from({ length: 5 }, () => row).flat().map((company, logoIndex) => {
+              {Array.from({ length: repeatsPerHalf }, () => row).flat().map((company, logoIndex) => {
                   const frame = logoFrames[company.slug as keyof typeof logoFrames];
                   const label = !duplicate && logoIndex < row.length ? company.name : undefined;
                   return <li class="industry-logo" data-brand={company.slug} data-repeat={duplicate || logoIndex >= row.length ? 'true' : undefined} style={`--logo-ratio: ${frame?.ratio ?? 2.5}`}>

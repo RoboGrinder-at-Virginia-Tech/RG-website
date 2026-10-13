@@ -50,7 +50,7 @@ const links = [
       </div>
       <div class="mobile-view-actions">
         <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
-        <a class="mobile-primary-action" href={withBase(primaryAction.href)}>{primaryAction.label}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
+        <a class="mobile-primary-action button-swipe" href={withBase(primaryAction.href)}>{primaryAction.label}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
       </div>
     </div>
     <div class="mobile-view mobile-subview" data-mobile-view="about" inert>
@@ -63,8 +63,8 @@ const links = [
         <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
         <a href={withBase('/sponsors/')}>Sponsors &amp; Partners<span class="material-icon" aria-hidden="true">chevron_right</span></a>
         <a href={withBase('/contact/')}>Contact us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <ConnectSocialLinks />
       </div>
-      <ConnectSocialLinks />
     </div>
   </nav>
 </div>
@@ -352,7 +352,7 @@ const links = [
     :global(html.mobile-navigation-open) { overflow: hidden; }
     .mobile-nav-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: none; border: 0; color: var(--paper); cursor: pointer; }
     .mobile-nav-toggle .material-icon { font-size: 28px; }
-    .mobile-navigation:not([hidden]) { display: block; position: absolute; top: 100%; left: 0; width: 100%; height: calc(100dvh - var(--header-height)); overflow: hidden; background: #000; color: var(--paper); border-top: 1px solid rgba(240,240,240,.2); }
+    .mobile-navigation:not([hidden]) { display: block; position: absolute; top: 100%; left: 0; width: 100%; height: calc(100dvh - var(--header-height)); overflow: hidden; background: #000; color: var(--paper); }
     .mobile-view { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 20px; padding: 20px 24px; overflow-y: auto; overscroll-behavior: contain; transition: transform 300ms ease-in-out; }
     .mobile-view[data-mobile-view="main"] { transform: translateX(-100%); }
     .mobile-navigation[data-view="main"] [data-mobile-view="main"] { transform: translateX(0); }
@@ -363,8 +363,12 @@ const links = [
     .mobile-view-links a[aria-current="page"] { color: var(--orange); }
     .mobile-view-actions { display: grid; gap: 12px; margin-top: auto; padding-bottom: env(safe-area-inset-bottom); }
     .mobile-view-actions a { padding: 16px; background: var(--ink); font-size: 18px; border: 0; }
-    .mobile-view-actions .mobile-primary-action { background: var(--orange); color: #fff; }
+    .mobile-view-actions .mobile-primary-action { background: var(--orange); color: #fff; --hover-fill: var(--paper); --hover-ink: var(--ink); clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
     .mobile-back { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; color: var(--paper); background: none; border: 0; font: 600 18px/1.3 var(--display); text-align: left; cursor: pointer; }
+    @media (hover: hover) and (pointer: fine) {
+      .mobile-view-links a:hover, .mobile-view-links button:hover, .mobile-view-actions a:not(.mobile-primary-action):hover, .mobile-back:hover, .mobile-nav-toggle:hover { color: var(--orange); }
+      .mobile-view-actions .mobile-primary-action:hover { color: var(--hover-ink); }
+    }
     .site-header { padding: 0 24px; gap: 12px; }
     .mobile-menu { display: none; }
     .mobile-menu nav { width: min(420px, calc(100vw - 2 * var(--mobile-gutter, 24px))); max-height: calc(100dvh - var(--header-height) - 20px); overflow-y: auto; }

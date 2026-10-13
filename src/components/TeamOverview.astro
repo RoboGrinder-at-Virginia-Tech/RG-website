@@ -24,7 +24,7 @@ const { variant = 'home' } = Astro.props;
       </div>
       <figure class="story-photo">
         {site.mission.image === '/images/arc-2026-team.jpg'
-          ? <Image src={missionPhoto} widths={[320, 480, 640, 960, 1280]} sizes="(max-width: 680px) 100vw, 50vw" format="webp" alt={site.mission.imageAlt} loading="lazy" />
+          ? <Image src={missionPhoto} widths={[320, 480, 640, 768, 960, 1280]} sizes="(max-width: 680px) 100vw, 50vw" format="webp" quality={70} alt={site.mission.imageAlt} loading="lazy" />
           : <img src={withBase(site.mission.image)} alt={site.mission.imageAlt} loading="lazy" />}
       </figure>
     </section>
@@ -67,6 +67,8 @@ const { variant = 'home' } = Astro.props;
     .story-heading h2 { max-width: 420px; margin: 0 0 24px; font-size: clamp(42px, 11vw, 62px); }
     .story-copy { margin-bottom: 24px; font-size: 22px; }
     .story-photo { min-height: 0; aspect-ratio: 1.5 / 1; }
+    /* Keep the image in flow so mobile Safari can size the grid row before lazy loading. */
+    .story-photo img { position: static; width: 100%; height: auto; aspect-ratio: 1.5 / 1; }
   }
   @media (max-width: 540px) { .who { padding: 56px 23px; } .team-facts { gap: 32px 24px; } .team-facts dd { font-size: clamp(42px, 13vw, 48px); } .team-facts dt { font-size: 16px; } }
 </style>
