@@ -21,6 +21,7 @@ const links = [
       <img src={withBase('/images/rg-white-small.png')} alt="" loading="lazy" />
     </a>
     <div class="header-controls">
+    <button class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation"><span class="material-icon" aria-hidden="true">menu</span></button>
     <details class="mobile-menu primary-menu" data-disclosure>
       <summary aria-label="Open About us menu"><span class="primary-label">About us</span><span class="material-icon dropdown-arrow" aria-hidden="true">expand_more</span><span class="material-icon burger-icon" aria-hidden="true">menu</span><span class="material-icon burger-close" aria-hidden="true">close</span></summary>
       <nav aria-label="Main navigation">
@@ -41,11 +42,106 @@ const links = [
     <a class="header-cta button-swipe" href={withBase(primaryAction.href)} aria-current={active === primaryAction.page ? 'page' : undefined}>{primaryAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
     </div>
   </header>
+  <nav class="mobile-navigation" id="mobile-navigation" aria-label="Mobile navigation" hidden>
+    <div class="mobile-view" data-mobile-view="main">
+      <div class="mobile-view-links">
+        <button type="button" data-open-view="about">About us<span class="material-icon" aria-hidden="true">arrow_forward</span></button>
+        <button type="button" data-open-view="connect">Connect<span class="material-icon" aria-hidden="true">arrow_forward</span></button>
+      </div>
+      <div class="mobile-view-actions">
+        <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
+        <a class="mobile-primary-action" href={withBase(primaryAction.href)}>{primaryAction.label}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
+      </div>
+    </div>
+    <div class="mobile-view mobile-subview" data-mobile-view="about" inert>
+      <button class="mobile-back" type="button" data-back-view><span class="material-icon" aria-hidden="true">arrow_back</span>About us</button>
+      <div class="mobile-view-links">{links.filter((link) => !['Sponsors & Partners', 'Contact us'].includes(link.label)).map((link) => <a href={withBase(link.href)} aria-current={active === link.active && link.label !== 'Subteams' ? 'page' : undefined}>{link.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>)}</div>
+    </div>
+    <div class="mobile-view mobile-subview" data-mobile-view="connect" inert>
+      <button class="mobile-back" type="button" data-back-view><span class="material-icon" aria-hidden="true">arrow_back</span>Connect</button>
+      <div class="mobile-view-links">
+        <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <a href={withBase('/sponsors/')}>Sponsors &amp; Partners<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <a href={withBase('/contact/')}>Contact us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+      </div>
+      <ConnectSocialLinks />
+    </div>
+  </nav>
 </div>
 
 <script>
   const disclosures = new Map<HTMLDetailsElement, (open: boolean) => void>();
-  const narrowScreen = matchMedia('(max-width: 850px)');
+  const narrowScreen = matchMedia('(max-width: 1024px)');
+  const menuShell = document.querySelector<HTMLElement>('.header-shell');
+  const mobileToggle = document.querySelector<HTMLButtonElement>('.mobile-nav-toggle')!;
+  const mobileNavigation = document.querySelector<HTMLElement>('.mobile-navigation')!;
+  const mobileViews = [...mobileNavigation.querySelectorAll<HTMLElement>('[data-mobile-view]')];
+  let mobileOpen = false;
+  let currentView = 'main';
+  const backgroundInert = new Map<HTMLElement, boolean>();
+  let mobileAnimation: Animation | undefined;
+  const showMobileView = (view: string, focus = true) => {
+    currentView = view;
+    mobileNavigation.dataset.view = view;
+    mobileViews.forEach((panel) => { panel.inert = panel.dataset.mobileView !== view; });
+    if (focus) mobileNavigation.querySelector<HTMLElement>(view === 'main' ? `[data-open-view="${mobileNavigation.dataset.previousView || 'about'}"]` : `[data-mobile-view="${view}"] .mobile-back`)?.focus({ preventScroll: true });
+  };
+  const setMobileOpen = (open: boolean, restoreFocus = true) => {
+    mobileOpen = open;
+    mobileAnimation?.cancel();
+    mobileNavigation.hidden = false;
+    mobileNavigation.inert = !open;
+    const swipe = mobileNavigation.animate(
+      open ? [{ clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0)' }]
+        : [{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 0 100%)' }],
+      { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 250, easing: 'ease', fill: 'both' }
+    );
+    mobileAnimation = swipe;
+    swipe.onfinish = () => {
+      if (mobileAnimation !== swipe) return;
+      mobileNavigation.hidden = !open;
+      swipe.cancel();
+      mobileAnimation = undefined;
+    };
+    mobileToggle.setAttribute('aria-expanded', String(open));
+    mobileToggle.setAttribute('aria-label', `${open ? 'Close' : 'Open'} navigation menu`);
+    mobileToggle.querySelector('.material-icon')!.textContent = open ? 'close' : 'menu';
+    document.documentElement.classList.toggle('mobile-navigation-open', open);
+    if (open) {
+      document.querySelectorAll<HTMLElement>('main, footer').forEach((element) => { backgroundInert.set(element, element.inert); element.inert = true; });
+      showMobileView('main');
+    } else {
+      backgroundInert.forEach((wasInert, element) => { element.inert = wasInert; });
+      backgroundInert.clear();
+      if (restoreFocus) mobileToggle.focus({ preventScroll: true });
+    }
+  };
+  mobileToggle.addEventListener('click', () => setMobileOpen(!mobileOpen));
+  mobileNavigation.querySelectorAll<HTMLButtonElement>('[data-open-view]').forEach((button) => button.addEventListener('click', () => {
+    mobileNavigation.dataset.previousView = button.dataset.openView;
+    showMobileView(button.dataset.openView!);
+  }));
+  mobileNavigation.querySelectorAll<HTMLButtonElement>('[data-back-view]').forEach((button) => button.addEventListener('click', () => showMobileView('main')));
+  mobileNavigation.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => link.addEventListener('click', () => setMobileOpen(false, false)));
+  menuShell?.addEventListener('keydown', (event) => {
+    if (!mobileOpen) return;
+    if (event.key === 'Escape') { event.preventDefault(); setMobileOpen(false); }
+    if (event.key === 'Tab') {
+      const focusable = [...menuShell.querySelectorAll<HTMLElement>('a[href], button, summary')].filter((element) => element.getClientRects().length && !element.closest('[inert]'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    }
+  });
+  const syncMenuHeight = () => {
+    const openMenu = document.querySelector<HTMLElement>('.mobile-menu > summary[aria-expanded="true"]')?.parentElement;
+    const panel = openMenu?.querySelector<HTMLElement>('nav');
+    menuShell?.style.setProperty('--menu-height', !narrowScreen.matches && panel ? `${panel.scrollHeight}px` : '0px');
+    menuShell?.classList.toggle('menu-expanded', Boolean(openMenu));
+  };
+  const menuSize = new ResizeObserver(syncMenuHeight);
+  document.querySelectorAll<HTMLElement>('.mobile-menu nav').forEach((panel) => menuSize.observe(panel));
   const updateMenuLabel = () => {
     const summary = document.querySelector<HTMLElement>('.primary-menu > summary');
     if (summary) summary.setAttribute('aria-label', `${summary.getAttribute('aria-expanded') === 'true' ? 'Close' : 'Open'} ${narrowScreen.matches ? 'navigation' : 'About us'} menu`);
@@ -65,7 +161,7 @@ const links = [
       const currentHeight = menu ? panel.getBoundingClientRect().height : details.getBoundingClientRect().height;
       const renderedOpacity = Number.parseFloat(getComputedStyle(panel).opacity);
       const currentOpacity = animation || contentAnimation || expanded ? renderedOpacity : 0;
-      const currentTransform = getComputedStyle(panel).transform;
+      const currentClip = getComputedStyle(panel).clipPath;
       expanded = open;
       animation?.cancel();
       contentAnimation?.cancel();
@@ -77,13 +173,15 @@ const links = [
       }
       details.open = true;
       if (menu) {
+        panel.inert = !open;
+        syncMenuHeight();
+      }
+      if (menu) {
         panel.style.overflow = 'hidden';
-        panel.style.opacity = String(Number.isFinite(currentOpacity) ? currentOpacity : open ? 0 : 1);
-        panel.style.transform = currentTransform === 'none' ? (open ? 'translateY(-6px)' : 'translateY(0)') : currentTransform;
         const frames = open
-          ? [{ opacity: Number.isFinite(currentOpacity) ? currentOpacity : 0, transform: currentTransform === 'none' ? 'translateY(-6px)' : currentTransform }, { opacity: 1, transform: 'translateY(0)' }]
-          : [{ opacity: Number.isFinite(currentOpacity) ? currentOpacity : 1, transform: currentTransform === 'none' ? 'translateY(0)' : currentTransform }, { opacity: 0, transform: 'translateY(-6px)' }];
-        animation = panel.animate(frames, { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300, easing: 'ease-in-out', fill: 'both' });
+          ? [{ clipPath: currentClip === 'none' ? 'inset(0 0 100% 0)' : currentClip }, { clipPath: 'inset(0 0 0 0)' }]
+          : [{ clipPath: currentClip === 'none' ? 'inset(0 0 0 0)' : currentClip }, { clipPath: 'inset(0 0 100% 0)' }];
+        animation = panel.animate(frames, { duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 250, easing: 'ease', fill: 'both' });
       } else {
         details.style.overflow = 'hidden';
         details.style.removeProperty('height');
@@ -119,6 +217,11 @@ const links = [
     };
     disclosures.set(details, setExpanded);
     summary.addEventListener('click', (event) => { event.preventDefault(); setExpanded(!expanded); });
+  });
+  narrowScreen.addEventListener('change', () => {
+    if (mobileOpen) setMobileOpen(false, false);
+    disclosures.forEach((set, details) => { if (details.classList.contains('mobile-menu')) set(false); });
+    syncMenuHeight();
   });
   document.querySelectorAll<HTMLDetailsElement>('.mobile-menu').forEach((menu) => {
     document.addEventListener('click', (event) => { if (!menu.contains(event.target as Node)) disclosures.get(menu)?.(false); });
@@ -180,7 +283,7 @@ const links = [
       navigationTimeout = setTimeout(resumeUserScroll, 2000);
       return true;
     };
-    document.querySelectorAll<HTMLAnchorElement>('.mobile-menu nav a, a[data-section-link]').forEach((link) => {
+    document.querySelectorAll<HTMLAnchorElement>('.mobile-menu nav a, .mobile-navigation a, a[data-section-link]').forEach((link) => {
       link.addEventListener('click', (event) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         const destination = new URL(link.href);
@@ -202,6 +305,7 @@ const links = [
     window.addEventListener('scroll', () => {
       const currentY = Math.max(0, window.scrollY);
       const delta = currentY - previousY;
+      if (mobileOpen) { hidden = false; updateHeader(); previousY = currentY; return; }
       if (navigatingToSection) { previousY = currentY; return; }
       if (currentY <= 0 || delta < 0 || headerShell.querySelector(':focus-visible')) {
         hidden = false;
@@ -225,6 +329,7 @@ const links = [
   .brand { display: inline-flex; min-width: 44px; min-height: 44px; align-items: center; gap: 12px; color: var(--paper); text-decoration: none; flex: 0 0 auto; }
   .brand img { width: 36px; height: 36px; object-fit: contain; }
   .header-controls { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+  .mobile-nav-toggle, .mobile-navigation { display: none; }
   .header-cta { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 18px; background: var(--orange); color: #fff; --hover-fill: #fff; --hover-ink: var(--ink); font-size: var(--font-ui-min); font-weight: 700; text-decoration: none; white-space: nowrap; }
   .mobile-menu { position: relative; display: block; }
   .mobile-menu summary { min-width: 44px; height: 44px; padding: 0 16px; display: flex; gap: 10px; align-items: center; justify-content: center; list-style: none; cursor: pointer; color: var(--paper); font-size: var(--font-ui-min); font-weight: 600; white-space: nowrap; }
@@ -240,12 +345,28 @@ const links = [
   .mobile-menu nav a[aria-current="page"] { color: var(--orange); }
   .mobile-menu summary::-webkit-details-marker { display: none; }
   .mobile-menu { --menu-dropdown-offset: calc((var(--header-height) - 44px) / 2); }
-  .mobile-menu nav { position: absolute; top: calc(100% + var(--menu-dropdown-offset)); right: 0; width: min(320px, calc(100vw - 32px)); padding: 0 20px; overflow: hidden; background: var(--ink); border: 1px solid rgba(240,240,240,.25); box-shadow: 0 16px 28px rgba(0,0,0,.18); }
-  .mobile-menu nav a { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--menu-link-color, var(--paper)); font-size: var(--font-ui-min); text-decoration: none; border-bottom: 1px solid rgba(240,240,240,.15); }
+  .mobile-menu nav { position: absolute; top: calc(100% + var(--menu-dropdown-offset)); right: 0; width: min(320px, calc(100vw - 32px)); padding: 0 20px; overflow: hidden; background: #000; border: 0; }
+  .mobile-menu nav a { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--menu-link-color, var(--paper)); font-size: var(--font-ui-min); text-decoration: none; }
   .mobile-menu nav a:last-child { border-bottom: 0; }
-  @media (max-width: 850px) {
+  @media (max-width: 1024px) {
+    :global(html.mobile-navigation-open) { overflow: hidden; }
+    .mobile-nav-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: none; border: 0; color: var(--paper); cursor: pointer; }
+    .mobile-nav-toggle .material-icon { font-size: 28px; }
+    .mobile-navigation:not([hidden]) { display: block; position: absolute; top: 100%; left: 0; width: 100%; height: calc(100dvh - var(--header-height)); overflow: hidden; background: #000; color: var(--paper); border-top: 1px solid rgba(240,240,240,.2); }
+    .mobile-view { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 20px; padding: 20px 24px; overflow-y: auto; overscroll-behavior: contain; transition: transform 300ms ease-in-out; }
+    .mobile-view[data-mobile-view="main"] { transform: translateX(-100%); }
+    .mobile-navigation[data-view="main"] [data-mobile-view="main"] { transform: translateX(0); }
+    .mobile-subview { transform: translateX(100%); }
+    .mobile-navigation[data-view="about"] [data-mobile-view="about"], .mobile-navigation[data-view="connect"] [data-mobile-view="connect"] { transform: translateX(0); }
+    .mobile-view-links { display: grid; }
+    .mobile-view-links a, .mobile-view-links button, .mobile-view-actions a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; color: inherit; text-decoration: none; font: 600 20px/1.3 var(--display); text-align: left; background: none; border: 0; padding: 10px 0; cursor: pointer; }
+    .mobile-view-links a[aria-current="page"] { color: var(--orange); }
+    .mobile-view-actions { display: grid; gap: 12px; margin-top: auto; padding-bottom: env(safe-area-inset-bottom); }
+    .mobile-view-actions a { padding: 16px; background: var(--ink); font-size: 18px; border: 0; }
+    .mobile-view-actions .mobile-primary-action { background: var(--orange); color: #fff; }
+    .mobile-back { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; color: var(--paper); background: none; border: 0; font: 600 18px/1.3 var(--display); text-align: left; cursor: pointer; }
     .site-header { padding: 0 24px; gap: 12px; }
-    .mobile-menu { position: relative; display: block; }
+    .mobile-menu { display: none; }
     .mobile-menu nav { width: min(420px, calc(100vw - 2 * var(--mobile-gutter, 24px))); max-height: calc(100dvh - var(--header-height) - 20px); overflow-y: auto; }
     .mobile-menu summary { min-width: 44px; height: 44px; padding: 0; }
     .support-menu, .header-cta, .brand-copy, .primary-label, .primary-menu .dropdown-arrow { display: none; }
@@ -255,7 +376,16 @@ const links = [
     .primary-menu nav .mobile-only { display: flex; }
     .mobile-menu summary .material-icon { font-size: 23px; }
   }
-  @media (min-width: 851px) {
+  @media (max-width: 1024px) and (min-width: 521px) {
+    .mobile-view { padding: 32px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .mobile-view { transition: none; } }
+  @media (min-width: 1025px) {
+    .mobile-menu { position: static; }
+    .mobile-menu nav { z-index: 1; top: 100%; left: 0; right: 0; width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); justify-content: start; align-items: start; column-gap: 40px; padding: 12px var(--desktop-gutter, clamp(24px, 6vw, 92px)) 20px; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; background: #000; border: 0; }
+    .support-menu nav > a { grid-column: 1; }
+    .support-menu nav :global(.connect-extras) { grid-column: 2; grid-row: 1 / span 3; padding-top: 0; }
+    .mobile-menu summary[aria-expanded="true"] { color: var(--orange); }
     .brand img { width: 32px; height: 32px; }
     .site-header { --font-ui-min: 14px; }
   }

@@ -312,6 +312,7 @@ collections:
             fields:
               - { label: Organization name, name: name, widget: string }
               - { label: Group, name: category, widget: select, options: [{ label: Sponsor, value: sponsor }, { label: Departmental supporter, value: departmental }], default: sponsor }
+              - { label: Sponsor tier, name: tier, widget: select, options: [{ label: Gold, value: gold }, { label: Silver, value: silver }, { label: Bronze, value: bronze }], default: bronze, required: false, hint: 'Empty tiers are hidden. Does not apply to departmental supporters.' }
               - { label: Logo, name: logo, widget: image }
               - { label: Website, name: url, widget: string, required: false }
 
@@ -434,6 +435,7 @@ collections:
             fields:
               - { label: Organization, name: name, widget: string }
               - { label: Unique identifier, name: slug, widget: string }
+              - { label: Organization website, name: url, widget: string, hint: 'Main company, lab, or institution website linked from its placement logo.' }
               - { label: Logo, name: logo, widget: image }
               - { label: Original asset URL, name: source, widget: string, required: false }
               - { label: Source page, name: sourcePage, widget: string, required: false }

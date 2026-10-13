@@ -6,8 +6,12 @@ import frames from '../content/sponsor-artwork-frames.json';
 const { partners, id = 'supporters', showCta = false, title = 'Our sponsors', departmentalTitle = 'Departmental supporters' } = Astro.props;
 const paperChannels = Array.from({ length: 256 }, (_, value) => Math.min(value, 240) / 255).join(' ');
 const groups = [
-  { departmental: false, partners: partners.filter((partner) => partner.category !== 'departmental' && partner.logo) },
-  { departmental: true, partners: partners.filter((partner) => partner.category === 'departmental' && partner.logo) },
+  ...['gold', 'silver', 'bronze'].map((tier) => ({
+    title: tier.charAt(0).toUpperCase() + tier.slice(1),
+    departmental: false,
+    partners: partners.filter((partner) => partner.category !== 'departmental' && (partner.tier || 'bronze') === tier && partner.logo),
+  })),
+  { title: departmentalTitle, departmental: true, partners: partners.filter((partner) => partner.category === 'departmental' && partner.logo) },
 ];
 const headingId = `${id}-title`;
 ---
@@ -16,7 +20,7 @@ const headingId = `${id}-title`;
 <svg class="logo-color-definition" width="0" height="0" aria-hidden="true"><defs><filter id="auvsi-paper" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="discrete" tableValues={paperChannels} /><feFuncG type="discrete" tableValues={paperChannels} /><feFuncB type="discrete" tableValues={paperChannels} /></feComponentTransfer></filter></defs></svg>
 
 {groups.filter((group) => group.partners.length).map((group) => <div class:list={['sponsor-group', group.departmental && 'departmental']}>
-  {group.departmental && <h3>{departmentalTitle}</h3>}
+  <h3>{group.title}</h3>
   <div class="sponsor-logos">
   {group.partners.map((partner) => (
     <a class="sponsor-logo" href={withBase(partner.url || '/contact/')} target={partner.url ? '_blank' : undefined} rel={partner.url ? 'noreferrer' : undefined} aria-label={`Visit ${partner.name}`}>
@@ -45,7 +49,8 @@ const headingId = `${id}-title`;
   img[src$="/images/partners/auvsi.png"] { filter: url(#auvsi-paper); }
   .sponsor-logo svg { display: block; width: min(100%, 340px, calc(var(--sponsor-ratio) * 140px)); aspect-ratio: var(--sponsor-ratio); overflow: hidden; }
   .departmental { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,.2); }
-  .departmental h3 { margin: 0 0 28px; text-align: center; font: 700 24px/1.2 var(--display); }
+  .sponsor-group + .sponsor-group { margin-top: 40px; }
+  .sponsor-group h3 { margin: 0 0 28px; text-align: center; font: 700 24px/1.2 var(--display); }
   .departmental .sponsor-logos { max-width: 740px; margin-inline: auto; gap: 24px 40px; }
   .departmental .sponsor-logo { flex: 0 1 calc((100% - 80px) / 3); max-width: 220px; min-height: 100px; }
   .departmental .sponsor-logo img { max-width: 220px; height: 80px; }

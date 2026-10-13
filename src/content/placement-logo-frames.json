@@ -238,5 +238,11 @@
     "height": 199,
     "viewBox": "2 1 997 197",
     "ratio": 5.060913705583756
+  },
+  "manifold-tech": {
+    "width": 1000,
+    "height": 320,
+    "viewBox": "0 0 1000 320",
+    "ratio": 3.125
   }
 }
