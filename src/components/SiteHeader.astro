@@ -70,6 +70,12 @@ const links = [
 </div>
 
 <script>
+  const brandLink = document.querySelector<HTMLAnchorElement>('.site-header .brand');
+  brandLink?.addEventListener('click', (event) => {
+    if (location.pathname.replace(/\/$/, '') === new URL(brandLink.href).pathname.replace(/\/$/, '')) {
+      event.preventDefault();
+    }
+  });
   const disclosures = new Map<HTMLDetailsElement, (open: boolean) => void>();
   const narrowScreen = matchMedia('(max-width: 1024px)');
   const menuShell = document.querySelector<HTMLElement>('.header-shell');

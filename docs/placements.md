@@ -13,7 +13,7 @@ The marquee sorts names alphabetically and splits the active list into three con
 | Amazon | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/0/06/Amazon_2024.svg) | [Logo](../public/images/placements/amazon.svg) |
 | Apple | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg) | [Logo](../public/images/placements/apple.svg) |
 | Aurora | Top row | [Source](https://ir.aurora.tech/_assets/_a79fe6f1ff1b34200e7f74a803ded825/aurora/db/982/9423/image.svg) | [Logo](../public/images/placements/aurora.svg) |
-| Barclays | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/a/ad/Barclays-Logo.svg) | [Logo](../public/images/placements/barclays.svg) |
+| Barclays | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/a/ad/Barclays-Logo.svg) | Not stored locally |
 | BMW | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg) | [Logo](../public/images/placements/bmw.svg) |
 | Boeing | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/5/54/Boeing_full_logo_%28variant%29.svg) | [Logo](../public/images/placements/boeing.svg) |
 | Capital One | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/9/98/Capital_One_logo.svg) | [Logo](../public/images/placements/capital-one.svg) |

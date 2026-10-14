@@ -97,7 +97,10 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
       <div class="join-copy">
         <h2 id="join-title">{site.join.title}</h2>
         <p>{site.join.description}</p>
-        <a class="button button-swipe button-dark" href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <div class="join-actions">
+          <a class="button button-swipe button-dark" href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-dark" href={withBase('/gallery/')}>View gallery<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        </div>
       </div>
       <span class="join-cut" aria-hidden="true"></span>
     </section>
@@ -292,6 +295,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .join-copy { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 75px clamp(24px, 8vw, 110px) 85px clamp(35px, 7vw, 105px); }
   .join-copy h2 { max-width: 430px; margin: 0 0 20px; font-size: clamp(42px, 5vw, 69px); line-height: .93; letter-spacing: -.05em; }
   .join-copy > p { max-width: 390px; margin-bottom: 27px; color: var(--ink); font-size: var(--font-body-min); line-height: 1.7; }
+  .join-actions { display: flex; flex-wrap: wrap; gap: 16px; }
   .button-dark { background: var(--ink); color: var(--paper); }
   .join-cut { position: absolute; top: 0; right: 0; width: 30px; height: 30px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); }
   @media (max-width: 950px) {
