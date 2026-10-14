@@ -23,7 +23,7 @@ const headingId = `${id}-title`;
   <h3>{group.title}</h3>
   <div class="sponsor-logos">
   {group.partners.map((partner) => (
-    <a class="sponsor-logo" href={withBase(partner.url || '/contact/')} target={partner.url ? '_blank' : undefined} rel={partner.url ? 'noreferrer' : undefined} aria-label={`Visit ${partner.name}`}>
+    <a class="sponsor-logo" href={withBase(partner.url || '/contact/')} target={partner.url ? '_blank' : undefined} rel={partner.url ? 'noreferrer' : undefined} aria-label={`Visit ${partner.name}`} title={partner.name}>
       {frames[partner.logo] && partner.logo !== '/images/partners/sec.png' ? <><svg class="lazy-artwork" viewBox={frames[partner.logo].viewBox} aria-hidden="true" style={`--sponsor-ratio: ${frames[partner.logo].ratio}`}><image href={withBase(partner.logo)} xlink:href={withBase(partner.logo)} width={frames[partner.logo].width} height={frames[partner.logo].height} preserveAspectRatio="xMidYMid meet" /></svg><noscript><img src={withBase(partner.logo)} alt="" loading="lazy" /></noscript></> : <img src={withBase(partner.logo)} alt="" loading="lazy" />}
     </a>
   ))}
@@ -55,6 +55,10 @@ const headingId = `${id}-title`;
   .departmental .sponsor-logo { flex: 0 1 calc((100% - 80px) / 3); max-width: 220px; min-height: 100px; }
   .departmental .sponsor-logo img { max-width: 220px; height: 80px; }
   .departmental .sponsor-logo svg { width: min(100%, 220px, calc(var(--sponsor-ratio) * 80px)); }
+  @media (min-width: 1025px) {
+    .departmental .sponsor-logos { max-width: 1260px; }
+    .departmental .sponsor-logo { flex-basis: calc((100% - 160px) / 5); }
+  }
   @media (max-width: 1024px) {
     .sponsor-logo { flex-basis: calc((100% - 32px) / 2); }
   }
