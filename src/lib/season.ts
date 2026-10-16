@@ -7,7 +7,7 @@ export const primaryAction = site.recruitment.open
 
 export const joinPageAction = site.recruitment.open
   ? { label: site.recruitment.applicationLabel, href: site.recruitment.applicationUrl }
-  : { label: 'Follow us', href: site.links.linktree };
+  : { label: 'Follow Us', href: site.links.linktree };
 
 export const recruitmentDescription = site.recruitment.open
   ? site.recruitment.openDescription

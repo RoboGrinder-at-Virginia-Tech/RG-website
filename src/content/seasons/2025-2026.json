@@ -3,7 +3,7 @@
   "people": [
     {
       "name": "t",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Business Information Technology",
       "photo": "",
@@ -23,7 +23,7 @@
     },
     {
       "name": "Chris Kiledea",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -33,7 +33,7 @@
     },
     {
       "name": "Corinne Chang",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -43,7 +43,7 @@
     },
     {
       "name": "David Dai",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -63,7 +63,7 @@
     },
     {
       "name": "Ethan Xu",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -83,7 +83,7 @@
     },
     {
       "name": "Jijun Niu",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -94,7 +94,7 @@
     },
     {
       "name": "Jonah Leopold",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -104,7 +104,7 @@
     },
     {
       "name": "Katherin Marroquin",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -114,7 +114,7 @@
     },
     {
       "name": "Xianxu Luo",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -124,7 +124,7 @@
     },
     {
       "name": "Michael Hatami",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Engineering",
       "photo": "",
@@ -134,7 +134,7 @@
     },
     {
       "name": "Mikiya Stein",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -174,8 +174,8 @@
     },
     {
       "name": "Qihang Zhu",
-      "subteam": "Electronics",
-      "role": "Electronics Lead",
+      "subteam": "Electrical",
+      "role": "Electrical Lead",
       "major": "Electrical Engineering",
       "photo": "",
       "linkedin": "",
@@ -184,7 +184,7 @@
     },
     {
       "name": "Rui Ma",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Engineering",
       "photo": "",
@@ -194,7 +194,7 @@
     },
     {
       "name": "Ruiqian Zhang",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -254,7 +254,7 @@
     },
     {
       "name": "Tommy Nguyen",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -274,8 +274,8 @@
     },
     {
       "name": "Ved Soolgiri",
-      "subteam": "Software & Computer Vision",
-      "role": "Software & Computer Vision Lead",
+      "subteam": "Software",
+      "role": "Software Lead",
       "major": "Computer Science",
       "photo": "",
       "linkedin": "",

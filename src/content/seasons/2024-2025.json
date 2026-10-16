@@ -13,7 +13,7 @@
     },
     {
       "name": "Britny Jiang",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -23,7 +23,7 @@
     },
     {
       "name": "Chengyi Xu",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -33,7 +33,7 @@
     },
     {
       "name": "Chris Kildea",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -93,7 +93,7 @@
     },
     {
       "name": "Katherin Marroquin",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -103,7 +103,7 @@
     },
     {
       "name": "Michael Hatami",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -113,7 +113,7 @@
     },
     {
       "name": "Mikiya Stein",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -143,7 +143,7 @@
     },
     {
       "name": "Qihang Zhu",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -153,7 +153,7 @@
     },
     {
       "name": "Rui Ma",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -163,8 +163,8 @@
     },
     {
       "name": "Rui Peng",
-      "subteam": "Electronics",
-      "role": "Electronics Lead",
+      "subteam": "Electrical",
+      "role": "Electrical Lead",
       "major": "Electrical Engineering",
       "photo": "",
       "linkedin": "",
@@ -173,7 +173,7 @@
     },
     {
       "name": "Ruiqian Zhang",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -223,8 +223,8 @@
     },
     {
       "name": "Ved Soolgiri",
-      "subteam": "Software & Computer Vision",
-      "role": "Software & Computer Vision Lead",
+      "subteam": "Software",
+      "role": "Software Lead",
       "major": "Computer Science",
       "photo": "",
       "linkedin": "",
@@ -263,7 +263,7 @@
     },
     {
       "name": "Zelin Shen",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "Embedded Lead",
       "major": "Computational Modeling and Data Analytics",
       "photo": "",

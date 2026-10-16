@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import ProfileIcon from '../../components/ProfileIcon.astro';
+import members from '../../content/members.json';
+import { memberSlug, graduationLabel, type MemberProfile } from '../../lib/memberProfiles';
+import { withBase } from '../../lib/urls';
+
+export function getStaticPaths() {
+  return members.people.map((person) => ({
+    params: { slug: memberSlug(person.name) },
+    props: { person },
+  }));
+}
+
+interface Props { person: MemberProfile; }
+const { person } = Astro.props;
+const socials = [
+  { name: 'LinkedIn', url: person.linkedin },
+  { name: 'GitHub', url: person.github },
+  { name: 'Portfolio', url: person.portfolio },
+  { name: 'Email', url: person.email ? `mailto:${person.email}` : undefined },
+].filter((link) => link.url);
+const details = [
+  { label: 'Major', value: person.major?.trim() || 'Not provided yet' },
+  { label: 'Expected graduation', value: graduationLabel(person) || 'Not provided yet' },
+  { label: 'Subteam', value: person.subteam?.trim() || 'Not provided yet' },
+];
+---
+
+<BaseLayout page="members" title={`${person.name} | RoboGrinder`} description={`Meet ${person.name}, ${person.role?.trim() || `a member of RoboGrinder's ${person.subteam} subteam`}. View their major, expected graduation, and social links.`}>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <SiteHeader active="Members" />
+  <main id="main">
+    <a class="button button-swipe button-light back-link" href={withBase('/members/')}><span class="material-icon" aria-hidden="true">arrow_back</span>All Members</a>
+    <article class="profile">
+      {person.photo ? <img class="portrait" src={withBase(person.photo)} alt={`Portrait of ${person.name}`} width="480" height="600" /> : <div class="portrait-placeholder" role="img" aria-label={`Photo pending for ${person.name}`}><img src={withBase('/images/rg-gray-square.png')} alt="" width="1080" height="1080" /></div>}
+      <div class="profile-content">
+        <p class="eyebrow">{members.rosterYear} · RoboGrinder</p>
+        <h1>{person.name}</h1>
+        {person.role?.trim() && <p class="profile-role">{person.role.trim()}</p>}
+        <dl>
+          {details.map((detail) => <div class="profile-detail"><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}
+        </dl>
+        <section class="socials" aria-labelledby="socials-heading">
+          <h2 id="socials-heading">Socials & contact</h2>
+          {socials.length ? <ul>{socials.map((link) => <li><a class="button button-swipe button-light" href={withBase(link.url)} target={link.name === 'Email' ? undefined : '_blank'} rel={link.name === 'Email' ? undefined : 'noopener noreferrer'}><ProfileIcon name={link.name} /><span>{link.name}</span></a></li>)}</ul> : <p>No social links provided yet.</p>}
+        </section>
+      </div>
+    </article>
+  </main>
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  main { max-width: 1440px; margin: 0 auto; padding: 56px clamp(24px, 8vw, 124px) 96px; }
+  .back-link { margin-bottom: 40px; }
+  .button-light { background: #fff; color: var(--ink); --hover-fill: var(--orange); --hover-ink: #fff; }
+  .profile { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .portrait, .portrait-placeholder { display: block; width: 100%; aspect-ratio: 4 / 5; background: #e0e0e0; clip-path: polygon(24px 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%, 0 24px); }
+  .portrait { height: auto; object-fit: cover; }
+  .portrait-placeholder { display: grid; place-items: center; }
+  .portrait-placeholder img { width: 50%; height: auto; }
+  .eyebrow { margin: 0 0 16px; font-size: var(--font-label-min); color: var(--muted-ink); }
+  h1 { margin: 0; font: 700 clamp(36px, 5vw, 64px)/1.1 var(--display); letter-spacing: -.04em; overflow-wrap: anywhere; }
+  .profile-role { margin: 12px 0 0; font-size: var(--font-body-min); font-weight: 600; line-height: 1.5; }
+  dl { margin: 32px 0 0; }
+  .profile-detail { padding: 16px 0; border-top: 1px solid var(--line); }
+  dt { margin-bottom: 6px; color: var(--muted-ink); font-size: var(--font-label-min); }
+  dd { margin: 0; font-size: var(--font-body-min); line-height: 1.5; overflow-wrap: anywhere; }
+  .socials { margin-top: 32px; }
+  h2 { margin: 0 0 16px; font: 700 24px/1.2 var(--display); }
+  .socials p { color: var(--muted-ink); line-height: 1.5; }
+  ul { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; margin: 0; padding: 0; }
+  @media (max-width: 700px) { main { padding-top: 32px; } .profile { grid-template-columns: 1fr; } .portrait, .portrait-placeholder { width: min(100%, 360px); justify-self: center; } .back-link { margin-bottom: 28px; } }
+</style>

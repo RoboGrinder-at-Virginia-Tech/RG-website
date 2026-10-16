@@ -335,6 +335,8 @@ collections:
               - { label: Subteam, name: subteam, widget: string, required: false }
               - { label: Role, name: role, widget: string, required: false }
               - { label: Major, name: major, widget: string, required: false }
+              - { label: Expected graduation year, name: graduationYear, widget: string, required: false, hint: 'Shown on the profile as Class of YYYY.', pattern: ['^[0-9]{4}$', 'Enter a four-digit year, for example 2028'] }
+              - { label: Expected graduation term, name: graduationTerm, widget: select, required: false, options: [Spring, Summer, Fall, Winter], hint: 'Optional. Combined with the year on member cards and profiles, for example Spring 2028.' }
               - { label: Photo, name: photo, widget: image, required: false }
               - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
               - { label: GitHub URL, name: github, widget: string, required: false }

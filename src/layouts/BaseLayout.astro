@@ -9,10 +9,14 @@ import '@fontsource/inter/latin-700.css';
 import '@fontsource/chakra-petch/latin-600.css';
 import '@fontsource/chakra-petch/latin-700.css';
 import '@fontsource/material-icons-round/400.css';
-interface Props { page: keyof typeof metadata.pages; }
-const { page } = Astro.props;
+import bodyFont from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import headingFont from '@fontsource/chakra-petch/files/chakra-petch-latin-700-normal.woff2?url';
+interface Props { page: keyof typeof metadata.pages; title?: string; description?: string; }
+const { page, title: customTitle, description: customDescription } = Astro.props;
 const siteTitle = metadata.siteName;
-const { title, description } = page === 'notFound' && maintenance.enabled ? maintenance : metadata.pages[page];
+const pageMetadata = page === 'notFound' && maintenance.enabled ? maintenance : metadata.pages[page];
+const title = customTitle ?? pageMetadata.title;
+const description = customDescription ?? pageMetadata.description;
 const previewImage = new URL(withBase(metadata.previewImage)!, Astro.site || Astro.url.origin).href;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin).href;
 ---
@@ -22,6 +26,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f0f0f0" />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href={withBase('/sitemap-index.xml')} />
@@ -100,6 +106,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
 </html>
 
 <style is:global>
+  /* Native document transitions keep the previous page visible during navigation
+     while allowing each page's scripts to initialize normally. */
+  @view-transition { navigation: auto; }
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation-duration: 140ms; animation-timing-function: ease-out; }
+  html { background: #f0f0f0; }
   :root {
     color-scheme: light;
     --header-height: 60px;
@@ -214,6 +227,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
   }
   @media (max-width: 360px) { :root { --mobile-gutter: 32px; } }
   @media (prefers-reduced-motion: reduce) {
+    @view-transition { navigation: none; }
+    ::view-transition-group(root), ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     .site-loader-spinner { animation: none; }
     .marquee-track { animation: none !important; }

@@ -9,6 +9,7 @@ export default defineConfig({
   site: siteURL.href,
   base: process.env.SITE_BASE || '/',
   output: 'static',
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],
 });

@@ -2,26 +2,29 @@
 import { withBase } from '../lib/urls';
 import site from '../content/site.json';
 import ProfileIcon from './ProfileIcon.astro';
-const { mobileOnly = false } = Astro.props;
+const { mobileOnly = false, showCommunity = true, showSocials = true } = Astro.props;
 const gobbler = site.links.social.find((link) => link.name === 'GobblerConnect');
-const socials = site.links.social.filter((link) => link.name !== 'GobblerConnect');
+const socials = [
+  ...site.links.social.filter((link) => !['GobblerConnect', 'Linktree'].includes(link.name)),
+  ...(site.links.linktree ? [{ name: 'Linktree', url: site.links.linktree }] : []),
+];
 ---
 <div class:list={['connect-extras', mobileOnly && 'mobile-only']}>
-  <div class="community-links" aria-label="Community links" style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 0;">
+  {showCommunity && <div class="community-links" aria-label="Community links" style="display: grid; grid-template-columns: minmax(0, 1fr); gap: 0;">
     {gobbler && <a class="menu-link" href={withBase(gobbler.url)} target="_blank" rel="noreferrer">GobblerConnect<span class="material-icon" aria-hidden="true">chevron_right</span></a>}
-    <a class="menu-link" href={withBase(site.links.linktree)} target="_blank" rel="noreferrer">Linktree<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-  </div>
-  <div class="social-group" role="group" aria-label="Social media">
+  </div>}
+  {showSocials && <div class="social-group" role="group" aria-label="Social media">
     <div class="social-links">{socials.map((link) => <a class="icon-button" href={withBase(link.url)} target="_blank" rel="noreferrer" aria-label={link.name} title={link.name}><ProfileIcon name={link.name} /></a>)}</div>
-  </div>
+  </div>}
 </div>
 <style>
   .connect-extras.mobile-only { display: none; }
   .connect-extras { display: grid; gap: 8px; }
   .menu-link { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--menu-link-color, var(--paper)); font-size: var(--font-ui-min); text-decoration: none; }
-  .social-links { display: flex; flex-wrap: wrap; gap: 0; }
-  .social-links .icon-button { display: grid; place-items: center; width: 44px; height: 44px; min-width: 44px; color: var(--paper); text-decoration: none; }
+  .social-links { display: flex; gap: 0; }
+  .social-links .icon-button { display: grid; place-items: center; flex: 0 1 44px; width: 44px; height: 44px; min-width: 0; color: var(--paper); text-decoration: none; }
+  .social-links :global(svg), .social-links :global(.material-icon) { display: block; width: 22px; height: 22px; line-height: 22px; }
   .menu-link:hover, .icon-button:hover { color: var(--orange); }
   @media (max-width: 1024px) { .connect-extras.mobile-only { display: grid; } }
-  @media (max-width: 1024px) { .menu-link { min-height: 48px; padding: 10px 0; font: 600 20px/1.3 var(--display); } }
+  @media (max-width: 1024px) { .menu-link { min-height: 48px; padding: 10px var(--mobile-link-padding, 0px); font: 600 20px/1.3 var(--display); } }
 </style>

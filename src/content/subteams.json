@@ -6,17 +6,17 @@
       "icon": "settings"
     },
     {
-      "name": "Electronics",
+      "name": "Electrical",
       "summary": "Design the power, sensing, and circuit systems that make every robot move with purpose.",
       "icon": "bolt"
     },
     {
-      "name": "Embedded Controls",
+      "name": "Embedded",
       "summary": "Connect hardware and software through reliable firmware, controls, and real-time systems.",
       "icon": "memory"
     },
     {
-      "name": "Software & Computer Vision",
+      "name": "Software",
       "summary": "Build autonomous behavior, perception, and tools that help the fleet compete as one.",
       "icon": "code"
     },

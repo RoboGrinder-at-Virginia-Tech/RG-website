@@ -70,7 +70,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
     <section class="subteams section-shell" id="subteams" aria-labelledby="subteams-title">
       <div class="subteams-head">
         <div>
-          <h2 id="subteams-title">Our subteams</h2>
+          <h2 id="subteams-title">Our Subteams</h2>
         </div>
       </div>
       <div class="team-grid">
@@ -81,7 +81,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
           </article>
         ))}
         <div class="subteams-actions">
-          <a class="button button-swipe button-dark" href={withBase('/members/')}>Meet the team<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-dark" href={withBase('/members/')}>Meet the Team<span class="material-icon" aria-hidden="true">chevron_right</span></a>
         </div>
       </div>
     </section>
@@ -99,7 +99,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
         <p>{site.join.description}</p>
         <div class="join-actions">
           <a class="button button-swipe button-dark" href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-          <a class="button button-swipe button-dark" href={withBase('/gallery/')}>View gallery<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-dark" href={withBase('/gallery/')}>View Gallery<span class="material-icon" aria-hidden="true">chevron_right</span></a>
         </div>
       </div>
       <span class="join-cut" aria-hidden="true"></span>
@@ -232,15 +232,16 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
     };
     if (document.readyState === 'complete') scheduleAutoplay();
     else window.addEventListener('load', scheduleAutoplay, { once: true });
+    const background = hero.querySelector<HTMLElement>('.hero-background')!;
     const sizeVideo = () => {
       if (video instanceof HTMLVideoElement) return;
-      const width = Math.max(hero.clientWidth, hero.clientHeight * 16 / 9);
+      const width = Math.max(background.clientWidth, background.clientHeight * 16 / 9);
       video.style.width = `${width}px`;
       video.style.height = `${width * 9 / 16}px`;
     };
 
     window.addEventListener('resize', sizeVideo);
-    new ResizeObserver(sizeVideo).observe(hero);
+    new ResizeObserver(sizeVideo).observe(background);
     sizeVideo();
 
     updateToggle();
@@ -249,7 +250,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
 
 <style>
 
-  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--orange); color: var(--paper); }
+  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; clip-path: inset(0); padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--orange); color: var(--paper); }
   .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; max-width: min(680px, calc(100% - 160px)); padding: 20px 0; }
   .hero-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 28px 0 0; border-top: 1px solid rgba(240,240,240,.4); scroll-margin-top: var(--scroll-header-offset); }
   .hero-numbers > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; }
@@ -263,7 +264,8 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .button { display: inline-flex; min-height: var(--button-height); align-items: center; justify-content: center; gap: var(--button-gap); padding: 0 var(--button-padding); font-size: max(var(--font-ui-min), 11px); font-weight: 700; text-decoration: none; }
   .button .material-icon { font-size: 18px; }
   .button-light { background: var(--paper); color: var(--ink); }
-  .hero-background { position: absolute; inset: 0; z-index: -2; overflow: hidden; background: #000000; pointer-events: none; }
+  /* Keep the video anchored to the viewport; the hero clips it as content scrolls over it. */
+  .hero-background { position: fixed; inset: var(--header-height) 0 0; z-index: -2; overflow: hidden; background: #000000; pointer-events: none; }
   .hero-background::after { position: absolute; inset: 0; content: ''; background: linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.70) 50%, rgba(0,0,0,.30) 100%), linear-gradient(rgba(237,114,30,.24), rgba(237,114,30,.24)); }
   .hero-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .hero-video { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 0; opacity: 0; transition: opacity 300ms ease; }

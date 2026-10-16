@@ -5,8 +5,8 @@
   "people": [
     {
       "name": "Britny Jiang",
-      "subteam": "Embedded Controls",
-      "role": "Embedded Controls Branch Lead",
+      "subteam": "Embedded",
+      "role": "Embedded Branch Lead",
       "major": "Business Information Technology",
       "photo": "",
       "linkedin": "",
@@ -25,7 +25,7 @@
     },
     {
       "name": "Chris Kiledea",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -35,7 +35,7 @@
     },
     {
       "name": "Corinne Chang",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -55,8 +55,8 @@
     },
     {
       "name": "Ethan Xu",
-      "subteam": "Software & Computer Vision",
-      "role": "Software & Computer Vision Technical Advisor",
+      "subteam": "Software",
+      "role": "Software Technical Advisor",
       "major": "Computer Science",
       "photo": "",
       "linkedin": "",
@@ -75,7 +75,7 @@
     },
     {
       "name": "Jonah Leopold",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -85,7 +85,7 @@
     },
     {
       "name": "Xianxu Luo",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -95,7 +95,7 @@
     },
     {
       "name": "Michael Hatami",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Engineering",
       "photo": "",
@@ -105,7 +105,7 @@
     },
     {
       "name": "Mikiya Stein",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -135,8 +135,8 @@
     },
     {
       "name": "Qihang Zhu",
-      "subteam": "Electronics",
-      "role": "Electronics Branch Lead",
+      "subteam": "Electrical",
+      "role": "Electrical Branch Lead",
       "major": "Electrical Engineering",
       "photo": "",
       "linkedin": "",
@@ -145,8 +145,8 @@
     },
     {
       "name": "Rui Ma",
-      "subteam": "Software & Computer Vision",
-      "role": "Software & Computer Vision Technical Advisor",
+      "subteam": "Software",
+      "role": "Software Technical Advisor",
       "major": "Computer Engineering",
       "photo": "",
       "linkedin": "",
@@ -155,7 +155,7 @@
     },
     {
       "name": "Ruiqian Zhang",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",
@@ -206,7 +206,7 @@
     },
     {
       "name": "Tommy Nguyen",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "Computer Science",
       "photo": "",
@@ -246,8 +246,8 @@
     },
     {
       "name": "Kushagra Saxena",
-      "subteam": "Software & Computer Vision",
-      "role": "Software & Computer Vision Project Lead",
+      "subteam": "Software",
+      "role": "Software Project Lead",
       "major": "",
       "photo": "",
       "linkedin": "https://www.linkedin.com/in/kushagra-saxena-33406934b/",
@@ -410,7 +410,7 @@
     },
     {
       "name": "Colton Cumberland",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -421,7 +421,7 @@
     },
     {
       "name": "Owen Burden",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -432,7 +432,7 @@
     },
     {
       "name": "Denzel Morrison",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -443,7 +443,7 @@
     },
     {
       "name": "Isabella Meza",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -454,7 +454,7 @@
     },
     {
       "name": "Ali Bahar",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "",
       "photo": "",
@@ -465,7 +465,7 @@
     },
     {
       "name": "Krishanth Sorna Aravintha Losanan",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -476,7 +476,7 @@
     },
     {
       "name": "Rowan White",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -487,7 +487,7 @@
     },
     {
       "name": "Ben Ark",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -498,7 +498,7 @@
     },
     {
       "name": "Sterling Hsu",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -509,7 +509,7 @@
     },
     {
       "name": "Houyue Chen",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -520,7 +520,7 @@
     },
     {
       "name": "Aryan Patil",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -531,7 +531,7 @@
     },
     {
       "name": "Elijah O'Donoghue",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -542,7 +542,7 @@
     },
     {
       "name": "Rishi Murali",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -553,7 +553,7 @@
     },
     {
       "name": "Wensi Dai",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -564,7 +564,7 @@
     },
     {
       "name": "Yi Cao",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -575,7 +575,7 @@
     },
     {
       "name": "Marcel Francisco",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -586,7 +586,7 @@
     },
     {
       "name": "Maged Al Qabany",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -597,7 +597,7 @@
     },
     {
       "name": "Nick Boukens",
-      "subteam": "Software & Computer Vision",
+      "subteam": "Software",
       "role": "",
       "major": "",
       "photo": "",
@@ -608,7 +608,7 @@
     },
     {
       "name": "Qichen Bao",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -619,7 +619,7 @@
     },
     {
       "name": "Lifu Xu",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -630,7 +630,7 @@
     },
     {
       "name": "Huy Vu",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -641,7 +641,7 @@
     },
     {
       "name": "Alex Zhao",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -652,7 +652,7 @@
     },
     {
       "name": "Jared Forchheimer",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -663,7 +663,7 @@
     },
     {
       "name": "Ayan Nawaz",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -674,7 +674,7 @@
     },
     {
       "name": "Zayd Kemper",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -685,7 +685,7 @@
     },
     {
       "name": "Fahd Aldhaher",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -696,7 +696,7 @@
     },
     {
       "name": "Jude Othman",
-      "subteam": "Embedded Controls",
+      "subteam": "Embedded",
       "role": "",
       "major": "",
       "photo": "",
@@ -740,7 +740,7 @@
     },
     {
       "name": "Jijun Niu",
-      "subteam": "Electronics",
+      "subteam": "Electrical",
       "role": "",
       "major": "Electrical Engineering",
       "photo": "",

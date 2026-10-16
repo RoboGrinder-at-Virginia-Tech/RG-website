@@ -50,3 +50,17 @@ live streaming playback and a new deployed Lighthouse score were not measured.
 
 After deployment, rerun mobile PageSpeed to measure the effect on LCP and blocking
 time. The timing change alone does not guarantee a particular score.
+
+## Page navigation
+
+The shared layout opts into native cross-document view transitions with a 140ms
+crossfade. Supported browsers retain the outgoing page while the next document
+renders; other browsers keep normal document navigation. Reduced-motion settings
+disable the transition. Full document navigation preserves existing script
+initialization for menus, gallery previews, forms, and the home video.
+
+Astro prefetches same-origin page links on hover or keyboard focus, falling back
+to tap for data-saving or slow connections. This avoids downloading every profile
+or gallery destination up front. The shared body and heading fonts are preloaded,
+and above-the-fold OrangeFeature photos load eagerly with high priority instead
+of waiting for lazy-image discovery.

@@ -4,14 +4,15 @@ import site from '../content/site.json';
 import { primaryAction } from '../lib/season';
 import ConnectSocialLinks from './ConnectSocialLinks.astro';
 const { active = 'Home' } = Astro.props;
+const gobblerConnect = site.links.social.find((link) => link.name === 'GobblerConnect');
 const links = [
   { label: 'Achievements', href: '/#achievements', active: 'Achievements' },
-  { label: 'Subteams', href: '/#subteams', active: 'Home' },
-  { label: 'Robots', href: '/robots/', active: 'Robots' },
+  { label: 'Our Subteams', href: '/#subteams', active: 'Home' },
+  { label: 'Our Robots', href: '/robots/', active: 'Robots' },
   { label: 'Members', href: '/members/', active: 'Members' },
   { label: 'Gallery', href: '/gallery/', active: 'Gallery' },
-  { label: 'Sponsors & Partners', href: '/sponsors/', active: 'Sponsors' },
-  { label: 'Contact us', href: '/contact/', active: 'Contact' },
+  { label: 'Sponsor Us', href: '/sponsors/', active: 'Sponsors' },
+  { label: 'Contact Us', href: '/contact/', active: 'Contact' },
 ];
 ---
 
@@ -23,20 +24,19 @@ const links = [
     <div class="header-controls">
     <button class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-navigation"><span class="material-icon" aria-hidden="true">menu</span></button>
     <details class="mobile-menu primary-menu" data-disclosure>
-      <summary aria-label="Open About us menu"><span class="primary-label">About us</span><span class="material-icon dropdown-arrow" aria-hidden="true">expand_more</span><span class="material-icon burger-icon" aria-hidden="true">menu</span><span class="material-icon burger-close" aria-hidden="true">close</span></summary>
+      <summary aria-label="Open About Us menu"><span class="primary-label">About Us</span><span class="material-icon dropdown-arrow" aria-hidden="true">expand_more</span><span class="material-icon burger-icon" aria-hidden="true">menu</span><span class="material-icon burger-close" aria-hidden="true">close</span></summary>
       <nav aria-label="Main navigation">
-        {links.map((link) => <a class:list={[['Sponsors & Partners', 'Contact us'].includes(link.label) && 'mobile-only']} href={withBase(link.href)} aria-current={active === link.active && link.label !== 'Subteams' ? 'page' : undefined}>{link.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>)}
-        <a class="mobile-only" href={withBase(site.recruitment.joinUrl)} aria-current={active === 'Join' ? 'page' : undefined}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <ConnectSocialLinks mobileOnly />
+        {links.filter((link) => !['Sponsors', 'Contact'].includes(link.active)).map((link) => <a href={withBase(link.href)} aria-current={active === link.active && link.active !== 'Home' ? 'page' : undefined}>{link.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>)}
       </nav>
     </details>
     <details class="mobile-menu support-menu" data-disclosure>
       <summary aria-label="Open Connect menu">Connect<span class="material-icon dropdown-arrow" aria-hidden="true">expand_more</span></summary>
       <nav aria-label="Connect">
-        <a href={withBase(site.recruitment.joinUrl)} aria-current={active === 'Join' ? 'page' : undefined}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <a href={withBase('/sponsors/')} aria-current={active === 'Sponsors' ? 'page' : undefined}>Sponsors &amp; Partners<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <a href={withBase('/contact/')} aria-current={active === 'Contact' ? 'page' : undefined}>Contact us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <ConnectSocialLinks />
+        {primaryAction.page !== 'Join' && <a href={withBase(site.recruitment.joinUrl)} aria-current={active === 'Join' ? 'page' : undefined}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>}
+        {primaryAction.page !== 'Sponsors' && <a href={withBase('/sponsors/')} aria-current={active === 'Sponsors' ? 'page' : undefined}>Sponsor Us<span class="material-icon" aria-hidden="true">chevron_right</span></a>}
+        <a href={withBase('/contact/')} aria-current={active === 'Contact' ? 'page' : undefined}>Contact Us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        {gobblerConnect && <a href={withBase(gobblerConnect.url)} target="_blank" rel="noreferrer">GobblerConnect<span class="material-icon" aria-hidden="true">chevron_right</span></a>}
+        <ConnectSocialLinks showCommunity={false} />
       </nav>
     </details>
     <a class="header-cta button-swipe" href={withBase(primaryAction.href)} aria-current={active === primaryAction.page ? 'page' : undefined}>{primaryAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
@@ -45,25 +45,13 @@ const links = [
   <nav class="mobile-navigation" id="mobile-navigation" aria-label="Mobile navigation" hidden>
     <div class="mobile-view" data-mobile-view="main">
       <div class="mobile-view-links">
-        <button type="button" data-open-view="about">About us<span class="material-icon" aria-hidden="true">arrow_forward</span></button>
-        <button type="button" data-open-view="connect">Connect<span class="material-icon" aria-hidden="true">arrow_forward</span></button>
+        {links.filter((link) => link.active !== 'Sponsors').map((link) => <a href={withBase(link.href)} aria-current={active === link.active && link.active !== 'Home' ? 'page' : undefined}>{link.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>)}
+        <ConnectSocialLinks showSocials={false} />
       </div>
       <div class="mobile-view-actions">
+        <div class="mobile-socials"><ConnectSocialLinks showCommunity={false} /></div>
         <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
-        <a class="mobile-primary-action button-swipe" href={withBase(primaryAction.href)}>{primaryAction.label}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
-      </div>
-    </div>
-    <div class="mobile-view mobile-subview" data-mobile-view="about" inert>
-      <button class="mobile-back" type="button" data-back-view><span class="material-icon" aria-hidden="true">arrow_back</span>About us</button>
-      <div class="mobile-view-links">{links.filter((link) => !['Sponsors & Partners', 'Contact us'].includes(link.label)).map((link) => <a href={withBase(link.href)} aria-current={active === link.active && link.label !== 'Subteams' ? 'page' : undefined}>{link.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>)}</div>
-    </div>
-    <div class="mobile-view mobile-subview" data-mobile-view="connect" inert>
-      <button class="mobile-back" type="button" data-back-view><span class="material-icon" aria-hidden="true">arrow_back</span>Connect</button>
-      <div class="mobile-view-links">
-        <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <a href={withBase('/sponsors/')}>Sponsors &amp; Partners<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <a href={withBase('/contact/')}>Contact us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <ConnectSocialLinks />
+        <a class="mobile-primary-action button-swipe" href={withBase('/sponsors/')}>Sponsor Us<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
       </div>
     </div>
   </nav>
@@ -81,17 +69,9 @@ const links = [
   const menuShell = document.querySelector<HTMLElement>('.header-shell');
   const mobileToggle = document.querySelector<HTMLButtonElement>('.mobile-nav-toggle')!;
   const mobileNavigation = document.querySelector<HTMLElement>('.mobile-navigation')!;
-  const mobileViews = [...mobileNavigation.querySelectorAll<HTMLElement>('[data-mobile-view]')];
   let mobileOpen = false;
-  let currentView = 'main';
   const backgroundInert = new Map<HTMLElement, boolean>();
   let mobileAnimation: Animation | undefined;
-  const showMobileView = (view: string, focus = true) => {
-    currentView = view;
-    mobileNavigation.dataset.view = view;
-    mobileViews.forEach((panel) => { panel.inert = panel.dataset.mobileView !== view; });
-    if (focus) mobileNavigation.querySelector<HTMLElement>(view === 'main' ? `[data-open-view="${mobileNavigation.dataset.previousView || 'about'}"]` : `[data-mobile-view="${view}"] .mobile-back`)?.focus({ preventScroll: true });
-  };
   const setMobileOpen = (open: boolean, restoreFocus = true) => {
     mobileOpen = open;
     mobileAnimation?.cancel();
@@ -115,7 +95,7 @@ const links = [
     document.documentElement.classList.toggle('mobile-navigation-open', open);
     if (open) {
       document.querySelectorAll<HTMLElement>('main, footer').forEach((element) => { backgroundInert.set(element, element.inert); element.inert = true; });
-      showMobileView('main');
+      mobileNavigation.querySelector<HTMLAnchorElement>('a')?.focus({ preventScroll: true });
     } else {
       backgroundInert.forEach((wasInert, element) => { element.inert = wasInert; });
       backgroundInert.clear();
@@ -123,11 +103,6 @@ const links = [
     }
   };
   mobileToggle.addEventListener('click', () => setMobileOpen(!mobileOpen));
-  mobileNavigation.querySelectorAll<HTMLButtonElement>('[data-open-view]').forEach((button) => button.addEventListener('click', () => {
-    mobileNavigation.dataset.previousView = button.dataset.openView;
-    showMobileView(button.dataset.openView!);
-  }));
-  mobileNavigation.querySelectorAll<HTMLButtonElement>('[data-back-view]').forEach((button) => button.addEventListener('click', () => showMobileView('main')));
   mobileNavigation.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => link.addEventListener('click', () => setMobileOpen(false, false)));
   menuShell?.addEventListener('keydown', (event) => {
     if (!mobileOpen) return;
@@ -150,7 +125,7 @@ const links = [
   document.querySelectorAll<HTMLElement>('.mobile-menu nav').forEach((panel) => menuSize.observe(panel));
   const updateMenuLabel = () => {
     const summary = document.querySelector<HTMLElement>('.primary-menu > summary');
-    if (summary) summary.setAttribute('aria-label', `${summary.getAttribute('aria-expanded') === 'true' ? 'Close' : 'Open'} ${narrowScreen.matches ? 'navigation' : 'About us'} menu`);
+    if (summary) summary.setAttribute('aria-label', `${summary.getAttribute('aria-expanded') === 'true' ? 'Close' : 'Open'} ${narrowScreen.matches ? 'navigation' : 'About Us'} menu`);
   };
   narrowScreen.addEventListener('change', updateMenuLabel);
   updateMenuLabel();
@@ -173,7 +148,7 @@ const links = [
       contentAnimation?.cancel();
       summary.setAttribute('aria-expanded', String(open));
       if (details.classList.contains('mobile-menu')) {
-        const label = details.classList.contains('support-menu') ? 'Connect' : narrowScreen.matches ? 'navigation' : 'About us';
+        const label = details.classList.contains('support-menu') ? 'Connect' : narrowScreen.matches ? 'navigation' : 'About Us';
         summary.setAttribute('aria-label', `${open ? 'Close' : 'Open'} ${label} menu`);
         if (open) disclosures.forEach((set, other) => { if (other !== details && other.classList.contains('mobile-menu')) set(false); });
       }
@@ -344,7 +319,6 @@ const links = [
   .mobile-menu summary { transition: color 200ms ease; }
   @media (hover: hover) and (pointer: fine) { .mobile-menu summary:hover { color: var(--orange); } }
   [aria-expanded="true"] .dropdown-arrow { rotate: 180deg; }
-  .primary-menu nav .mobile-only { display: none; }
   .mobile-menu .menu-close { display: none; }
   .mobile-menu[open] .menu-open { display: none; }
   .mobile-menu[open] .menu-close { display: inline-block; }
@@ -359,20 +333,16 @@ const links = [
     .mobile-nav-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: none; border: 0; color: var(--paper); cursor: pointer; }
     .mobile-nav-toggle .material-icon { font-size: 28px; }
     .mobile-navigation:not([hidden]) { display: block; position: absolute; top: 100%; left: 0; width: 100%; height: calc(100dvh - var(--header-height)); overflow: hidden; background: #000; color: var(--paper); }
-    .mobile-view { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 20px; padding: 20px 24px; overflow-y: auto; overscroll-behavior: contain; transition: transform 300ms ease-in-out; }
-    .mobile-view[data-mobile-view="main"] { transform: translateX(-100%); }
-    .mobile-navigation[data-view="main"] [data-mobile-view="main"] { transform: translateX(0); }
-    .mobile-subview { transform: translateX(100%); }
-    .mobile-navigation[data-view="about"] [data-mobile-view="about"], .mobile-navigation[data-view="connect"] [data-mobile-view="connect"] { transform: translateX(0); }
+    .mobile-view { --mobile-link-padding: 16px; position: absolute; inset: 0; display: flex; flex-direction: column; gap: 20px; padding: 20px 24px; overflow-y: auto; overscroll-behavior: contain; transition: transform 300ms ease-in-out; }
     .mobile-view-links { display: grid; }
-    .mobile-view-links a, .mobile-view-links button, .mobile-view-actions a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; color: inherit; text-decoration: none; font: 600 20px/1.3 var(--display); text-align: left; background: none; border: 0; padding: 10px 0; cursor: pointer; }
+    .mobile-view-links a, .mobile-view-links button, .mobile-view-actions > a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; color: inherit; text-decoration: none; font: 600 20px/1.3 var(--display); text-align: left; background: none; border: 0; padding: 10px var(--mobile-link-padding); cursor: pointer; }
     .mobile-view-links a[aria-current="page"] { color: var(--orange); }
     .mobile-view-actions { display: grid; gap: 12px; margin-top: auto; padding-bottom: env(safe-area-inset-bottom); }
-    .mobile-view-actions a { padding: 16px; background: var(--ink); font-size: 18px; border: 0; }
+    .mobile-view-actions > a { padding: 16px var(--mobile-link-padding); background: var(--ink); font-size: 18px; border: 0; }
+    .mobile-socials { padding-inline: 5px; }
     .mobile-view-actions .mobile-primary-action { background: var(--orange); color: #fff; --hover-fill: var(--paper); --hover-ink: var(--ink); clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
-    .mobile-back { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; color: var(--paper); background: none; border: 0; font: 600 18px/1.3 var(--display); text-align: left; cursor: pointer; }
     @media (hover: hover) and (pointer: fine) {
-      .mobile-view-links a:hover, .mobile-view-links button:hover, .mobile-view-actions a:not(.mobile-primary-action):hover, .mobile-back:hover, .mobile-nav-toggle:hover { color: var(--orange); }
+      .mobile-view-links a:hover, .mobile-view-actions a:not(.mobile-primary-action):hover, .mobile-nav-toggle:hover { color: var(--orange); }
       .mobile-view-actions .mobile-primary-action:hover { color: var(--hover-ink); }
     }
     .site-header { padding: 0 24px; gap: 12px; }
@@ -383,7 +353,6 @@ const links = [
     .primary-menu .burger-icon { display: inline-block; }
     .primary-menu summary[aria-expanded="true"] .burger-icon { display: none; }
     .primary-menu summary[aria-expanded="true"] .burger-close { display: inline-block; }
-    .primary-menu nav .mobile-only { display: flex; }
     .mobile-menu summary .material-icon { font-size: 23px; }
   }
   @media (max-width: 1024px) and (min-width: 521px) {
@@ -392,9 +361,9 @@ const links = [
   @media (prefers-reduced-motion: reduce) { .mobile-view { transition: none; } }
   @media (min-width: 1025px) {
     .mobile-menu { position: static; }
-    .mobile-menu nav { z-index: 1; top: 100%; left: 0; right: 0; width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); justify-content: start; align-items: start; column-gap: 40px; padding: 12px var(--desktop-gutter, clamp(24px, 6vw, 92px)) 20px; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; background: #000; border: 0; }
-    .support-menu nav > a { grid-column: 1; }
-    .support-menu nav :global(.connect-extras) { grid-column: 2; grid-row: 1 / span 3; padding-top: 0; }
+    .mobile-menu nav { z-index: 1; top: 100%; left: 0; right: 0; width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); grid-template-rows: repeat(3, auto); grid-auto-flow: column; justify-content: start; align-items: start; column-gap: 40px; padding: 12px var(--desktop-gutter, clamp(24px, 6vw, 92px)) 20px; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; background: #000; border: 0; }
+    .support-menu nav { grid-template-columns: minmax(0, 280px) minmax(0, 1fr) minmax(0, 308px); }
+    .support-menu nav :global(.connect-extras) { grid-column: 3; grid-row: 1 / span 3; justify-self: end; width: 100%; padding-top: 0; }
     .mobile-menu summary[aria-expanded="true"] { color: var(--orange); }
     .brand img { width: 32px; height: 32px; }
     .site-header { --font-ui-min: 14px; }

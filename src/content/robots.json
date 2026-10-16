@@ -1,5 +1,5 @@
 {
-  "headline": "Our robots.",
+  "headline": "Our Robots.",
   "intro": "From agile ground units to autonomous systems, our robots bring mechanical design, electronics, embedded controls, and computer vision together on the competition field.",
   "image": "/images/rmul-2025-fleet.webp",
   "imageAlt": "Three RoboGrinder competition robots on the arena floor",
@@ -54,6 +54,6 @@
   ],
   "ctaTitle": "Help build what comes next.",
   "ctaDescription": "Our robots are built by students working together across five engineering subteams. Meet the people behind the machines or support their next season.",
-  "teamButtonLabel": "Meet the team",
-  "sponsorButtonLabel": "Sponsor us"
+  "teamButtonLabel": "Meet the Team",
+  "sponsorButtonLabel": "Sponsor Us"
 }

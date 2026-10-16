@@ -2,7 +2,7 @@
 import { compareMembers, leadershipRank, presidencyYear } from '../lib/roster';
 type Person = { name: string; subteam: string; role: string; major?: string };
 const { people, alumni = false } = Astro.props as { people: Person[]; alumni?: boolean };
-const order = ['Mechanical', 'Electronics', 'Embedded Controls', 'Software & Computer Vision', 'Operations'];
+const order = ['Mechanical', 'Electrical', 'Embedded', 'Software', 'Operations'];
 const groups = [
   { name: alumni ? 'Past presidents' : 'Leadership', people: people.filter((person) => person.role && (alumni ? leadershipRank(person.role) === 0 : leadershipRank(person.role) < 4)) },
   ...(alumni ? [{ name: 'Past leadership', people: people.filter((person) => person.role && leadershipRank(person.role) > 0 && leadershipRank(person.role) < 4) }] : []),

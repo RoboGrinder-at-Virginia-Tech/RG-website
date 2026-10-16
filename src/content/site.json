@@ -1,13 +1,13 @@
 {
   "recruitment": {
     "open": false,
-    "joinLabel": "Join us",
+    "joinLabel": "Join Us",
     "joinUrl": "/join/",
     "applicationLabel": "Application forms",
     "applicationUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "openDescription": "Applications are open! Students from every major are welcome. Apply to join a subteam and help build our next fleet.",
     "closedDescription": "Thanks for your interest in RoboGrinder! Applications for the 2026–2027 season are closed, but we’d love to meet you next fall when recruitment opens again.",
-    "supportLabel": "Support us",
+    "supportLabel": "Sponsor Us",
     "supportUrl": "/sponsors/"
   },
   "hero": {
@@ -28,7 +28,7 @@
     }
   },
   "mission": {
-    "title": "Our mission",
+    "title": "Our Mission",
     "tagline": "Turn classroom knowledge into hands-on experience.",
     "description": "Students learn tools used in industry as they design parts, build circuits, write software, and test the team’s robots. Working together builds practical engineering, problem-solving, and teamwork skills for their future careers. Students from every major are welcome.",
     "image": "/images/arc-2026-team.jpg",
