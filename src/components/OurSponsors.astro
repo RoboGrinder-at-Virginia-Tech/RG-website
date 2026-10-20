@@ -3,7 +3,7 @@ import { withBase } from '../lib/urls';
 import frames from '../content/sponsor-artwork-frames.json';
 // EDIT CONTENT: partners in sponsors.json supplies both pages.
 // EDIT DISPLAY: headings and the homepage call to action are configured here.
-const { partners, id = 'supporters', showCta = false, title = 'Our sponsors', departmentalTitle = 'Departmental supporters' } = Astro.props;
+const { partners, id = 'supporters', thankYou = '', showCta = false, showDepartmental = true, title = 'Our sponsors', departmentalTitle = 'Departmental supporters' } = Astro.props;
 const paperChannels = Array.from({ length: 256 }, (_, value) => Math.min(value, 240) / 255).join(' ');
 const groups = [
   ...['gold', 'silver', 'bronze'].map((tier) => ({
@@ -19,7 +19,7 @@ const headingId = `${id}-title`;
   <h2 id={headingId}>{title}</h2>
 <svg class="logo-color-definition" width="0" height="0" aria-hidden="true"><defs><filter id="auvsi-paper" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="discrete" tableValues={paperChannels} /><feFuncG type="discrete" tableValues={paperChannels} /><feFuncB type="discrete" tableValues={paperChannels} /></feComponentTransfer></filter></defs></svg>
 
-{groups.filter((group) => group.partners.length).map((group) => <div class:list={['sponsor-group', group.departmental && 'departmental']}>
+{groups.filter((group) => group.partners.length && (showDepartmental || !group.departmental)).map((group) => <div class:list={['sponsor-group', group.departmental && 'departmental']}>
   <h3>{group.title}</h3>
   <div class="sponsor-logos">
   {group.partners.map((partner) => (
@@ -29,6 +29,7 @@ const headingId = `${id}-title`;
   ))}
 </div>
 </div>)}
+  {thankYou && <p class="sponsor-thanks">{thankYou}</p>}
   {showCta && <div class="partner-cta">
     <h3>Interested in partnering with us?</h3>
     <a class="button button-swipe button-dark" href={withBase('/sponsors/')}>Sponsor Us<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
@@ -37,6 +38,7 @@ const headingId = `${id}-title`;
 <style>
   .partners { padding: 80px clamp(24px, 8vw, 124px); background: var(--paper); color: var(--ink); scroll-margin-top: var(--scroll-header-offset); }
   h2 { margin: 0 0 40px; text-align: center; font: 700 clamp(36px, 4.5vw, 58px)/1.05 var(--display); letter-spacing: -.035em; text-wrap: balance; }
+  .sponsor-thanks { max-width: 760px; margin: 40px auto 0; text-align: center; font-size: var(--font-body-min); line-height: 1.7; }
   .partner-cta { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; margin-top: 48px; text-align: center; }
   .partner-cta h3 { margin: 0; font: 700 clamp(24px, 2.5vw, 32px)/1.2 var(--display); text-wrap: balance; }
   @media (max-width: 540px) { .partners { padding: 56px 23px; } h2 { margin-bottom: 44px; } }

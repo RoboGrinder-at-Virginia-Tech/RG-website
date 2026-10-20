@@ -17,6 +17,14 @@ const groups = [
   { id: 'leadership', title: 'Leadership', people: people.filter((person) => leadershipRank(person.role.trim()) !== 4) },
   { id: 'members', title: 'Members', people: people.filter((person) => leadershipRank(person.role.trim()) === 4) },
 ];
+const regularMembers = people.filter((person) => leadershipRank(person.role.trim()) === 4);
+const subteamGroups = [...new Set(regularMembers.map((person) => person.subteam.trim() || 'Other members'))]
+  .sort((a, b) => Number(a === 'Operations') - Number(b === 'Operations') || a.localeCompare(b, 'en'))
+  .map((title) => ({ title, people: regularMembers.filter((person) => (person.subteam.trim() || 'Other members') === title).sort((a, b) => a.name.trim().localeCompare(b.name.trim(), 'en', { sensitivity: 'base' })) }));
+const advisors = [
+  { name: 'Dr. Dylan Losey', department: 'Mechanical Engineering', photo: '/images/advisors/dylan-losey.jpg', url: 'https://me.vt.edu/people/faculty/losey-dylan.html' },
+  { name: 'Dr. Tyler Milburn', department: 'Electrical and Computer Engineering', photo: '/images/advisors/tyler-milburn.jpg', url: 'https://ece.vt.edu/people/profile/milburn.html' },
+];
 const recordedPresidents = new Set(alumniRoster.alumni.filter((person) => /^President\b/i.test(person.role)).map((person) => person.name.trim().toLowerCase()));
 const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season) => season.people.filter((person) => /^President$/i.test(person.role) && !recordedPresidents.has(person.name.trim().toLowerCase())).map((person) => ({ ...person, role: `President, ${season.year}` })))], members.people);
 ---
@@ -33,11 +41,36 @@ const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season)
 
     </header>
     {groups.map((group) => group.people.length > 0 && <section class="roster-group" aria-labelledby={`${group.id}-heading`}>
-    <h2 class="group-heading" id={`${group.id}-heading`}>{group.title}</h2>
+    {group.id !== 'members' && <h2 class="group-heading" id={`${group.id}-heading`}>{group.title}</h2>}
+    {group.id === 'members' ? <details class="members-dropdown" data-disclosure open>
+      <summary><h2 class="group-heading" id="members-heading">Members</h2><span class="material-icon archive-arrow" aria-hidden="true">expand_more</span></summary>
+      <div class="disclosure-panel">
+      {subteamGroups.map((subteam) => <details class="subteam-dropdown" data-disclosure open>
+      <summary><h3>{subteam.title}</h3><span class="material-icon archive-arrow" aria-hidden="true">expand_more</span></summary>
+      <div class="disclosure-panel">
+    <div class="member-grid">
+      {subteam.people.map((person) => <article class="member">
+        <a class="member-profile" href={withBase(memberProfileUrl(person.name))} aria-label={`View ${person.name}'s profile`}>
+        {person.photo ? <span class="portrait-frame"><img src={withBase(person.photo)} alt={`Portrait of ${person.name}`} width="320" height="400" loading="lazy" /></span> : <div class="portrait-placeholder" aria-label={`Photo pending for ${person.name}`}><img src={withBase('/images/rg-gray-square.png')} alt="" width="1080" height="1080" loading="lazy" /></div>}
+        <h4>{person.name}</h4>
+        </a>
+        <p class="member-role">{person.role.trim() || person.subteam}</p>
+        {graduationLabel(person) && <p class="member-graduation">{graduationLabel(person)}</p>}
+        {(person.linkedin || person.github || person.portfolio || person.email) && <div class="member-links" aria-label={`${person.name} profiles and contact`}>
+          {[{ name: 'LinkedIn', url: person.linkedin }, { name: 'GitHub', url: person.github }, { name: 'Portfolio', url: person.portfolio }].filter((link) => link.url).map((link) => <a class="icon-button button-swipe member-profile-button" href={withBase(link.url)} target="_blank" rel="noreferrer" aria-label={`${person.name}: ${link.name}`}><ProfileIcon name={link.name} /></a>)}
+          {person.email && <a class="icon-button button-swipe member-profile-button" href={`mailto:${person.email}`} aria-label={`Email ${person.name}`}><ProfileIcon name="Email" /></a>}
+        </div>}
+      </article>)}
+    </div>
+
+      </div>
+    </details>)}
+      </div>
+    </details> : (
     <div class="member-grid">
       {group.people.map((person) => <article class="member">
         <a class="member-profile" href={withBase(memberProfileUrl(person.name))} aria-label={`View ${person.name}'s profile`}>
-        {person.photo ? <img src={withBase(person.photo)} alt={`Portrait of ${person.name}`} width="320" height="400" loading="lazy" /> : <div class="portrait-placeholder" aria-label={`Photo pending for ${person.name}`}><img src={withBase('/images/rg-gray-square.png')} alt="" width="1080" height="1080" loading="lazy" /></div>}
+        {person.photo ? <span class="portrait-frame"><img src={withBase(person.photo)} alt={`Portrait of ${person.name}`} width="320" height="400" loading="lazy" /></span> : <div class="portrait-placeholder" aria-label={`Photo pending for ${person.name}`}><img src={withBase('/images/rg-gray-square.png')} alt="" width="1080" height="1080" loading="lazy" /></div>}
         <h3>{person.name}</h3>
         </a>
         <p class="member-role">{person.role.trim() || person.subteam}</p>
@@ -48,8 +81,22 @@ const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season)
         </div>}
       </article>)}
     </div>
+
+    )}
     </section>)}
     </div>
+    <section class="advisors" aria-labelledby="advisors-heading">
+      <h2 class="group-heading" id="advisors-heading">Faculty advisors</h2>
+      <div class="advisor-grid">
+        {advisors.map((advisor) => <article class="member advisor">
+          <a class="member-profile" href={advisor.url} aria-label={`View ${advisor.name}'s department profile`}>
+            <span class="portrait-frame"><img src={withBase(advisor.photo)} alt={`Portrait of ${advisor.name}`} width="320" height="400" loading="lazy" /></span>
+            <h3>{advisor.name}</h3>
+          </a>
+          <p>{advisor.department}</p>
+        </article>)}
+      </div>
+    </section>
     <section class="archive" aria-label="Previous seasons and alumni">
       <details data-disclosure>
         <summary>Previous seasons<span class="material-icon archive-arrow" aria-hidden="true">expand_more</span></summary>
@@ -78,14 +125,40 @@ const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season)
   .roster-year { margin-top: 32px; font-size: 28px; }
   .roster-group + .roster-group { margin-top: 64px; }
   .group-heading { margin: 0 0 28px; font: 700 clamp(28px, 3vw, 36px)/1.2 var(--display); }
+  .members-dropdown > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 12px 0; }
+  .members-dropdown > summary .group-heading { margin: 0; }
+  .members-dropdown > summary { border-bottom: 1px solid var(--line); }
+  .members-dropdown > .disclosure-panel > .subteam-dropdown:first-child { border-top: 0; }
+  .members-dropdown[open] > summary .archive-arrow { rotate: 180deg; }
+  .subteam-dropdown { margin-bottom: 0; border-top: 1px solid var(--line); }
+  .subteam-dropdown > summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 60px; padding: 12px 0; }
+  .subteam-dropdown > summary h3 { margin: 0; font: 700 24px/1.2 var(--display); }
+  .subteam-dropdown .member-grid { padding: 20px 0 24px; }
+  .subteam-dropdown[open] > summary .archive-arrow { rotate: 180deg; }
   .member-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 48px 24px; }
   .member { min-width: 0; }
   .member-profile { display: block; color: inherit; text-decoration: none; }
-  @media (hover: hover) and (pointer: fine) { .member-profile:hover h3 { color: var(--orange); } }
-  .member img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: #ddd; clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
-  .portrait-placeholder { display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 5; background: #e0e0e0; color: rgba(0,0,0,.45); font: 700 clamp(40px, 6vw, 72px)/1 var(--display); clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+  .portrait-frame { display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; background: #ddd; clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+  .member-profile :is(.portrait-frame, .portrait-placeholder) > img { transition: transform 220ms ease; }
+  .member-profile:focus-visible :is(.portrait-frame, .portrait-placeholder) > img,
+  .advisor:focus-within .portrait-frame > img { transform: scale(1.06) translateY(-3px); }
+  @media (hover: hover) and (pointer: fine) {
+    .member-profile:hover :is(.portrait-frame, .portrait-placeholder) > img,
+    .advisor:hover .portrait-frame > img { transform: scale(1.06) translateY(-3px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .member-profile :is(.portrait-frame, .portrait-placeholder) > img { transition: none; }
+    .member-profile:is(:hover, :focus-visible) :is(.portrait-frame, .portrait-placeholder) > img,
+    .advisor:is(:hover, :focus-within) .portrait-frame > img { transform: none; }
+  }
+  .member-profile :is(h3, h4) { transition: color 220ms ease; }
+  .member-profile:focus-visible :is(h3, h4) { color: var(--orange); }
+  @media (prefers-reduced-motion: reduce) { .member-profile :is(h3, h4) { transition: none; } }
+  @media (hover: hover) and (pointer: fine) { .member-profile:hover :is(h3, h4) { color: var(--orange); } }
+  .member .portrait-frame > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .portrait-placeholder { overflow: hidden; display: grid; place-items: center; width: 100%; aspect-ratio: 4 / 5; background: #e0e0e0; color: rgba(0,0,0,.45); font: 700 clamp(40px, 6vw, 72px)/1 var(--display); clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
   .member .portrait-placeholder img { display: block; width: 50%; height: auto; aspect-ratio: 1; object-fit: contain; object-position: center; background: transparent; clip-path: none; }
-  .member h3 { margin: 20px 0 8px; font: 700 clamp(22px, 2vw, 28px)/1.2 var(--display); }
+  .member :is(h3, h4) { margin: 20px 0 8px; font: 700 clamp(22px, 2vw, 28px)/1.2 var(--display); }
   .member p { margin: 0 0 12px; font-size: var(--font-body-min); line-height: 1.5; }
   .member .member-role { font-weight: 600; }
   .member .member-graduation { font-size: var(--font-label-min); color: var(--muted-ink); }
@@ -94,11 +167,19 @@ const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season)
   .member-links { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
   .member-links .member-profile-button { background: #fff; color: var(--ink); --hover-fill: var(--orange); --hover-ink: #fff; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px); }
   @media (hover: hover) and (pointer: fine) { .member-links .member-profile-button:hover { color: #fff; } }
-  .archive { margin-top: 72px; }
+  .advisors { margin-top: 64px; text-align: left; }
+  .advisor-grid { display: grid; grid-template-columns: repeat(2, minmax(0, calc((100% - 96px) / 5))); justify-content: start; gap: 48px 24px; }
+  .advisor p { margin-inline: 0; }
+  .advisor:focus-within .member-profile h3 { color: var(--orange); }
+  @media (hover: hover) and (pointer: fine) { .advisor:hover .member-profile h3 { color: var(--orange); } }
+  @media (max-width: 1100px) { .advisor-grid { grid-template-columns: repeat(2, minmax(0, calc((100% - 48px) / 3))); } }
+  @media (max-width: 800px) { .advisor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; } }
+  @media (max-width: 420px) { .advisor-grid { gap: 32px 16px; } }
+  .archive { margin-top: 48px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .archive summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 16px 0; font: 700 24px/1.2 var(--display); }
   .archive-arrow { transition: rotate 300ms ease; }
   summary[aria-expanded="true"] > .archive-arrow { rotate: 180deg; }
-  .season { }
+  .season { border-top: 1px solid var(--line); }
   .season summary { font-size: 20px; }
   .archive-teams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 32px; padding: 16px 0 32px; }
   .archive h3 { font: 700 18px/1.4 var(--display); margin: 0 0 12px; }
@@ -107,5 +188,5 @@ const alumni = filterAlumni([...alumniRoster.alumni, ...seasons.flatMap((season)
   @media (max-width: 1100px) { .member-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 800px) { .member-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; } }
   @media (max-width: 600px) { .archive-teams { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 420px) { main { padding: 0 16px 64px; } .member-roster { padding-top: 48px; } .member-grid { gap: 32px 16px; } .member h3 { font-size: 20px; overflow-wrap: anywhere; } .member p { overflow-wrap: anywhere; } .archive-teams { grid-template-columns: 1fr; } }
+  @media (max-width: 420px) { main { padding: 0 16px 64px; } .member-roster { padding-top: 48px; } .member-grid { gap: 32px 16px; } .member :is(h3, h4) { font-size: 20px; overflow-wrap: anywhere; } .member p { overflow-wrap: anywhere; } .archive-teams { grid-template-columns: 1fr; } }
 </style>

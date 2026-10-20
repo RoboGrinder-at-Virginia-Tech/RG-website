@@ -1,6 +1,16 @@
 {
   "alumni": [
     {
+      "name": "Dr. William T. Baumann",
+      "subteam": "Electrical and Computer Engineering",
+      "role": "Faculty Advisor, Electrical and Computer Engineering, 2016–2026",
+      "major": "",
+      "photo": "/images/advisors/william-baumann.jpg",
+      "linkedin": "",
+      "github": "",
+      "portfolio": "https://ece.vt.edu/people/profile/baumann.html"
+    },
+    {
       "name": "Aahan Atrey",
       "subteam": "",
       "role": "",

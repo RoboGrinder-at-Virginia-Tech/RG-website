@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import competitionPhoto from '../../public/images/arc-2026-infantry.webp';
+---
+<section class="competition-overview" id="arcc" aria-labelledby="arcc-title">
+  <div class="competition-copy">
+    <h2 id="arcc-title">What is ARCC?</h2>
+    <p class="competition-tagline">The world's greatest robotics esports competition</p>
+    <p class="competition-description">ARCC is an international collegiate robotics competition where teams from 30+ universities worldwide design, build, and battle robots. Students gain hands-on experience in mechanical design, electronics, programming, and teamwork.</p>
+  </div>
+  <figure class="competition-photo"><Image src={competitionPhoto} widths={[480, 768, 1200]} sizes="(max-width: 700px) 100vw, 50vw" format="webp" quality={75} alt="RoboGrinder Infantry robot in action on the ARCC 2026 competition field" loading="lazy" /></figure>
+</section>
+<style>
+  .competition-overview { --section-cut: 24px; position: relative; z-index: 1; margin-top: calc(-1 * var(--section-cut)); clip-path: polygon(var(--section-cut) 0, calc(100% - var(--section-cut)) 0, 100% var(--section-cut), 100% 100%, 0 100%, 0 var(--section-cut)); display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; padding: 0; background: var(--paper); color: var(--ink); }
+  .competition-copy { align-self: center; padding: 64px clamp(24px, 6vw, 90px) 64px clamp(24px, 8vw, 124px); }
+  h2 { margin: 0 0 20px; font: 700 clamp(36px, 5vw, 56px)/1.1 var(--display); letter-spacing: -.03em; }
+  .competition-tagline { margin: 0 0 20px; font: 600 clamp(20px, 2.5vw, 28px)/1.35 var(--display); }
+  .competition-description { margin: 0; font-size: var(--font-body-min); line-height: 1.7; }
+  .competition-photo { position: relative; min-width: 0; min-height: 480px; margin: 0; overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% 100%, 24px 100%, 0 calc(100% - 24px)); }
+  .competition-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 18% 24%; }
+  @media (max-width: 700px) { .competition-overview { grid-template-columns: 1fr; } .competition-copy { padding: 48px 23px; } .competition-photo { min-height: 0; clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%); } .competition-photo img { position: static; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; } }
+</style>

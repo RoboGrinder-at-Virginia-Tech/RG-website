@@ -9,7 +9,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import OurSponsors from '../components/OurSponsors.astro';
 import IndustryExperience from '../components/IndustryExperience.astro';
 import Achievements from '../components/Achievements.astro';
-import TeamOverview from '../components/TeamOverview.astro';
+import CompetitionOverview from '../components/CompetitionOverview.astro';
 import RobotOverview from '../components/RobotOverview.astro';
 import AnimatedStat from '../components/AnimatedStat.astro';
 import { numbers } from '../lib/teamNumbers';
@@ -65,7 +65,8 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
       {videoEnabled && <button class="button button-swipe button-light video-toggle" type="button" aria-label="Pause video" aria-pressed="false"><span class="material-icon" aria-hidden="true">pause</span></button>}
     </section>
 
-    <TeamOverview />
+    <CompetitionOverview />
+    <RobotOverview />
     <Achievements />
 
     <section class="subteams section-shell" id="subteams" aria-labelledby="subteams-title">
@@ -87,11 +88,10 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
       </div>
     </section>
 
-    <RobotOverview />
 
     <IndustryExperience companies={placements.companies} title={placements.title} description={placements.description} />
 
-    <OurSponsors partners={sponsorship.partners} showCta={true} />
+    <OurSponsors partners={sponsorship.partners} showCta={true} showDepartmental={false} />
 
     <section class="join" id="join" aria-labelledby="join-title">
       <div class="join-photo">{site.join.image === '/images/robot-competition-2018.jpg'
@@ -253,7 +253,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
 
 <style>
 
-  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; clip-path: inset(0); padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--orange); color: var(--paper); }
+  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; clip-path: inset(0); padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--ink); color: var(--paper); }
   .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; max-width: min(680px, calc(100% - 160px)); padding: 20px 0; }
   .hero-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 28px 0 0; scroll-margin-top: var(--scroll-header-offset); }
   .hero-numbers > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; }

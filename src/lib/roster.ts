@@ -3,7 +3,8 @@ export function leadershipRank(role = '') {
   if (/^(?:vice president|vp)\b/i.test(role)) return 1;
   if (/faculty.*advisor|advisor.*faculty/i.test(role)) return 5;
   if (/project\s+lead/i.test(role)) return 3;
-  if (/lead|technical\s+advisor/i.test(role)) return 2;
+  if (/lead/i.test(role)) return 2;
+  if (/technical\s+advisor/i.test(role)) return 2.5;
   return 4;
 }
 
