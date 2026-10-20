@@ -156,6 +156,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
   }
   /* Dropdown controls retain their colors; regular buttons use only a swipe fill. */
   .button-swipe { --hover-fill: var(--paper); --hover-ink: var(--ink); position: relative; isolation: isolate; overflow: hidden; transition: color 250ms ease; }
+  .action-arrow { display: inline-block; width: 22px; height: 22px; flex-shrink: 0; }
   .button-swipe::before { position: absolute; inset: 0; z-index: -1; content: ''; background: var(--hover-fill); transform: scaleX(0); transform-origin: left; transition: transform 250ms ease; }
   .button { display: inline-flex; min-height: var(--button-height); align-items: center; justify-content: center; gap: var(--button-gap); padding: 0 var(--button-padding); border: 0; font: 700 var(--font-ui-min) var(--body); text-decoration: none; cursor: pointer; }
   .button-dark { background: var(--ink); color: var(--paper); --hover-fill: var(--orange); --hover-ink: var(--paper); }
@@ -181,13 +182,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
   .site-loader-brand img { width: 64px; height: 64px; object-fit: contain; }
   .site-loader-spinner { width: 32px; height: 32px; border: 3px solid rgba(240,240,240,.2); border-top-color: var(--orange); border-radius: 50%; animation: site-loader-spin 800ms linear infinite; }
   @keyframes site-loader-spin { to { transform: rotate(360deg); } }
-  ::selection { color: #fff; background: var(--orange); }
-  :is(.orange-feature, .subteams, .team-numbers, .join, .support, .header-cta, .not-found, .robot-cta, .preview-close)::selection,
-  :is(.orange-feature, .subteams, .team-numbers, .join, .support, .header-cta, .not-found, .robot-cta, .preview-close) ::selection { color: #fff; background: var(--ink); }
-  .landing::selection,
-  .landing ::selection { color: #fff; background: var(--orange); }
-  :is(.orange-feature, .subteams, .team-numbers, .join, .support, .not-found, .robot-cta, .landing) .button-dark::selection,
-  :is(.orange-feature, .subteams, .team-numbers, .join, .support, .not-found, .robot-cta, .landing) .button-dark ::selection { color: #fff; background: var(--orange); }
+  /* Selection colors follow the local surface, including nested controls. */
+  :root { --selection-fill: var(--orange); --selection-ink: var(--ink); }
+  :is(.orange-feature, .mission-chapter, .story, .team-numbers, .join, .support, .header-cta, .not-found, .robot-cta, .robot-overview, .mobile-primary-action) { --selection-fill: var(--ink); --selection-ink: var(--paper); }
+  :is(.subteams, .landing, .site-header, .mobile-navigation, .mobile-menu nav, .site-footer, .benefits, .connect, .tier-gold, .anniversary-banner, .button-dark, .preview-close, .marquee-toggle) { --selection-fill: var(--orange); --selection-ink: var(--ink); }
+  :is(.button-light, .subteams .button-dark, .member-profile-button, .banner-band) { --selection-fill: var(--orange); --selection-ink: var(--ink); }
+  ::selection { color: var(--selection-ink); background: var(--selection-fill); }
   :focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
   :is(.button, .header-cta, .icon-button):focus-visible { outline-offset: -4px; }
   .button-dark:focus-visible { outline-color: var(--paper); }

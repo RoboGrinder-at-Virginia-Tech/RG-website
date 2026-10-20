@@ -25,7 +25,6 @@ const socials = [
 const details = [
   { label: 'Major', value: person.major?.trim() || 'Not provided yet' },
   { label: 'Expected graduation', value: graduationLabel(person) || 'Not provided yet' },
-  { label: 'Subteam', value: person.subteam?.trim() || 'Not provided yet' },
 ];
 ---
 
@@ -33,20 +32,19 @@ const details = [
   <a class="skip-link" href="#main">Skip to content</a>
   <SiteHeader active="Members" />
   <main id="main">
-    <a class="button button-swipe button-light back-link" href={withBase('/members/')}><span class="material-icon" aria-hidden="true">arrow_back</span>All Members</a>
+    <a class="button button-swipe button-light back-link" href={withBase('/members/')}><svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 19 5 5M19 5H5v14" /></svg>All Members</a>
     <article class="profile">
       {person.photo ? <img class="portrait" src={withBase(person.photo)} alt={`Portrait of ${person.name}`} width="480" height="600" /> : <div class="portrait-placeholder" role="img" aria-label={`Photo pending for ${person.name}`}><img src={withBase('/images/rg-gray-square.png')} alt="" width="1080" height="1080" /></div>}
       <div class="profile-content">
-        <p class="eyebrow">{members.rosterYear} · RoboGrinder</p>
+        <p class="eyebrow">RoboGrinder {members.rosterYear}</p>
         <h1>{person.name}</h1>
-        {person.role?.trim() && <p class="profile-role">{person.role.trim()}</p>}
+        {(person.role?.trim() || person.subteam?.trim()) && <p class="profile-role">{person.role?.trim() || person.subteam?.trim()}</p>}
         <dl>
           {details.map((detail) => <div class="profile-detail"><dt>{detail.label}</dt><dd>{detail.value}</dd></div>)}
         </dl>
-        <section class="socials" aria-labelledby="socials-heading">
-          <h2 id="socials-heading">Socials & contact</h2>
-          {socials.length ? <ul>{socials.map((link) => <li><a class="button button-swipe button-light" href={withBase(link.url)} target={link.name === 'Email' ? undefined : '_blank'} rel={link.name === 'Email' ? undefined : 'noopener noreferrer'}><ProfileIcon name={link.name} /><span>{link.name}</span></a></li>)}</ul> : <p>No social links provided yet.</p>}
-        </section>
+        {socials.length > 0 && <div class="socials" role="group" aria-label="Socials and contact">
+          <ul>{socials.map((link) => <li><a class="button button-swipe button-light" href={withBase(link.url)} target={link.name === 'Email' ? undefined : '_blank'} rel={link.name === 'Email' ? undefined : 'noopener noreferrer'}><ProfileIcon name={link.name} /><span>{link.name}</span></a></li>)}</ul>
+        </div>}
       </div>
     </article>
   </main>
@@ -66,7 +64,7 @@ const details = [
   h1 { margin: 0; font: 700 clamp(36px, 5vw, 64px)/1.1 var(--display); letter-spacing: -.04em; overflow-wrap: anywhere; }
   .profile-role { margin: 12px 0 0; font-size: var(--font-body-min); font-weight: 600; line-height: 1.5; }
   dl { margin: 32px 0 0; }
-  .profile-detail { padding: 16px 0; border-top: 1px solid var(--line); }
+  .profile-detail { padding: 16px 0; }
   dt { margin-bottom: 6px; color: var(--muted-ink); font-size: var(--font-label-min); }
   dd { margin: 0; font-size: var(--font-body-min); line-height: 1.5; overflow-wrap: anywhere; }
   .socials { margin-top: 32px; }

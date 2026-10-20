@@ -1,0 +1,49 @@
+---
+import robots from '../content/robots.json';
+import { withBase } from '../lib/urls';
+---
+<section class="robot-overview section-shell" id="robots" aria-labelledby="robots-title">
+  <header>
+    <h2 id="robots-title">Our Robots</h2>
+    <p>Meet the student-built robots for the ARC Robotics Championship.</p>
+  </header>
+  <div class="robot-grid">
+    {robots.robots.map((robot) => <article class="robot-card"><a class="robot-link" href={withBase(`/robots/#${robot.name.toLowerCase()}`)} aria-label={`Meet ${robot.name}`}>
+      <div class:list={['robot-image', { 'robot-wip': robot.name === 'Engineer' }]}>
+        {robot.name === 'Engineer' ? <span class="wip-placeholder" aria-label="Work in progress">WIP</span> : <img src={withBase(robot.image)} alt={robot.imageAlt} width="1080" height="1080" loading="lazy" />}
+      </div>
+      <h3>{robot.name}</h3>
+    </a></article>)}
+  </div>
+  <div class="robot-actions"><a class="button button-swipe button-dark" href={withBase('/robots/')}>Meet our robots<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a></div>
+</section>
+<style>
+  .robot-overview { padding: 80px clamp(24px, 8vw, 124px); background: var(--orange); color: var(--ink); }
+  header { margin-bottom: 40px; }
+  h2 { margin: 0 0 16px; font: 700 clamp(36px, 5vw, 56px)/1.1 var(--display); letter-spacing: -.03em; }
+  header p { margin: 0; color: var(--ink); font-size: var(--font-body-min); line-height: 1.6; }
+  .robot-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; }
+  .robot-card { min-width: 0; }
+  .robot-image { display: grid; place-items: center; aspect-ratio: 1; background: transparent; }
+  .robot-image img { width: 100%; height: 100%; object-fit: contain; }
+  .robot-link { display: block; color: inherit; text-decoration: none; }
+  .robot-link:focus-visible { outline: 3px solid var(--ink); outline-offset: 6px; }
+  .wip-placeholder { font: 700 clamp(40px, 6vw, 76px)/1 var(--display); letter-spacing: -.04em; }
+  .robot-actions { display: flex; justify-content: center; margin-top: 40px; }
+  .robot-actions .button-dark { --hover-fill: var(--paper); --hover-ink: var(--ink); }
+  h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0 0; font: 700 clamp(22px, 2vw, 28px)/1.2 var(--display); }
+  @media (max-width: 900px) { .robot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 600px) { .robot-overview { padding: 48px 23px; } .robot-grid { gap: 28px 16px; } }
+  .robot-image img, .wip-placeholder { transition: transform 220ms ease; }
+  .robot-link h3 { transition: transform 220ms ease, color 220ms ease; }
+  .robot-link:focus-visible :is(.robot-image img, .wip-placeholder) { transform: translateY(-4px) scale(1.025); }
+  .robot-link:focus-visible h3 { transform: translateX(4px); color: var(--paper); }
+  @media (hover: hover) and (pointer: fine) {
+    .robot-link:hover :is(.robot-image img, .wip-placeholder) { transform: translateY(-4px) scale(1.025); }
+    .robot-link:hover h3 { transform: translateX(4px); color: var(--paper); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .robot-link :is(.robot-image img, .wip-placeholder, h3) { transition: none; }
+    .robot-link:is(:hover, :focus-visible) :is(.robot-image img, .wip-placeholder, h3) { transform: none; }
+  }
+</style>

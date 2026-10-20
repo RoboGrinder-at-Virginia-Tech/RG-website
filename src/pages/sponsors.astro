@@ -15,8 +15,8 @@ import sponsorship from '../content/sponsors.json';
   <main id="main" class="sponsor-page">
     <OrangeFeature title={sponsorship.headline} description={sponsorship.intro} image={sponsorship.image} imageAlt={sponsorship.imageAlt}>
       <div class="hero-actions">
-        <a class="button button-swipe button-dark" data-section-link href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <a class="button button-swipe button-dark packet-link" href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.packetLabel}<span class="material-icon" aria-hidden="true">open_in_new</span></a>
+        <a class="button button-swipe button-dark" data-section-link href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+        <a class="button button-swipe button-dark packet-link" href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.packetLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
       </div>
     </OrangeFeature>
     <TeamOverview variant="sponsors" />
@@ -32,11 +32,11 @@ import sponsorship from '../content/sponsors.json';
         <ul>{tier.highlights.map((highlight) => <li><span aria-hidden="true">✓</span>{highlight}</li>)}</ul>
       </article>)}</div>
       <div class="tier-notes"><p>{sponsorship.tiersSupportNote}</p></div>
-      <div class="tier-actions"><a class="button button-swipe button-dark" data-section-link href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a></div>
+      <div class="tier-actions"><a class="button button-swipe button-dark" data-section-link href={withBase(sponsorship.conversationUrl)}>{sponsorship.conversationLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a></div>
     </section>
     <OurSponsors partners={sponsorship.partners} id="partners" title={sponsorship.partnersTitle} departmentalTitle={sponsorship.departmentalTitle} />
     <section class="connect section-shell" id="connect" aria-labelledby="connect-title">
-      <div><h2 id="connect-title">{sponsorship.connectTitle}</h2><p>{sponsorship.connectIntro}</p><a class="button button-swipe button-light packet-link connect-packet" href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.packetLabel}<span class="material-icon" aria-hidden="true">open_in_new</span></a></div>
+      <div><h2 id="connect-title">{sponsorship.connectTitle}</h2><p>{sponsorship.connectIntro}</p><a class="button button-swipe button-light packet-link connect-packet" href={withBase(sponsorship.packetUrl)} target="_blank" rel="noreferrer">{sponsorship.packetLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a></div>
       <ContactForm partnership labels={sponsorship.form} />
     </section>
   </main>
@@ -56,7 +56,7 @@ import sponsorship from '../content/sponsors.json';
   .benefits header p { max-width: 760px; }
   .benefits header a { text-underline-offset: 4px; }
   .benefit-list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: 48px; }
-  .benefit-list article { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 18px; padding: 28px 0; border-bottom: 1px solid rgba(240,240,240,.2); }
+  .benefit-list article { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 18px; padding: 28px 0; }
   .benefit-icon { display: grid; place-items: center; width: 40px; height: 32px; color: var(--orange); font-size: 28px; }
   .benefit-list h3 { margin-bottom: 10px; font-size: clamp(22px, 2vw, 26px); }
   .benefit-list p { max-width: 620px; }

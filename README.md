@@ -176,3 +176,7 @@ The deployment reads the website address and folder path from GitHub Pages setti
 Online editor login is **not configured yet**: `public/admin/config.yml` still names the old repository and contains `https://YOUR_OAUTH_HOST`. To enable it, update `backend.repo` to `RoboGrinder-at-Virginia-Tech/RG-website`, keep `backend.branch` aligned with `main`, and configure a GitHub OAuth provider or Decap Turbo. Set its authentication host as `backend.base_url`. OAuth lets an editor sign in through GitHub. Editors need repository write access. Never store authentication secrets in this repository.
 
 The contact form uses the visitor's email app. General messages use `contact.email` in `src/content/site.json`; sponsorship inquiries use `contact.sponsorEmail` when supplied.
+
+## Design guide
+
+See [the design guide](docs/DESIGN.md) for the site's visual conventions.

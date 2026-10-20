@@ -16,7 +16,7 @@ const seasons = gallery.seasons.map((season) => ({
   <SiteHeader active="Gallery" />
   <main id="main">
     <OrangeFeature title="Life on the grind." description="The builds, the competitions, and the moments we share along the way." image="/images/arc-2026-17.webp" imageAlt="A moment worth celebrating" imagePosition="50% center">
-      <a class="button button-swipe button-dark" href="#seasons">Explore the photos<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+      <a class="button button-swipe button-dark" href="#seasons">Explore the photos<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
     </OrangeFeature>
     <div class="seasons" id="seasons">
       {seasons.map((season) => <details class="season" data-disclosure>
@@ -67,7 +67,7 @@ const seasons = gallery.seasons.map((season) => ({
 </BaseLayout>
 <style>
   .seasons { padding: 64px clamp(24px, 8vw, 124px) 80px; scroll-margin-top: var(--scroll-header-offset); }
-  .season { border-bottom: 1px solid var(--line); }
+  .season { }
   summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 80px; padding: 24px 0; }
   h2 { margin: 0; font: 700 clamp(24px, 3vw, 36px)/1.2 var(--display); letter-spacing: -.03em; }
   .season-arrow { flex-shrink: 0; transition: rotate 300ms ease; }

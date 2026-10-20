@@ -11,12 +11,12 @@ import { withBase } from '../lib/urls';
   <SiteHeader active="Robots" />
   <main id="main">
     <OrangeFeature title={robots.headline} description={robots.intro} image={robots.image} imageAlt={robots.imageAlt} imagePosition="center">
-      <a class="button button-swipe button-dark" href="#fleet">{robots.buttonLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+      <a class="button button-swipe button-dark" href="#fleet">{robots.buttonLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
     </OrangeFeature>
     <section class="fleet section-shell" id="fleet" aria-labelledby="fleet-title">
       <header><h2 id="fleet-title">{robots.fleetTitle}</h2><p>{robots.fleetIntro}</p></header>
       <div class="robot-list">
-        {robots.robots.map((robot) => <article class="robot" id={robot.name === 'Engineer' ? 'engineer-title' : undefined}>
+        {robots.robots.map((robot) => <article class="robot" id={`${robot.name.toLowerCase()}`}>
           <div class:list={['robot-render', { 'placeholder-render': robot.image === '/images/rg-gray-square.png' }]}><img src={withBase(robot.image)} alt={robot.imageAlt} width="1080" height="1080" loading="lazy" /></div>
           <div class="robot-copy">
             <h3>{robot.name}</h3>
@@ -30,8 +30,8 @@ import { withBase } from '../lib/urls';
       <h2 id="robot-cta-title">{robots.ctaTitle}</h2>
       <p>{robots.ctaDescription}</p>
       <div class="cta-actions">
-        <a class="button button-swipe button-light" style="background: var(--paper);" href={withBase('/members/')}>{robots.teamButtonLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-        <a class="button button-swipe button-light" style="background: var(--paper);" href={withBase('/sponsors/')}>{robots.sponsorButtonLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+        <a class="button button-swipe button-light" style="background: var(--paper);" href={withBase('/members/')}>{robots.teamButtonLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+        <a class="button button-swipe button-light" style="background: var(--paper);" href={withBase('/sponsors/')}>{robots.sponsorButtonLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
       </div>
     </section>
   </main>
@@ -43,12 +43,14 @@ import { withBase } from '../lib/urls';
   header { max-width: 760px; margin-bottom: 48px; }
   h2 { margin: 0 0 24px; font: 700 clamp(36px, 4.5vw, 58px)/1.05 var(--display); letter-spacing: -.035em; text-wrap: balance; }
   p { margin: 0; font-size: var(--font-body-min); line-height: 1.65; }
-  .robot { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 48px 0; border-top: 1px solid var(--line); }
+  .robot[id] { scroll-margin-top: var(--scroll-header-offset); }
+  .robot { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 48px 0; }
   .robot:last-child { padding-bottom: 0; }
   .robot-render { display: grid; place-items: center; min-width: 0; }
   .robot-render img { display: block; width: 100%; max-width: 520px; height: auto; aspect-ratio: 1; object-fit: contain; }
   .placeholder-render { aspect-ratio: 1; }
   .placeholder-render img { width: 50%; max-width: 260px; }
+  .robot[id] { scroll-margin-top: var(--scroll-header-offset); }
   .robot { scroll-margin-top: calc(var(--scroll-header-offset) + 24px); }
   .robot:nth-child(even) .robot-render { order: 2; }
   .robot-copy { min-width: 0; }
@@ -63,8 +65,10 @@ import { withBase } from '../lib/urls';
   @media (max-width: 680px) {
     .section-shell { padding: 56px 23px; }
     header { margin-bottom: 32px; }
-    .robot { grid-template-columns: 1fr; }
-    .robot { gap: 24px; padding-top: 32px; padding-bottom: 40px; }
+    .robot[id] { scroll-margin-top: var(--scroll-header-offset); }
+  .robot { grid-template-columns: 1fr; }
+    .robot[id] { scroll-margin-top: var(--scroll-header-offset); }
+  .robot { gap: 24px; padding-top: 32px; padding-bottom: 40px; }
     .robot:nth-child(even) .robot-render { order: 0; }
     .robot-render img { max-width: 400px; }
     .placeholder-render img { max-width: 200px; }

@@ -31,7 +31,7 @@ const headingId = `${id}-title`;
 </div>)}
   {showCta && <div class="partner-cta">
     <h3>Interested in partnering with us?</h3>
-    <a class="button button-swipe button-dark" href={withBase('/sponsors/')}>Sponsor Us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+    <a class="button button-swipe button-dark" href={withBase('/sponsors/')}>Sponsor Us<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
   </div>}
 </section>
 <style>
@@ -48,7 +48,7 @@ const headingId = `${id}-title`;
   .logo-color-definition { position: absolute; pointer-events: none; }
   img[src$="/images/partners/auvsi.png"] { filter: url(#auvsi-paper); }
   .sponsor-logo svg { display: block; width: min(100%, 340px, calc(var(--sponsor-ratio) * 140px)); aspect-ratio: var(--sponsor-ratio); overflow: hidden; }
-  .departmental { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(0,0,0,.2); }
+  .departmental { margin-top: 40px; padding-top: 32px; }
   .sponsor-group + .sponsor-group { margin-top: 40px; }
   .sponsor-group h3 { margin: 0 0 28px; text-align: center; font: 700 24px/1.2 var(--display); }
   .departmental .sponsor-logos { --columns: 5; --column-gap: 40px; row-gap: 24px; }

@@ -1,6 +1,7 @@
 ---
+import { withBase } from '../lib/urls';
 import { compareMembers, leadershipRank, presidencyYear } from '../lib/roster';
-type Person = { name: string; subteam: string; role: string; major?: string };
+type Person = { name: string; subteam: string; role: string; major?: string; photo?: string };
 const { people, alumni = false } = Astro.props as { people: Person[]; alumni?: boolean };
 const order = ['Mechanical', 'Electrical', 'Embedded', 'Software', 'Operations'];
 const groups = [
@@ -12,12 +13,20 @@ const groups = [
 ].filter((group) => group.people.length);
 ---
 <div class="roster-groups">
-  {groups.map((group) => <div><h3>{group.name}</h3><ul>
-    {[...group.people].sort(alumni && group.name === 'Past presidents' ? (a, b) => presidencyYear(b.role) - presidencyYear(a.role) || compareMembers(a, b) : compareMembers).map((person) => <li>{person.name}{person.role && <span>{person.role}</span>}</li>)}
+  {groups.map((group) => <div class:list={{ 'leadership-group': ['Leadership', 'Past presidents', 'Past leadership'].includes(group.name) }}><h3>{group.name}</h3><ul class:list={{ 'leadership-portraits': ['Leadership', 'Past presidents', 'Past leadership'].includes(group.name) }}>
+    {[...group.people].sort(alumni && group.name === 'Past presidents' ? (a, b) => presidencyYear(b.role) - presidencyYear(a.role) || compareMembers(a, b) : compareMembers).map((person) => <li>{['Leadership', 'Past presidents', 'Past leadership'].includes(group.name) && (person.photo ? <img class="leader-portrait" src={withBase(person.photo)} alt={`Portrait of ${person.name}`} width="320" height="400" loading="lazy" /> : <div class="leader-placeholder" role="img" aria-label={`Photo pending for ${person.name}`}><img src={withBase('/images/rg-gray-square.png')} alt="" width="1080" height="1080" loading="lazy" /></div>)}{person.name}{person.role && <span>{person.role}</span>}</li>)}
   </ul></div>)}
 </div>
 <style>
   .roster-groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding: 20px 0 36px; }
+  .leadership-group { grid-column: 1 / -1; }
+  .leadership-portraits { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px 24px; }
+  .leader-portrait, .leader-placeholder { width: 100%; aspect-ratio: 4 / 5; margin-bottom: 16px; background: #e0e0e0; clip-path: polygon(16px 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%, 0 16px); }
+  .leader-portrait { height: auto; object-fit: cover; }
+  .leader-placeholder { display: grid; place-items: center; }
+  .leader-placeholder img { width: 50%; height: auto; }
+  @media (max-width: 1100px) { .leadership-portraits { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 700px) { .leadership-portraits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; } }
   h3 { font: 700 20px/1.4 var(--display); margin: 0 0 16px; }
   ul { padding: 0; margin: 0; list-style: none; }
   li { padding: 5px 0; font-size: var(--font-body-min); line-height: 1.6; overflow-wrap: anywhere; }

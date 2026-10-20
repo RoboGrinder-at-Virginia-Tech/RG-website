@@ -1,6 +1,6 @@
 export function leadershipRank(role = '') {
   if (/^president\b/i.test(role)) return 0;
-  if (/^vice president\b/i.test(role)) return 1;
+  if (/^(?:vice president|vp)\b/i.test(role)) return 1;
   if (/faculty.*advisor|advisor.*faculty/i.test(role)) return 5;
   if (/project\s+lead/i.test(role)) return 3;
   if (/lead|technical\s+advisor/i.test(role)) return 2;

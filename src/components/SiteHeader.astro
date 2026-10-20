@@ -39,7 +39,7 @@ const links = [
         <ConnectSocialLinks showCommunity={false} />
       </nav>
     </details>
-    <a class="header-cta button-swipe" href={withBase(primaryAction.href)} aria-current={active === primaryAction.page ? 'page' : undefined}>{primaryAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+    <a class="header-cta button-swipe" href={withBase(primaryAction.href)} aria-current={active === primaryAction.page ? 'page' : undefined}>{primaryAction.label}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
     </div>
   </header>
   <nav class="mobile-navigation" id="mobile-navigation" aria-label="Mobile navigation" hidden>
@@ -50,8 +50,8 @@ const links = [
       </div>
       <div class="mobile-view-actions">
         <div class="mobile-socials"><ConnectSocialLinks showCommunity={false} /></div>
-        <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
-        <a class="mobile-primary-action button-swipe" href={withBase('/sponsors/')}>Sponsor Us<span class="material-icon" aria-hidden="true">arrow_outward</span></a>
+        <a href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+        <a class="mobile-primary-action button-swipe" href={withBase('/sponsors/')}>Sponsor Us<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
       </div>
     </div>
   </nav>

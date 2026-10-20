@@ -17,8 +17,8 @@ import maintenance from '../content/maintenance.json';
         <h1 id="not-found-title">{maintenance.enabled ? maintenance.heading : 'Page not found'}</h1>
         <p>{maintenance.enabled ? maintenance.message : 'We couldn’t find that page. The link may have changed, or the address may have a typo.'}</p>
         <div class="error-actions">
-          <a class="button button-swipe button-dark" href={withBase('/')}>Back to home<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-          <a class="button button-swipe button-dark" href={withBase('/contact/')}>Contact Us<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-dark" href={withBase('/')}>Back to home<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+          <a class="button button-swipe button-dark" href={withBase('/contact/')}>Contact Us<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
         </div>
       </div>
     </section>

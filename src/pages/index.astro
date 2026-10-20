@@ -10,6 +10,7 @@ import OurSponsors from '../components/OurSponsors.astro';
 import IndustryExperience from '../components/IndustryExperience.astro';
 import Achievements from '../components/Achievements.astro';
 import TeamOverview from '../components/TeamOverview.astro';
+import RobotOverview from '../components/RobotOverview.astro';
 import AnimatedStat from '../components/AnimatedStat.astro';
 import { numbers } from '../lib/teamNumbers';
 import site from '../content/site.json';
@@ -41,7 +42,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
         <h1 id="hero-title">{site.hero.headline}</h1>
         <p class="hero-intro">{site.hero.intro}</p>
         <div class="hero-actions">
-          <a class="button button-swipe button-light" href={withBase(primaryAction.href)}>{primaryAction.label}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-light" href={withBase(primaryAction.href)}>{primaryAction.label}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
         </div>
       </div>
       <dl class="hero-numbers" id="numbers" aria-label="Team numbers">{numbers.map((number) => <div><dt>{number.label}</dt><dd><AnimatedStat value={number.value} /></dd></div>)}</dl>
@@ -81,10 +82,12 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
           </article>
         ))}
         <div class="subteams-actions">
-          <a class="button button-swipe button-dark" href={withBase('/members/')}>Meet the Team<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-dark" href={withBase('/members/')}>Meet the Team<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
         </div>
       </div>
     </section>
+
+    <RobotOverview />
 
     <IndustryExperience companies={placements.companies} title={placements.title} description={placements.description} />
 
@@ -98,8 +101,8 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
         <h2 id="join-title">{site.join.title}</h2>
         <p>{site.join.description}</p>
         <div class="join-actions">
-          <a class="button button-swipe button-dark" href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<span class="material-icon" aria-hidden="true">chevron_right</span></a>
-          <a class="button button-swipe button-dark" href={withBase('/gallery/')}>View Gallery<span class="material-icon" aria-hidden="true">chevron_right</span></a>
+          <a class="button button-swipe button-dark" href={withBase(site.recruitment.joinUrl)}>{site.recruitment.joinLabel}<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
+          <a class="button button-swipe button-dark" href={withBase('/gallery/')}>View Gallery<svg class="action-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 19 19 5M5 5h14v14" /></svg></a>
         </div>
       </div>
       <span class="join-cut" aria-hidden="true"></span>
@@ -252,7 +255,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
 
   .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; clip-path: inset(0); padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--orange); color: var(--paper); }
   .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; max-width: min(680px, calc(100% - 160px)); padding: 20px 0; }
-  .hero-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 28px 0 0; border-top: 1px solid rgba(240,240,240,.4); scroll-margin-top: var(--scroll-header-offset); }
+  .hero-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 28px 0 0; scroll-margin-top: var(--scroll-header-offset); }
   .hero-numbers > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; }
   .hero-numbers dt { max-width: 230px; font-size: var(--font-body-min); line-height: 1.5; }
   .hero-numbers dd { margin: 0; font: 700 clamp(44px, 5vw, 68px)/1 var(--display); }
@@ -281,14 +284,16 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .banner-dates { margin-top: 10px; font: 700 14px/1.25 var(--display); letter-spacing: .05em; text-align: center; }
   .video-toggle { position: absolute; right: max(24px, env(safe-area-inset-right)); bottom: calc(22px + env(safe-area-inset-bottom)); width: var(--button-height); min-height: var(--button-height); border: 0; cursor: pointer; }
   .section-shell { padding-left: clamp(24px, 8vw, 124px); padding-right: clamp(24px, 8vw, 124px); }
-  .subteams { padding-top: 64px; padding-bottom: 64px; background: var(--orange); color: var(--ink); }
+  .subteams { padding-top: 64px; padding-bottom: 64px; background: var(--ink); color: var(--paper); }
   .subteams-head { margin-bottom: 32px; }
   .subteams h2 { margin: 0; font-size: clamp(42px, 5vw, 64px); line-height: 1.08; letter-spacing: -.06em; }
   .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
   .team-card { min-width: 0; display: grid; grid-template-columns: 32px minmax(0, 1fr); align-items: start; gap: 14px; }
   .team-icon { font-size: 32px; line-height: 1; }
   .team-card h3 { margin: 0 0 10px; font-size: clamp(20px, 1.75vw, 25px); line-height: 1.15; letter-spacing: -.035em; }
-  .team-card p { margin: 0; color: var(--ink); font-size: var(--font-body-min); line-height: 1.6; }
+  .team-card p { margin: 0; color: var(--paper); font-size: var(--font-body-min); line-height: 1.6; }
+  .subteams .team-icon { color: var(--orange); }
+  .subteams .button-dark { background: var(--paper); color: var(--ink); --hover-fill: var(--orange); --hover-ink: var(--ink); }
   .subteams-actions { display: flex; align-items: center; justify-content: flex-start; padding-left: 46px; }
   .join { position: relative; min-height: 512px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; background: var(--orange); color: var(--ink); }
   .join-photo { position: relative; min-width: 0; min-height: 512px; overflow: hidden; }

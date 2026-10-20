@@ -2,7 +2,7 @@ local_backend: true
 
 backend:
   name: github
-  repo: ruiqian-zhang/RG-website
+  repo: RoboGrinder-at-Virginia-Tech/RG-website
   branch: main
   base_url: https://YOUR_OAUTH_HOST
 
