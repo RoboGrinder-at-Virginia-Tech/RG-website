@@ -22,9 +22,9 @@ endobj
 /CreationDate (D:20261013083250+00'00')
 /ModDate (D:20261013083250+00'00')
 /Keywords (DAHPb6Fmc_g,BAHOXh1MOHw)
-/Author (RoboGrinder)
+/Author (Ruiqian Zhang)
 /Trapped /False
-/containsAiGeneratedContent (No)
+/containsAiGeneratedContent (Yes)
 >>
 endobj
 2 0 obj
@@ -55,7 +55,7 @@ stream
     pdf:Producer="Canva"
     pdf:Keywords="DAHPb6Fmc_g,BAHOXh1MOHw"
     pdf:Trapped="False"
-    ContainsAiGeneratedContent:ContainsAiGeneratedContent="No"
+    ContainsAiGeneratedContent:ContainsAiGeneratedContent="Yes"
     Iptc4xmpExt:DigitalSourceType="http://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia"
     xmp:CreatorTool="Canva"
     xmp:CreateDate="2026-10-13T08:32:50.097Z"
@@ -70,7 +70,7 @@ stream
     </dc:title>
     <dc:creator>
       <rdf:Seq>
-        <rdf:li>RoboGrinder</rdf:li>
+        <rdf:li>Ruiqian Zhang</rdf:li>
       </rdf:Seq>
     </dc:creator>
   </rdf:Description>
