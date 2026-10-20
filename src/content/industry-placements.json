@@ -3,6 +3,14 @@
   "description": "Hands-on engineering helps our members prepare for careers in engineering and technology, as well as research and graduate study.",
   "companies": [
     {
+      "name": "Collaborative Robotics Lab (Collab) at Virginia Tech",
+      "slug": "collab-vt",
+      "logo": "/images/placements/collab-vt.jpg",
+      "source": "https://autonomyandrobotics.centers.vt.edu/content/autonomyandrobotics_centers_vt_edu/en/groups/collab/_jcr_content/bio-image.transform/l-medium/image.jpg",
+      "sourcePage": "https://autonomyandrobotics.centers.vt.edu/groups/collab.html",
+      "url": "https://collab.me.vt.edu/"
+    },
+    {
       "name": "Agile Space Industries",
       "slug": "agile-space-industries",
       "logo": "/images/placements/agile-space-industries.png",

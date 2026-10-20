@@ -198,7 +198,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
   @media (min-width: 1001px) {
     :root { --desktop-gutter: clamp(100px, 10vw, 180px); }
     .site-header, .site-footer, .landing, .section-shell:not(.story),
-    .feature-copy, .story-heading, .team-numbers, .who, .achievements,
+    .feature-copy, .competition-copy, .story-heading, .team-numbers, .who, .achievements,
     .partners, .contact-page, .not-found, .next-season, .recruitment-process,
     .seasons, .join-copy, main:has(> .member-roster) {
       padding-left: var(--desktop-gutter) !important;
@@ -209,7 +209,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url.origin)
   @media (max-width: 850px) {
     :root { --header-height: 60px; --font-ui-min: 15px; --mobile-gutter: clamp(28px, 6vw, 40px); }
     .site-header, .site-footer, .landing, .section-shell:not(.story),
-    .feature-copy, .story-heading, .team-numbers, .who, .achievements,
+    .feature-copy, .competition-copy, .story-heading, .team-numbers, .who, .achievements,
     .partners, .contact-page, .not-found, .next-season, .recruitment-process,
     .seasons, .join-copy, main:has(> .member-roster) {
       padding-left: var(--mobile-gutter) !important;
