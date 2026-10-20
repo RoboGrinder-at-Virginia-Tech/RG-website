@@ -11,5 +11,5 @@ export default defineConfig({
   output: 'static',
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !/\/members\/[^/]+\/?$/.test(new URL(page).pathname) })],
 });
