@@ -24,7 +24,7 @@ The marquee sorts names alphabetically and splits the active list into three con
 | COMAC | Top row | [Source](https://upload.wikimedia.org/wikipedia/en/c/c1/Commercial_Aircraft_Corporation_of_China_logo.svg) | [Logo](../public/images/placements/comac.svg) |
 | Cornell University | Top row | [Source](https://upload.wikimedia.org/wikipedia/commons/4/4b/Cornell_University_logo.svg) | [Logo](../public/images/placements/cornell-university.svg) |
 | Dexmate | Top row | [Source](https://app.ashbyhq.com/api/images/org-theme-wordmark/a388bdb8-ef84-4e47-9d02-f8b8b2db8a58/33f8c0e5-b8b4-410b-91a4-705b1bbdf30f/4c35cd30-7b72-4fe5-83e3-f4234a4551af.png) | [Logo](../public/images/placements/dexmate.png) |
-| DJI | Middle row | [Source](https://upload.wikimedia.org/wikipedia/commons/9/9a/DJI_Innovations_logo.svg) | [Logo](../public/images/placements/dji.svg) |
+| DJI | Middle row | [Source](https://static.wikia.nocookie.net/logopedia/images/c/c6/DJI.svg/revision/latest/scale-to-width-down/1000?cb=20250616045056) | [Logo](../public/images/placements/dji.webp) |
 | Duke University | Excluded by university cutoff | [Source](https://upload.wikimedia.org/wikipedia/commons/e/e6/Duke_University_logo.svg) | [Logo](../public/images/placements/duke.svg) |
 | Evoenergy | Middle row | [Source](https://www.evoenergy.com.au/-/media/Project/Evoenergy/EVO/Footer/logo-evo.png?rev=b6de6ab78e9c4b4687fa0616b0d4520f) | [Logo](../public/images/placements/evoenergy.png) |
 | Faraday Future | Middle row | [Source](https://upload.wikimedia.org/wikipedia/commons/9/96/Faraday_Future_logo.svg) | [Logo](../public/images/placements/faraday-future.svg) |
@@ -146,3 +146,4 @@ Evoenergy uses the corrected source provided by the team. The original shared As
 ## Content location
 
 Homepage placement headings, copy, and organizations now live in src/content/industry-placements.json, editable through the Industry placements CMS collection. site.json holds essential site and homepage settings.
+
