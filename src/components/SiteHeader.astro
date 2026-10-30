@@ -65,7 +65,7 @@ const links = [
     }
   });
   const disclosures = new Map<HTMLDetailsElement, (open: boolean) => void>();
-  const narrowScreen = matchMedia('(max-width: 1024px)');
+  const narrowScreen = matchMedia('(max-width: 640px)');
   const menuShell = document.querySelector<HTMLElement>('.header-shell');
   const mobileToggle = document.querySelector<HTMLButtonElement>('.mobile-nav-toggle')!;
   const mobileNavigation = document.querySelector<HTMLElement>('.mobile-navigation')!;
@@ -328,7 +328,7 @@ const links = [
   .mobile-menu nav { position: absolute; top: calc(100% + var(--menu-dropdown-offset)); right: 0; width: min(320px, calc(100vw - 32px)); padding: 0 20px; overflow: hidden; background: #000; border: 0; }
   .mobile-menu nav a { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--menu-link-color, var(--paper)); font-size: var(--font-ui-min); text-decoration: none; }
   .mobile-menu nav a:last-child { border-bottom: 0; }
-  @media (max-width: 1024px) {
+  @media (max-width: 640px) {
     :global(html.mobile-navigation-open) { overflow: hidden; }
     .mobile-nav-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: none; border: 0; color: var(--paper); cursor: pointer; }
     .mobile-nav-toggle .material-icon { font-size: 28px; }
@@ -355,11 +355,11 @@ const links = [
     .primary-menu summary[aria-expanded="true"] .burger-close { display: inline-block; }
     .mobile-menu summary .material-icon { font-size: 23px; }
   }
-  @media (max-width: 1024px) and (min-width: 521px) {
+  @media (max-width: 640px) and (min-width: 521px) {
     .mobile-view { padding: 32px; }
   }
   @media (prefers-reduced-motion: reduce) { .mobile-view { transition: none; } }
-  @media (min-width: 1025px) {
+  @media (min-width: 641px) {
     .mobile-menu { position: static; }
     .mobile-menu nav { z-index: 1; top: 100%; left: 0; right: 0; width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); grid-template-rows: repeat(3, auto); grid-auto-flow: column; justify-content: start; align-items: start; column-gap: 40px; padding: 12px var(--desktop-gutter, clamp(24px, 6vw, 92px)) 20px; max-height: calc(100dvh - var(--header-height)); overflow-y: auto; background: #000; border: 0; }
     .support-menu nav { grid-template-columns: minmax(0, 280px) minmax(0, 1fr) minmax(0, 308px); }
@@ -367,6 +367,13 @@ const links = [
     .mobile-menu summary[aria-expanded="true"] { color: var(--orange); }
     .brand img { width: 32px; height: 32px; }
     .site-header { --font-ui-min: 14px; }
+  }
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .site-header { padding-inline: 24px; gap: 16px; }
+    .header-controls { gap: 8px; }
+    .mobile-menu summary { padding-inline: 12px; }
+    .support-menu nav { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+    .support-menu nav :global(.connect-extras) { grid-column: 2; }
   }
   @media (max-width: 360px) {
     .mobile-menu summary { gap: 4px; }

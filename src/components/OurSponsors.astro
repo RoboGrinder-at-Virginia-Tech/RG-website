@@ -36,12 +36,17 @@ const headingId = `${id}-title`;
   </div>}
 </section>
 <style>
-  .partners { padding: 80px clamp(24px, 8vw, 124px); background: var(--paper); color: var(--ink); scroll-margin-top: var(--scroll-header-offset); }
-  h2 { margin: 0 0 40px; text-align: center; font: 700 clamp(36px, 4.5vw, 58px)/1.05 var(--display); letter-spacing: -.035em; text-wrap: balance; }
-  .sponsor-thanks { max-width: 760px; margin: 40px auto 0; text-align: center; font-size: var(--font-body-min); line-height: 1.7; }
-  .partner-cta { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; margin-top: 48px; text-align: center; }
+  .partners { padding: 112px clamp(24px, 8vw, 124px); background: var(--paper); color: var(--ink); scroll-margin-top: var(--scroll-header-offset); }
+  h2 { margin: 0 0 64px; text-align: center; font: 700 clamp(36px, 4.5vw, 58px)/1.05 var(--display); letter-spacing: -.035em; text-wrap: balance; }
+  .sponsor-thanks { max-width: 760px; margin: 64px auto 0; text-align: center; font-size: var(--font-body-min); line-height: 1.7; }
+  .partner-cta { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; margin-top: 80px; text-align: center; }
   .partner-cta h3 { margin: 0; font: 700 clamp(24px, 2.5vw, 32px)/1.2 var(--display); text-wrap: balance; }
-  @media (max-width: 540px) { .partners { padding: 56px 23px; } h2 { margin-bottom: 44px; } }
+  @media (max-width: 540px) {
+    .partners { padding: 72px 23px; }
+    h2 { margin-bottom: 48px; }
+    .partner-cta { margin-top: 56px; gap: 24px; }
+    .sponsor-thanks { margin-top: 48px; }
+  }
 
   .sponsor-logos { --columns: 3; --column-gap: 64px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 28px var(--column-gap); width: 100%; }
   .sponsor-logo { display: grid; flex: 0 0 calc((100% - (var(--columns) - 1) * var(--column-gap)) / var(--columns)); box-sizing: border-box; place-items: center; min-width: 0; min-height: 160px; padding: 12px; text-decoration: none; transition: opacity .2s; }
@@ -51,8 +56,8 @@ const headingId = `${id}-title`;
   img[src$="/images/partners/auvsi.png"] { filter: url(#auvsi-paper); }
   .sponsor-logo svg { display: block; width: min(100%, 340px, calc(var(--sponsor-ratio) * 140px)); aspect-ratio: var(--sponsor-ratio); overflow: hidden; }
   .departmental { margin-top: 40px; padding-top: 32px; }
-  .sponsor-group + .sponsor-group { margin-top: 40px; }
-  .sponsor-group h3 { margin: 0 0 28px; text-align: center; font: 700 24px/1.2 var(--display); }
+  .sponsor-group + .sponsor-group { margin-top: 64px; }
+  .sponsor-group h3 { margin: 0 0 40px; text-align: center; font: 700 24px/1.2 var(--display); }
   .departmental .sponsor-logos { --columns: 5; --column-gap: 40px; row-gap: 24px; }
   .departmental .sponsor-logo { min-height: 100px; }
   .departmental .sponsor-logo img { max-width: 220px; height: 80px; }
