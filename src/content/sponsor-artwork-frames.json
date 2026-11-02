@@ -40,5 +40,11 @@
     "height": 320,
     "viewBox": "0 0 1000 320",
     "ratio": 3.125
+  },
+  "/images/partners/red-bull.svg": {
+    "width": 1000,
+    "height": 615,
+    "viewBox": "0 0 1000 615",
+    "ratio": 1.6260162601626016
   }
 }

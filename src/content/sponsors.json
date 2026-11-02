@@ -68,6 +68,12 @@
       "tier": "bronze",
       "logo": "/images/partners/manifold-tech.webp",
       "url": "https://3dmanifold.com/"
+    },
+    {
+      "name": "Red Bull Energy Drink",
+      "tier": "bronze",
+      "logo": "/images/partners/red-bull.svg",
+      "url": "https://www.redbull.com/"
     }
   ],
   "conversationLabel": "Start a conversation",
