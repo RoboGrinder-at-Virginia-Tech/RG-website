@@ -132,7 +132,7 @@ const rows = Array.from({ length: 3 }, (_, index) => {
   }
   @media (prefers-reduced-motion: reduce) {
     .marquee-toggle, .marquee-list[aria-hidden="true"], .industry-logo[data-repeat="true"], .marquee::before, .marquee::after { display: none; }
-    .marquee-track { width: 100%; transform: none; animation: none; }
-    .marquee-list { width: 100%; flex-wrap: wrap; justify-content: center; gap: 32px; padding: 20px 24px; }
+    .marquee { overflow-x: auto; }
+    .marquee-track { transform: none; animation: none; }
   }
 </style>
