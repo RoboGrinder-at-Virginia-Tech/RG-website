@@ -253,7 +253,8 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
 
 <style>
 
-  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100svh - var(--header-height)); isolation: isolate; overflow: hidden; clip-path: inset(0); padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--ink); color: var(--paper); }
+  main { --arcc-overlap: 24px; }
+  .landing { position: relative; display: grid; grid-template-rows: 1fr auto; align-items: center; gap: 48px; min-height: calc(100dvh - var(--header-height) + var(--arcc-overlap)); isolation: isolate; overflow: hidden; clip-path: inset(0); padding: 64px clamp(24px, 8vw, 124px) 40px; background: var(--ink); color: var(--paper); }
   .hero-copy { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: center; max-width: min(680px, calc(100% - 160px)); padding: 20px 0; }
   .hero-numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 28px 0 0; scroll-margin-top: var(--scroll-header-offset); }
   .hero-numbers > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 12px; }
@@ -282,7 +283,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .anniversary-banner strong { font: 700 64px/.95 var(--display); margin: 4px 0 8px; }
   .banner-band { background: var(--paper); color: var(--ink); width: calc(100% + 20px); text-align: center; padding: 5px; font: 700 16px/1 var(--display); }
   .banner-dates { margin-top: 10px; font: 700 14px/1.25 var(--display); letter-spacing: .05em; text-align: center; }
-  .video-toggle { position: absolute; right: max(24px, env(safe-area-inset-right)); bottom: calc(22px + env(safe-area-inset-bottom)); width: var(--button-height); min-height: var(--button-height); border: 0; cursor: pointer; }
+  .video-toggle { position: absolute; right: max(24px, env(safe-area-inset-right)); bottom: calc(22px + var(--arcc-overlap) + env(safe-area-inset-bottom)); width: var(--button-height); min-height: var(--button-height); border: 0; cursor: pointer; }
   .section-shell { padding-left: clamp(24px, 8vw, 124px); padding-right: clamp(24px, 8vw, 124px); }
   .subteams { padding-top: 64px; padding-bottom: 64px; background: var(--ink); color: var(--paper); }
   .subteams-head { margin-bottom: 32px; }
@@ -306,7 +307,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
   .button-dark { background: var(--ink); color: var(--paper); }
   .join-cut { position: absolute; top: 0; right: 0; width: 30px; height: 30px; background: var(--orange); clip-path: polygon(100% 0, 100% 100%, 0 0); }
   @media (max-width: 950px) {
-    .landing { min-height: calc(100svh - var(--header-height)); padding: 56px clamp(24px, 4vw, 38px) 88px; }
+    .landing { padding: 56px clamp(24px, 4vw, 38px) 88px; }
     .hero-copy { max-width: calc(100% - 124px); }
     .hero-numbers { gap: 24px; }
     .anniversary-banner { right: 24px; width: 100px; height: 202px; padding: 14px 8px 25px; }
@@ -320,7 +321,7 @@ const anniversaryYears = Math.max(0, Number(banner.anniversaryYear) - Number(ban
     .join-copy { padding-left: 45px; }
   }
   @media (max-width: 680px) {
-    .landing { align-items: start; min-height: calc(100svh - var(--header-height)); gap: 32px; padding: 48px 22px 76px; }
+    .landing { align-items: start; gap: 32px; padding: 48px 22px 76px; }
     .hero-copy { max-width: 100%; padding: 0; }
     .hero-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; padding-top: 24px; }
     .hero-numbers dd { font-size: 44px; }

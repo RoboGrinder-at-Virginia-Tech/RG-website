@@ -11,7 +11,7 @@ import competitionPhoto from '../../public/images/arc-2026-infantry.webp';
   <figure class="competition-photo"><Image src={competitionPhoto} widths={[480, 768, 1200]} sizes="(max-width: 700px) 100vw, 50vw" format="webp" quality={75} alt="RoboGrinder Infantry robot in action on the ARCC 2026 competition field" loading="lazy" /></figure>
 </section>
 <style>
-  .competition-overview { --section-cut: 24px; position: relative; z-index: 1; margin-top: calc(-1 * var(--section-cut)); clip-path: polygon(var(--section-cut) 0, calc(100% - var(--section-cut)) 0, 100% var(--section-cut), 100% 100%, 0 100%, 0 var(--section-cut)); display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; padding: 0; background: var(--paper); color: var(--ink); }
+  .competition-overview { --section-cut: var(--arcc-overlap); position: relative; z-index: 1; margin-top: calc(-1 * var(--section-cut)); clip-path: polygon(var(--section-cut) 0, calc(100% - var(--section-cut)) 0, 100% var(--section-cut), 100% 100%, 0 100%, 0 var(--section-cut)); display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch; padding: 0; background: var(--paper); color: var(--ink); }
   .competition-copy { align-self: center; padding: 64px clamp(24px, 6vw, 90px) 64px clamp(24px, 8vw, 124px); }
   h2 { margin: 0 0 20px; font: 700 clamp(36px, 5vw, 56px)/1.1 var(--display); letter-spacing: -.03em; }
   .competition-tagline { margin: 0 0 20px; font: 600 clamp(20px, 2.5vw, 28px)/1.35 var(--display); }
