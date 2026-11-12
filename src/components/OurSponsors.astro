@@ -7,6 +7,7 @@ const { partners, id = 'supporters', thankYou = '', showCta = false, showDepartm
 const paperChannels = Array.from({ length: 256 }, (_, value) => Math.min(value, 240) / 255).join(' ');
 const groups = [
   ...['gold', 'silver', 'bronze'].map((tier) => ({
+    tier,
     title: tier.charAt(0).toUpperCase() + tier.slice(1),
     departmental: false,
     partners: partners.filter((partner) => partner.category !== 'departmental' && (partner.tier || 'bronze') === tier && partner.logo),
@@ -19,7 +20,7 @@ const headingId = `${id}-title`;
   <h2 id={headingId}>{title}</h2>
 <svg class="logo-color-definition" width="0" height="0" aria-hidden="true"><defs><filter id="auvsi-paper" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="discrete" tableValues={paperChannels} /><feFuncG type="discrete" tableValues={paperChannels} /><feFuncB type="discrete" tableValues={paperChannels} /></feComponentTransfer></filter></defs></svg>
 
-{groups.filter((group) => group.partners.length && (showDepartmental || !group.departmental)).map((group) => <div class:list={['sponsor-group', group.departmental && 'departmental']}>
+{groups.filter((group) => group.partners.length && (showDepartmental || !group.departmental)).map((group) => <div class:list={['sponsor-group', group.tier === 'gold' && 'gold', group.departmental && 'departmental']}>
   <h3>{group.title}</h3>
   <div class="sponsor-logos">
   {group.partners.map((partner) => (
@@ -67,7 +68,8 @@ const headingId = `${id}-title`;
     .departmental .sponsor-logos { --columns: 3; }
   }
   @media (max-width: 767px) {
-    .sponsor-logos { --columns: 1; --column-gap: 24px; row-gap: 24px; }
+    .sponsor-logos { --columns: 2; --column-gap: 24px; row-gap: 24px; }
+    .gold .sponsor-logos { --columns: 1; }
     .departmental .sponsor-logos { --columns: 2; --column-gap: 24px; row-gap: 20px; }
   }
   @media (max-width: 680px) {
