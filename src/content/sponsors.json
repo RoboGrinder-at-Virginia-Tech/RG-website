@@ -2,6 +2,9 @@
   "headline": "Partner with RoboGrinder",
   "intro": "Companies, local businesses, families, and friends help our students design, build, and compete. Support RoboGrinder with funding, equipment, or expertise to keep our robots and our team moving through the season.",
   "packetUrl": "/packets/RoboGrinder_Sponsorship_Packet.pdf",
+  "donationGuideUrl": "/packets/RoboGrinder_Donation_Info.pdf",
+  "donationGuideLabel": "Tax-deductible giving guide (PDF)",
+  "onlineGivingUrl": "https://giving.adv.vt.edu/gift",
   "benefits": [
     {
       "title": "Resume book",
@@ -40,6 +43,12 @@
       "url": "https://me.vt.edu/"
     },
     {
+      "name": "Virginia Tech University Libraries",
+      "category": "departmental",
+      "logo": "/images/partners/university-libraries.svg",
+      "url": "https://lib.vt.edu/"
+    },
+    {
       "name": "Student Engineers' Council at Virginia Tech",
       "category": "departmental",
       "logo": "/images/partners/sec.png",
@@ -74,6 +83,12 @@
       "tier": "bronze",
       "logo": "/images/partners/red-bull.svg",
       "url": "https://www.redbull.com/"
+    },
+    {
+      "name": "Altec",
+      "tier": "friend",
+      "logo": "/images/placements/altec.png",
+      "linkLogo": false
     }
   ],
   "conversationLabel": "Start a conversation",
@@ -113,17 +128,18 @@
     {
       "name": "Friend",
       "style": "friend",
-      "amount": "$250+",
+      "amount": "$290+",
       "highlights": [
-        "Support student-led engineering"
+        "Support student-led engineering",
+        "Logo on our website"
       ]
     },
     {
       "name": "Bronze",
       "style": "bronze",
-      "amount": "$3,000+",
+      "amount": "$2,990+",
       "highlights": [
-        "Website logo & social post on request",
+        "Social post on request",
         "Small logo on the robot",
         "Access to our resume book"
       ]
@@ -131,7 +147,7 @@
     {
       "name": "Silver",
       "style": "silver",
-      "amount": "$8,000+",
+      "amount": "$7,990+",
       "highlights": [
         "Medium robot & team apparel logos",
         "Shop tour & campus visit"
@@ -140,7 +156,7 @@
     {
       "name": "Gold",
       "style": "gold",
-      "amount": "$15,000+",
+      "amount": "$14,990+",
       "highlights": [
         "Large robot & team apparel logos",
         "Banner in our shop",

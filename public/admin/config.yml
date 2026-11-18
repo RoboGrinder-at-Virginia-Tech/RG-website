@@ -249,6 +249,8 @@ collections:
           - { label: Conversation button text, name: conversationLabel, widget: string }
           - { label: Conversation button destination, name: conversationUrl, widget: string }
           - { label: Packet button text, name: packetLabel, widget: string }
+          - { label: Donation guide button text, name: donationGuideLabel, widget: string }
+          - { label: Virginia Tech online giving form, name: onlineGivingUrl, widget: string }
           - { label: Team introduction heading, name: whoTitle, widget: text, hint: Use a new line to split the heading. }
           - { label: Team introduction, name: whoDescription, widget: text }
           - { label: Benefits heading, name: benefitsTitle, widget: string }
@@ -282,6 +284,7 @@ collections:
               - { label: Submit button, name: submitLabel, widget: string }
               - { label: Form helper text, name: statusText, widget: text }
           - { label: Sponsorship packet PDF, name: packetUrl, widget: file, hint: 'Upload or select the current PDF. This updates every sponsorship packet link. Save, commit, and push local editor changes to publish them.' }
+          - { label: Donation guide PDF, name: donationGuideUrl, widget: file }
           - label: Partnership benefits
             name: benefits
             widget: list
@@ -312,8 +315,9 @@ collections:
             fields:
               - { label: Organization name, name: name, widget: string }
               - { label: Group, name: category, widget: select, options: [{ label: Sponsor, value: sponsor }, { label: Departmental supporter, value: departmental }], default: sponsor }
-              - { label: Sponsor tier, name: tier, widget: select, options: [{ label: Gold, value: gold }, { label: Silver, value: silver }, { label: Bronze, value: bronze }], default: bronze, required: false, hint: 'Empty tiers are hidden. Does not apply to departmental supporters.' }
+              - { label: Sponsor tier, name: tier, widget: select, options: [{ label: Gold, value: gold }, { label: Silver, value: silver }, { label: Bronze, value: bronze }, { label: Friend, value: friend }], default: bronze, required: false, hint: 'Empty tiers are hidden. Does not apply to departmental supporters.' }
               - { label: Logo, name: logo, widget: image }
+              - { label: Link logo, name: linkLogo, widget: boolean, default: true, required: false }
               - { label: Website, name: url, widget: string, required: false }
 
   - name: members

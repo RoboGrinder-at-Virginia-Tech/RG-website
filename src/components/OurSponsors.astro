@@ -6,7 +6,7 @@ import frames from '../content/sponsor-artwork-frames.json';
 const { partners, id = 'supporters', thankYou = '', showCta = false, showDepartmental = true, title = 'Our sponsors', departmentalTitle = 'Departmental supporters' } = Astro.props;
 const paperChannels = Array.from({ length: 256 }, (_, value) => Math.min(value, 240) / 255).join(' ');
 const groups = [
-  ...['gold', 'silver', 'bronze'].map((tier) => ({
+  ...['gold', 'silver', 'bronze', 'friend'].map((tier) => ({
     tier,
     title: tier.charAt(0).toUpperCase() + tier.slice(1),
     departmental: false,
@@ -23,11 +23,21 @@ const headingId = `${id}-title`;
 {groups.filter((group) => group.partners.length && (showDepartmental || !group.departmental)).map((group) => <div class:list={['sponsor-group', group.tier === 'gold' && 'gold', group.departmental && 'departmental']}>
   <h3>{group.title}</h3>
   <div class="sponsor-logos">
-  {group.partners.map((partner) => (
-    <a class="sponsor-logo" href={withBase(partner.url || '/contact/')} target={partner.url ? '_blank' : undefined} rel={partner.url ? 'noreferrer' : undefined} aria-label={`Visit ${partner.name}`} title={partner.name}>
+  {group.partners.map((partner) => {
+    const linked = partner.linkLogo !== false;
+    const LogoTag = linked ? 'a' : 'div';
+    const logoAttributes = linked ? {
+      href: withBase(partner.url || '/contact/'),
+      target: partner.url ? '_blank' : undefined,
+      rel: partner.url ? 'noreferrer' : undefined,
+      'aria-label': `Visit ${partner.name}`,
+      title: partner.name,
+    } : { role: 'img', 'aria-label': partner.name };
+
+    return <LogoTag class="sponsor-logo" {...logoAttributes}>
       {frames[partner.logo] && partner.logo !== '/images/partners/sec.png' ? <><svg class="lazy-artwork" viewBox={frames[partner.logo].viewBox} aria-hidden="true" style={`--sponsor-ratio: ${frames[partner.logo].ratio}`}><image href={withBase(partner.logo)} xlink:href={withBase(partner.logo)} width={frames[partner.logo].width} height={frames[partner.logo].height} preserveAspectRatio="xMidYMid meet" /></svg><noscript><img src={withBase(partner.logo)} alt="" loading="lazy" /></noscript></> : <img src={withBase(partner.logo)} alt="" loading="lazy" />}
-    </a>
-  ))}
+    </LogoTag>;
+  })}
 </div>
 </div>)}
   {thankYou && <p class="sponsor-thanks">{thankYou}</p>}
@@ -50,8 +60,9 @@ const headingId = `${id}-title`;
   }
 
   .sponsor-logos { --columns: 3; --column-gap: 64px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 28px var(--column-gap); width: 100%; }
-  .sponsor-logo { display: grid; flex: 0 0 calc((100% - (var(--columns) - 1) * var(--column-gap)) / var(--columns)); box-sizing: border-box; place-items: center; min-width: 0; min-height: 160px; padding: 12px; text-decoration: none; transition: opacity .2s; }
-  .sponsor-logo:hover { opacity: .75; }
+  .sponsor-logo { display: grid; flex: 0 0 calc((100% - (var(--columns) - 1) * var(--column-gap)) / var(--columns)); box-sizing: border-box; place-items: center; min-width: 0; min-height: 160px; padding: 12px; }
+  a.sponsor-logo { text-decoration: none; transition: opacity .2s; }
+  a.sponsor-logo:hover { opacity: .75; }
   .sponsor-logo img { width: 100%; max-width: 340px; height: 140px; object-fit: contain; }
   .logo-color-definition { position: absolute; pointer-events: none; }
   img[src$="/images/partners/auvsi.png"] { filter: url(#auvsi-paper); }
@@ -59,7 +70,7 @@ const headingId = `${id}-title`;
   .departmental { margin-top: 40px; padding-top: 32px; }
   .sponsor-group + .sponsor-group { margin-top: 64px; }
   .sponsor-group h3 { margin: 0 0 40px; text-align: center; font: 700 24px/1.2 var(--display); }
-  .departmental .sponsor-logos { --columns: 5; --column-gap: 40px; row-gap: 24px; }
+  .departmental .sponsor-logos { --columns: 6; --column-gap: 24px; row-gap: 24px; }
   .departmental .sponsor-logo { min-height: 100px; }
   .departmental .sponsor-logo img { max-width: 220px; height: 80px; }
   .departmental .sponsor-logo svg { width: min(100%, 220px, calc(var(--sponsor-ratio) * 80px)); max-height: 80px; }
