@@ -5,26 +5,30 @@ import frames from '../content/sponsor-artwork-frames.json';
 // EDIT DISPLAY: headings and the homepage call to action are configured here.
 const { partners, id = 'supporters', thankYou = '', showCta = false, showDepartmental = true, title = 'Our sponsors', departmentalTitle = 'Departmental supporters' } = Astro.props;
 const paperChannels = Array.from({ length: 256 }, (_, value) => Math.min(value, 240) / 255).join(' ');
+const sponsors = partners.filter((partner) => partner.category !== 'departmental' && partner.logo);
+const tierGroups = ['gold', 'silver', 'bronze', 'friend'].map((tier) => ({
+  tier,
+  title: tier.charAt(0).toUpperCase() + tier.slice(1),
+  partners: sponsors.filter((partner) => (partner.tier || 'bronze') === tier),
+})).filter((group) => group.partners.length);
+const featured = tierGroups.filter((group) => group.tier === 'gold' || group.tier === 'silver');
+const other = tierGroups.filter((group) => group.tier === 'bronze' || group.tier === 'friend');
 const groups = [
-  ...['gold', 'silver', 'bronze', 'friend'].map((tier) => ({
-    tier,
-    title: tier.charAt(0).toUpperCase() + tier.slice(1),
-    departmental: false,
-    partners: partners.filter((partner) => partner.category !== 'departmental' && (partner.tier || 'bronze') === tier && partner.logo),
-  })),
-  { title: departmentalTitle, departmental: true, partners: partners.filter((partner) => partner.category === 'departmental' && partner.logo) },
-];
+  ...featured,
+  { tier: 'combined', title: featured.length ? other.map((group) => group.title).join(' & ') : '', partners: other.flatMap((group) => group.partners) },
+  { tier: 'departmental', title: departmentalTitle, partners: showDepartmental ? partners.filter((partner) => partner.category === 'departmental' && partner.logo) : [] },
+].filter((group) => group.partners.length);
 const headingId = `${id}-title`;
 ---
 <section class="partners section-shell" id={id} aria-labelledby={headingId}>
   <h2 id={headingId}>{title}</h2>
 <svg class="logo-color-definition" width="0" height="0" aria-hidden="true"><defs><filter id="auvsi-paper" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="discrete" tableValues={paperChannels} /><feFuncG type="discrete" tableValues={paperChannels} /><feFuncB type="discrete" tableValues={paperChannels} /></feComponentTransfer></filter></defs></svg>
 
-{groups.filter((group) => group.partners.length && (showDepartmental || !group.departmental)).map((group) => <div class:list={['sponsor-group', group.tier === 'gold' && 'gold', group.departmental && 'departmental']}>
-  <h3>{group.title}</h3>
+{groups.map((group) => <div class:list={['sponsor-group', group.tier, ['combined', 'departmental'].includes(group.tier) && 'compact']}>
+  {group.title && <h3>{group.title}</h3>}
   <div class="sponsor-logos">
   {group.partners.map((partner) => {
-    const linked = partner.linkLogo !== false;
+    const linked = group.tier !== 'combined' && partner.linkLogo !== false;
     const LogoTag = linked ? 'a' : 'div';
     const logoAttributes = linked ? {
       href: withBase(partner.url || '/contact/'),
@@ -70,22 +74,23 @@ const headingId = `${id}-title`;
   .departmental { margin-top: 40px; padding-top: 32px; }
   .sponsor-group + .sponsor-group { margin-top: 64px; }
   .sponsor-group h3 { margin: 0 0 40px; text-align: center; font: 700 24px/1.2 var(--display); }
-  .departmental .sponsor-logos { --columns: 6; --column-gap: 24px; row-gap: 24px; }
-  .departmental .sponsor-logo { min-height: 100px; }
-  .departmental .sponsor-logo img { max-width: 220px; height: 80px; }
-  .departmental .sponsor-logo svg { width: min(100%, 220px, calc(var(--sponsor-ratio) * 80px)); max-height: 80px; }
+  .compact .sponsor-logos { --columns: 5; --column-gap: 24px; row-gap: 24px; }
+  .departmental .sponsor-logos { --columns: 6; }
+  .compact .sponsor-logo { min-height: 100px; }
+  .compact .sponsor-logo img { max-width: 220px; height: 80px; }
+  .compact .sponsor-logo svg { width: min(100%, 220px, calc(var(--sponsor-ratio) * 80px)); max-height: 80px; }
   @media (min-width: 768px) and (max-width: 1024px) {
     .sponsor-logos { --columns: 2; }
-    .departmental .sponsor-logos { --columns: 3; }
+    .compact .sponsor-logos { --columns: 3; }
   }
   @media (max-width: 767px) {
     .sponsor-logos { --columns: 2; --column-gap: 24px; row-gap: 24px; }
     .gold .sponsor-logos { --columns: 1; }
-    .departmental .sponsor-logos { --columns: 2; --column-gap: 24px; row-gap: 20px; }
+    .compact .sponsor-logos { --columns: 2; row-gap: 20px; }
   }
   @media (max-width: 680px) {
-    .departmental .sponsor-logo { min-height: 90px; }
     .sponsor-logo { min-height: 120px; }
+    .compact .sponsor-logo { min-height: 90px; }
     .sponsor-logo img { height: 120px; }
     .sponsor-logo svg { width: min(100%, 340px, calc(var(--sponsor-ratio) * 120px)); max-height: 120px; }
   }
