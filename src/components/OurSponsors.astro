@@ -5,7 +5,9 @@ import frames from '../content/sponsor-artwork-frames.json';
 // EDIT DISPLAY: headings and the homepage call to action are configured here.
 const { partners, id = 'supporters', thankYou = '', showCta = false, showDepartmental = true, title = 'Our sponsors', departmentalTitle = 'Departmental supporters' } = Astro.props;
 const paperChannels = Array.from({ length: 256 }, (_, value) => Math.min(value, 240) / 255).join(' ');
-const sponsors = partners.filter((partner) => partner.category !== 'departmental' && partner.logo);
+const sponsors = partners
+  .filter((partner) => partner.category !== 'departmental' && partner.logo)
+  .sort((first, second) => first.name.localeCompare(second.name, 'en', { sensitivity: 'base' }));
 const tierGroups = ['gold', 'silver', 'bronze', 'friend'].map((tier) => ({
   tier,
   title: tier.charAt(0).toUpperCase() + tier.slice(1),
@@ -15,7 +17,11 @@ const featured = tierGroups.filter((group) => group.tier === 'gold' || group.tie
 const other = tierGroups.filter((group) => group.tier === 'bronze' || group.tier === 'friend');
 const groups = [
   ...featured,
-  { tier: 'combined', title: featured.length ? other.map((group) => group.title).join(' & ') : '', partners: other.flatMap((group) => group.partners) },
+  {
+    tier: 'combined',
+    title: featured.length ? other.map((group) => group.title).join(' & ') : '',
+    partners: sponsors.filter((partner) => !partner.tier || partner.tier === 'bronze' || partner.tier === 'friend'),
+  },
   { tier: 'departmental', title: departmentalTitle, partners: showDepartmental ? partners.filter((partner) => partner.category === 'departmental' && partner.logo) : [] },
 ].filter((group) => group.partners.length);
 const headingId = `${id}-title`;
